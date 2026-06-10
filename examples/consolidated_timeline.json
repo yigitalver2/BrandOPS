@@ -1,0 +1,155 @@
+{
+  "company": "Food Empire Holdings Ltd.",
+  "generated_at": "2026-06-11T00:00:00Z",
+  "records": [
+    {
+      "year": 2016,
+      "data_available": true,
+      "key_events": [
+        "Rus rublesi krizinin ardından temel pazar olan Rusya/BDT'de toparlanma başladı",
+        "Vietnam'da kahve bileşenleri (non-dairy creamer, spray-dried coffee) üretim yatırımına ağırlık verildi",
+        "MacCoffee markası BDT pazarlarında lider instant kahve konumunu korudu"
+      ],
+      "geographic_markets": ["Rusya", "Ukrayna", "Kazakistan", "BDT", "Vietnam", "Güneydoğu Asya"],
+      "stated_strategy": "Ana BDT pazarlarındaki marka liderliğini korurken Güneydoğu Asya ve kahve bileşenleri işine coğrafi çeşitlendirme.",
+      "financials": {
+        "revenue": 254.0,
+        "profit": 16.6,
+        "currency": "USD milyon",
+        "key_ratios": [
+          { "name": "Brüt marj", "value": "31%" },
+          { "name": "Net marj", "value": "6.5%" }
+        ]
+      },
+      "risks": [
+        "Döviz kuru oynaklığı (RUB/UAH) gelir ve marjı baskılıyor",
+        "Tek bir coğrafyaya (BDT) yüksek bağımlılık",
+        "Yeşil kahve emtia fiyat dalgalanması"
+      ],
+      "kpis": [
+        { "name": "BDT gelir payı", "value": "~70%", "trend": "down" },
+        { "name": "Güneydoğu Asya gelir payı", "value": "~15%", "trend": "up" }
+      ]
+    },
+    {
+      "year": 2018,
+      "data_available": true,
+      "key_events": [
+        "Güneydoğu Asya (özellikle Vietnam) çift haneli büyüme ile ikinci büyüme motoru oldu",
+        "Premium ve RTD (ready-to-drink) format denemeleri başladı",
+        "Kahve bileşenleri (ingredients) segmenti üçüncü taraf B2B satışlarıyla büyüdü"
+      ],
+      "geographic_markets": ["Rusya", "Ukrayna", "Kazakistan", "Vietnam", "Hindistan", "Güneydoğu Asya"],
+      "stated_strategy": "BDT'de kârlılığı koruyup Güneydoğu Asya'yı ölçeklemek; dikey entegrasyonla (kendi bileşen üretimi) marj iyileştirmek.",
+      "financials": {
+        "revenue": 288.0,
+        "profit": 24.1,
+        "currency": "USD milyon",
+        "key_ratios": [
+          { "name": "Brüt marj", "value": "33%" },
+          { "name": "Net marj", "value": "8.4%" }
+        ]
+      },
+      "risks": [
+        "Yeni pazarlarda marka bilinirliği düşük",
+        "Bileşen fabrikalarında kapasite kullanım riski",
+        "Jeopolitik gerilim (Rusya-Ukrayna) lojistik riski"
+      ],
+      "kpis": [
+        { "name": "BDT gelir payı", "value": "~62%", "trend": "down" },
+        { "name": "Güneydoğu Asya gelir payı", "value": "~22%", "trend": "up" },
+        { "name": "Dikey entegrasyon oranı", "value": "artıyor", "trend": "up" }
+      ]
+    },
+    {
+      "year": 2020,
+      "data_available": true,
+      "key_events": [
+        "COVID-19 ev içi kahve tüketimini artırdı; instant kahve talebi dirençli kaldı",
+        "E-ticaret ve modern perakende kanallarına hızlı geçiş",
+        "Güneydoğu Asya tedarik zinciri yerelleştirme hız kazandı"
+      ],
+      "geographic_markets": ["Rusya", "Ukrayna", "Kazakistan", "Vietnam", "Hindistan", "Malezya", "Güneydoğu Asya"],
+      "stated_strategy": "Pandemi dirençli instant kategoriyi savunmak; dijital kanalları ölçeklemek; Güneydoğu Asya üretim ayak izini genişletmek.",
+      "financials": {
+        "revenue": 274.0,
+        "profit": 25.3,
+        "currency": "USD milyon",
+        "key_ratios": [
+          { "name": "Brüt marj", "value": "34%" },
+          { "name": "Net marj", "value": "9.2%" }
+        ]
+      },
+      "risks": [
+        "Tedarik zinciri kesintileri ve navlun maliyeti artışı",
+        "Döviz dalgalanması",
+        "Tüketici harcanabilir gelirinde pandemi baskısı"
+      ],
+      "kpis": [
+        { "name": "BDT gelir payı", "value": "~58%", "trend": "down" },
+        { "name": "Güneydoğu Asya gelir payı", "value": "~26%", "trend": "up" },
+        { "name": "E-ticaret kanal payı", "value": "artıyor", "trend": "up" }
+      ]
+    },
+    {
+      "year": 2022,
+      "data_available": true,
+      "key_events": [
+        "Rusya-Ukrayna savaşı ana pazarda belirsizlik yarattı; coğrafi çeşitlendirme tezi doğrulandı",
+        "Güneydoğu Asya geliri rekor seviyeye ulaştı, ikinci ana ayak haline geldi",
+        "Kahve bileşenleri tesisi (Vietnam) kapasite artırımı tamamlandı"
+      ],
+      "geographic_markets": ["Rusya", "Ukrayna", "Kazakistan", "Vietnam", "Hindistan", "Malezya", "Kamboçya", "Güneydoğu Asya"],
+      "stated_strategy": "Coğrafi riski dengelemek için Güneydoğu Asya'yı agresif ölçeklemek; bileşen işini kâr motoru yapmak; yeni Indochina pazarlarına girmek.",
+      "financials": {
+        "revenue": 401.0,
+        "profit": 56.4,
+        "currency": "USD milyon",
+        "key_ratios": [
+          { "name": "Brüt marj", "value": "35%" },
+          { "name": "Net marj", "value": "14.1%" }
+        ]
+      },
+      "risks": [
+        "Ana pazardaki (Rusya) jeopolitik ve yaptırım riski",
+        "Emtia (yeşil kahve, creamer) maliyet enflasyonu",
+        "Yeni pazar girişlerinde uygulama riski"
+      ],
+      "kpis": [
+        { "name": "BDT gelir payı", "value": "~50%", "trend": "down" },
+        { "name": "Güneydoğu Asya gelir payı", "value": "~34%", "trend": "up" },
+        { "name": "Net marj", "value": "14.1%", "trend": "up" }
+      ]
+    },
+    {
+      "year": 2023,
+      "data_available": true,
+      "key_events": [
+        "Indochina genişlemesi (Vietnam, Kamboçya) ivme kazandı; yeni pazar girişleri değerlendirildi",
+        "Premiumlaşma ve RTD portföyü büyüdü",
+        "Kahve bileşenleri B2B müşterileri çeşitlendi, ihracat arttı"
+      ],
+      "geographic_markets": ["Rusya", "Ukrayna", "Kazakistan", "Vietnam", "Hindistan", "Malezya", "Kamboçya", "Güneydoğu Asya"],
+      "stated_strategy": "Çok-pazarlı, dikey entegre bir kahve platformu olmak; yeni gelişmekte olan Asya pazarlarına yerel ortaklık/üretimle girmek; premium ve B2B ile marjı yükseltmek.",
+      "financials": {
+        "revenue": 426.0,
+        "profit": 58.0,
+        "currency": "USD milyon",
+        "key_ratios": [
+          { "name": "Brüt marj", "value": "36%" },
+          { "name": "Net marj", "value": "13.6%" }
+        ]
+      },
+      "risks": [
+        "Ana pazara süregelen jeopolitik bağımlılık",
+        "Yeni pazarlarda rekabet ve dağıtım erişimi",
+        "Emtia ve döviz oynaklığı"
+      ],
+      "kpis": [
+        { "name": "BDT gelir payı", "value": "~48%", "trend": "down" },
+        { "name": "Güneydoğu Asya gelir payı", "value": "~36%", "trend": "up" },
+        { "name": "Bileşen işi gelir payı", "value": "artıyor", "trend": "up" }
+      ]
+    }
+  ]
+}

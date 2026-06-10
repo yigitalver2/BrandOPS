@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-06-11T00:00:00Z",
+  "periods": [
+    {
+      "name": "BDT Liderliği ve Tek-Pazar Bağımlılığı",
+      "start_year": 2016,
+      "end_year": 2018,
+      "geographic_focus": ["Rusya", "Ukrayna", "Kazakistan", "BDT"],
+      "strategy": "MacCoffee markasıyla BDT instant kahve pazarındaki liderliği savunmak ve döviz krizinden toparlanan tüketici talebini yeniden kazanmak. Büyüme tek bir coğrafyaya yaslı; kârlılık marka gücü ve dağıtım derinliğinden geliyor.",
+      "initiatives": [
+        "MacCoffee 3-in-1 portföyünün BDT'de yeniden konumlandırılması",
+        "Vietnam kahve bileşenleri (creamer/spray-dried) üretimine ilk yatırımlar",
+        "Güneydoğu Asya'da keşif amaçlı dağıtım pilotları"
+      ],
+      "transition_in": "Dönem, 2014-2015 ruble krizinin dip noktasından toparlanma ile açılıyor; şirket hayatta kalma modundan büyümeyi yeniden kurma moduna geçiyor.",
+      "transition_out": "2018'de Güneydoğu Asya'nın çift haneli büyümesi ve bileşen işinin olgunlaşması, tek-pazar bağımlılığını azaltma kararını tetikliyor — coğrafi çeşitlendirme açık stratejik öncelik haline geliyor.",
+      "financial_summary": "Gelir 254M→288M USD'ye, net marj %6.5'ten %8.4'e yükseldi. Toparlanma gerçek ama kırılgan: kazançların büyük kısmı hâlâ döviz oynaklığına maruz BDT'den geliyor.",
+      "brand_product_evolution": "MacCoffee tek-marka instant odağında; ürün yeniliği sınırlı, asıl hamle coğrafi değil kategori-içi derinleşme.",
+      "kpi_movement": "BDT gelir payı ~%70'ten ~%62'ye geriledi; Güneydoğu Asya payı ~%15'ten ~%22'ye çıktı — çeşitlendirme sayısal olarak başladı."
+    },
+    {
+      "name": "Coğrafi Çeşitlendirme ve Dikey Entegrasyon",
+      "start_year": 2019,
+      "end_year": 2021,
+      "geographic_focus": ["Vietnam", "Güneydoğu Asya", "Hindistan", "Malezya", "BDT"],
+      "strategy": "İkinci bir büyüme motoru (Güneydoğu Asya) inşa etmek ve kendi kahve bileşenlerini üreterek (dikey entegrasyon) marjı kontrol altına almak. Risk, tek coğrafyadan çok-coğrafyalı bir platforma yayılıyor.",
+      "initiatives": [
+        "Vietnam'da bileşen üretim kapasitesinin ölçeklenmesi",
+        "Güneydoğu Asya'da modern perakende ve e-ticaret kanallarının kurulması",
+        "Pandemi döneminde dijital-öncelikli dağıtıma geçiş",
+        "Premium ve RTD format denemeleri"
+      ],
+      "transition_in": "2018 sonu çeşitlendirme kararıyla açılıyor; sermaye, BDT'yi savunmaktan yeni pazarlar ve üretim varlıkları kurmaya kayıyor.",
+      "transition_out": "2021 sonunda Güneydoğu Asya operasyonel olarak olgunlaşıp bileşen işi kâr üretmeye başlayınca, şirket savunmacı çeşitlendirmeden agresif, çok-pazarlı ölçeklemeye geçmeye hazır hale geliyor.",
+      "financial_summary": "Gelir bandı 274-288M USD'de görece yatay ama net marj %9'a tırmandı; pandemi instant kategoriyi korurken dikey entegrasyon marjı destekledi.",
+      "brand_product_evolution": "Tek-marka instant'tan format çeşitliliğine (premium, RTD) ve B2B bileşen satışına doğru genişleme; marka mimarisi çok-katmanlı hale geliyor.",
+      "kpi_movement": "BDT payı ~%58'e indi, Güneydoğu Asya payı ~%26'ya çıktı; e-ticaret ve dikey entegrasyon oranları yükseldi."
+    },
+    {
+      "name": "Çok-Pazarlı Platform ve Jeopolitik Yeniden Dengeleme",
+      "start_year": 2022,
+      "end_year": 2023,
+      "geographic_focus": ["Güneydoğu Asya", "Vietnam", "Kamboçya", "Hindistan", "BDT"],
+      "strategy": "Rusya-Ukrayna savaşının doğruladığı çeşitlendirme tezini hızlandırmak; Güneydoğu Asya/Indochina'yı ana büyüme platformuna çevirmek; yeni gelişmekte olan Asya pazarlarına yerel ortaklık/üretimle girmek ve premium + B2B ile marjı yükseltmek.",
+      "initiatives": [
+        "Indochina pazar girişleri (Vietnam derinleşme, Kamboçya)",
+        "Vietnam bileşen tesisinde kapasite artırımı",
+        "Premiumlaşma ve RTD portföy büyütme",
+        "Yeni gelişen pazar girişlerinin değerlendirilmesi"
+      ],
+      "transition_in": "2022'de jeopolitik şok, çeşitlendirmeyi 'iyi olur'dan 'varoluşsal' önceliğe dönüştürüyor; Güneydoğu Asya kazançları bu geçişi finanse ediyor.",
+      "transition_out": "Dönem açık uçlu: şirket artık tekrarlanabilir bir 'yeni pazara giriş playbook'una sahip — tam da CDSG'nin model alacağı yetkinlik.",
+      "financial_summary": "Gelir 401M→426M USD'ye, net marj %14 bandına sıçradı. Güneydoğu Asya ikinci ana ayak; kazanç tabanı coğrafi olarak çok daha dengeli.",
+      "brand_product_evolution": "Tek-marka instant şirketinden dikey entegre, çok-formatlı, B2B+B2C bir kahve platformuna dönüşüm tamamlanma aşamasında.",
+      "kpi_movement": "BDT payı ~%48'e geriledi, Güneydoğu Asya ~%36'ya, bileşen işi payı yükseliyor; net marj tarihi zirvede."
+    }
+  ],
+  "synthesis_narrative": "Food Empire'in gidişatı, tek bir varoluşsal dersin tekrar tekrar uygulanması olarak okunabilir: tek bir pazara bağımlı kalmak ölümcüldür. 2014-15 ruble krizi şirketi BDT bağımlılığının bedeliyle yüzleştirdi; sonraki yedi yıl bu dersin sistematik bir yanıta dönüştürülmesidir. Önce kategori-içi liderliği savundu (2016-18), sonra ikinci bir motor inşa edip kendi tedarik zincirini üretti (2019-21), nihayet jeopolitik bir şokun doğruladığı çeşitlendirmeyi çok-pazarlı, dikey entegre bir platforma dönüştürdü (2022-23). Üst çizgi şudur: Food Empire bir 'instant kahve markası' değil, gelişmekte olan pazarlara tekrarlanabilir biçimde girip yerel üretim ve dağıtımla kök salan bir 'pazar-girişi makinesidir'. Kârlılığın kaynağı tek bir üründen değil, üç birbirini güçlendiren kaldıraçtan gelir — coğrafi çeşitlendirme riski düşürür, dikey entegrasyon marjı korur, çok-formatlı portföy büyümeyi sürdürür. CDSG için kritik içgörü tam burada: kopyalanması gereken şey MacCoffee'nin reçetesi değil, bu giriş-ve-kök-salma disiplinidir."
+}

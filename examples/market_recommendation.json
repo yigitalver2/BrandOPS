@@ -1,0 +1,65 @@
+{
+  "generated_at": "2026-06-11T00:00:00Z",
+  "candidates": [
+    {
+      "market": "Vietnam",
+      "bull_case": "Olgun kahve kültürü, Food Empire'in zaten üretim ve bileşen ayak izine sahip olduğu pazar; tedarik zinciri ve know-how hazır. Yüksek kahve tüketimi ve büyüyen orta sınıf.",
+      "bear_case": "Yoğun rekabet (Trung Nguyen, Nescafé, yerel oyuncular) ve fiyat baskısı. Food Empire için 'yeni' değil — CDSG'nin Myanmar tabanının sağlayacağı farklılaştırıcı avantaj sınırlı. Doygunluk riski.",
+      "cfo_score": 6.5
+    },
+    {
+      "market": "Myanmar",
+      "bull_case": "CDSG'nin ana üssü — benzersiz yerel dağıtım, regülasyon ve tüketici bilgisi avantajı. Düşük instant kahve penetrasyonu ama hızlı büyüyen genç nüfus ve şehirleşme. Food Empire'in BDT'de kanıtladığı 'düşük penetrasyonlu pazarda kategori inşa etme' playbook'una birebir uygun. Giriş maliyeti CDSG altyapısı sayesinde düşük.",
+      "bear_case": "Politik ve döviz istikrarsızlığı, yaptırım/bankacılık erişim riskleri. Düşük harcanabilir gelir premium fiyatı zorlaştırır. Soğuk zincir ve modern perakende altyapısı sınırlı.",
+      "cfo_score": 8.2
+    },
+    {
+      "market": "Kamboçya",
+      "bull_case": "Food Empire'in halihazırda giriş yaptığı, büyüyen Indochina pazarı. Dolarize ekonomi döviz riskini azaltır. Genç nüfus, artan kahve ilgisi.",
+      "bear_case": "Küçük pazar büyüklüğü, ölçek sınırlı. CDSG'nin yerel avantajı yok; sıfırdan dağıtım kurmak gerekir. Food Empire zaten girdiği için CDSG'ye özgün stratejik gerekçe zayıf.",
+      "cfo_score": 5.8
+    },
+    {
+      "market": "Bangladeş",
+      "bull_case": "Büyük, genç nüfus; düşük kahve penetrasyonu nedeniyle uzun vadeli kategori-inşa potansiyeli yüksek. Çay-ağırlıklı pazarda instant kahve için açık beyaz alan.",
+      "bear_case": "Güçlü çay kültürü kahve geçişini yavaşlatır; tüketici eğitimi maliyeti yüksek ve geri ödeme uzun. CDSG'nin yerel varlığı yok; düzenleyici ve dağıtım engelleri yüksek.",
+      "cfo_score": 5.0
+    }
+  ],
+  "recommended_market": "Myanmar",
+  "rationale": "Myanmar, Food Empire tarihinin en net dersiyle CDSG'nin en güçlü varlığını birleştiren tek adaydır. Food Empire kârını 'düşük penetrasyonlu bir pazarda, yerel üretim ve derin dağıtımla kategori inşa ederek' kazandı — tam da Myanmar'ın profili. CDSG ise bu playbook'u uygulamak için Vietnam'da Food Empire'in yıllarca kurduğu yerel altyapıya doğuştan sahip: dağıtım ağı, regülasyon bilgisi, tüketici erişimi. Vietnam ve Kamboçya'da bu sinerji yok (Food Empire zaten orada, CDSG'nin avantajı sıfır); Bangladeş'te ise ne yerel varlık ne de hızlı geri ödeme var. Myanmar'da giriş maliyeti CDSG altyapısıyla en düşük, stratejik uyum en yüksek ve uzun vadeli kategori-liderliği potansiyeli en büyük.",
+  "success_factors": [
+    "Food Empire'in 'düşük penetrasyonlu pazarda kategori inşa etme' playbook'unun yerel uyarlaması",
+    "CDSG'nin mevcut dağıtım ağı ve geleneksel perakende (kioskları/bakkalları) erişimi",
+    "Dikey entegrasyon: Vietnam bileşen tedarikiyle maliyet kontrolü ve fiyatlandırma esnekliği",
+    "Erişilebilir fiyatlı 3-in-1 instant formatla kütle pazarına hızlı penetrasyon",
+    "Genç, şehirleşen tüketiciye yönelik marka inşası ve örneklem/deneme odaklı aktivasyon"
+  ],
+  "risks": [
+    {
+      "risk": "Politik istikrarsızlık ve yaptırım/bankacılık erişim kısıtları",
+      "mitigation": "CDSG'nin yerel bankacılık ve operasyon ilişkilerini kullanmak; sermaye taahhüdünü aşamalı yapmak; kâr transferini yerel reinvestmanla dengelemek."
+    },
+    {
+      "risk": "Döviz (MMK) oynaklığı gelir ve ithal girdi maliyetini baskılar",
+      "mitigation": "Vietnam'dan bileşen tedarikini kademeli yerelleştirmek; yerel para fiyatlamasını maliyet endeksli ayarlamak; doğal hedge için yerel satış-yerel maliyet dengesi kurmak."
+    },
+    {
+      "risk": "Düşük harcanabilir gelir premium konumlandırmayı zorlaştırır",
+      "mitigation": "Değer odaklı 3-in-1 ile kütle pazarına girmek; küçük sachet/tek-kullanım ambalajla erişilebilir fiyat noktası; premium hattı sonraki aşamaya bırakmak."
+    },
+    {
+      "risk": "Modern perakende ve soğuk zincir altyapısının sınırlı olması",
+      "mitigation": "RTD yerine raf-dayanıklı instant formata odaklanmak; geleneksel ticaret (general trade) dağıtımını CDSG ağıyla önceliklendirmek."
+    }
+  ],
+  "entry_mode": "joint_venture",
+  "entry_mode_justification": "Tam sahiplik, Myanmar'ın politik/döviz riskine tam maruz kalmak demektir ve CDSG'nin yerel avantajını kullanmaz. Salt ihracat ise CDSG'nin asıl değer kaynağı olan dağıtım ve regülasyon erişimini devre dışı bırakır. Franchise, kategori-inşa aşamasında gereken marka ve kalite kontrolünü zayıflatır. Ortak girişim (JV), Food Empire'in ürün/üretim know-how'ı ile CDSG'nin yerel dağıtım, regülasyon ve tüketici erişimini birleştirip riski paylaşır — Food Empire'in gelişen pazarlarda kanıtladığı 'yerel ortaklık + kendi üretim' modeliyle de bire bir örtüşür.",
+  "foodempire_adaptations": [
+    "MacCoffee'nin BDT konumlandırmasını değil, 'erişilebilir premium algısı yaratan kütle markası' mantığını uyarlamak",
+    "3-in-1 instant formülünü yerel damak tadına (tatlılık/kıvam) göre ayarlamak",
+    "Vietnam bileşen tesisini başlangıç tedarik kaynağı, Myanmar'ı kademeli yerelleştirme hedefi yapmak",
+    "BDT'de kullanılan geleneksel-perakende derin dağıtım modelini CDSG ağı üzerinden çoğaltmak",
+    "Örnekleme/deneme (sampling) ağırlıklı aktivasyonla kategori penetrasyonunu hızlandırmak"
+  ]
+}

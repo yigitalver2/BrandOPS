@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "consolidated_timeline.schema.json",
+  "title": "Consolidated Timeline",
+  "description": "IntelligenceAgent çıktısı — Food Empire kahve işinin yıl bazlı, sıkıştırılmış kronolojik kaydı.",
+  "type": "object",
+  "required": ["company", "records"],
+  "additionalProperties": false,
+  "properties": {
+    "company": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/yearRecord" }
+    }
+  },
+  "definitions": {
+    "yearRecord": {
+      "type": "object",
+      "required": ["year", "key_events", "geographic_markets", "stated_strategy", "financials", "risks", "kpis"],
+      "additionalProperties": false,
+      "properties": {
+        "year": { "type": "integer", "minimum": 1990, "maximum": 2100 },
+        "data_available": { "type": "boolean", "default": true },
+        "key_events": { "type": "array", "items": { "type": "string" } },
+        "geographic_markets": { "type": "array", "items": { "type": "string" } },
+        "stated_strategy": { "type": "string" },
+        "financials": {
+          "type": "object",
+          "required": ["revenue", "profit", "key_ratios"],
+          "additionalProperties": false,
+          "properties": {
+            "revenue": { "type": ["number", "string", "null"] },
+            "profit": { "type": ["number", "string", "null"] },
+            "currency": { "type": "string" },
+            "key_ratios": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name", "value"],
+                "additionalProperties": false,
+                "properties": {
+                  "name": { "type": "string" },
+                  "value": { "type": ["number", "string"] }
+                }
+              }
+            }
+          }
+        },
+        "risks": { "type": "array", "items": { "type": "string" } },
+        "kpis": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "value"],
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "value": { "type": ["number", "string"] },
+              "trend": { "type": "string", "enum": ["up", "down", "flat", "n/a"] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

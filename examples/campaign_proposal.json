@@ -1,0 +1,54 @@
+{
+  "generated_at": "2026-06-11T00:00:00Z",
+  "target_audience": {
+    "demographics": "18-35 yaş, şehirli (Yangon, Mandalay) genç yetişkinler; öğrenciler ve yeni profesyoneller; orta ve alt-orta gelir grubu; mobil-öncelikli, sosyal medyada aktif nüfus.",
+    "psychographics": "Modern, global yaşam tarzına özenen ama fiyat-bilinçli; küçük lükslerle (afford­able treat) statü ve enerji arayan; markaya açık ama deneyimden önce denemek isteyen; topluluk ve paylaşım odaklı.",
+    "consumption_habits": "Geleneksel olarak çay içen ama kahveye geçiş yapan genç kesim; instant kahveyi evde ve iş yerinde tüketiyor; geleneksel perakende (bakkal, tea-shop, kiosk) ve sokak satışı baskın; tek-kullanımlık sachet tercih ediliyor; günün başında enerji ve sosyal mola anları için tüketim.",
+    "unmet_needs": [
+      "Erişilebilir fiyatta, tutarlı kalitede, damak tadına uygun hazır kahve",
+      "Çaydan kahveye geçişi kolaylaştıran, tatlı/kremamsı ve tanıdık bir tat profili",
+      "Küçük bütçeye uygun tek-kullanım ambalaj",
+      "Güvenilir, modern ama yerel hisseden bir marka kimliği"
+    ]
+  },
+  "value_proposition": "Myanmar'ın genç şehirlilerine, dünyaya açılırken cebini zorlamayan, her gün güvenebileceği kremamsı ve enerjik bir kahve molası — yerel damak tadına göre üretilmiş, herkesin erişebileceği modern bir keyif.",
+  "positioning_statement": "Kahveye yeni geçen, fiyat-bilinçli genç Myanmarlı tüketici için [Marka], her güne erişilebilir bir modern başlangıç sunan 3-in-1 instant kahvedir; çünkü Food Empire'in gelişen pazarlarda kanıtlanmış kalitesini CDSG'nin yerel bilgisi ve dağıtımıyla birleştirir.",
+  "core_message": "Her güne uygun fiyatlı, kremamsı bir başlangıç. — Senin kahven, senin anın.",
+  "marketing_mix": {
+    "product": "3-in-1 instant kahve (kahve + creamer + şeker), yerel damak tadına göre daha kremamsı ve dengeli-tatlı profil. Birincil format: tek-kullanım sachet (kütle pazar için erişilebilir fiyat noktası) ve çok-sachetli ekonomik paket. Vietnam bileşen tesisinden tedarik, kademeli yerelleştirme. Ambalaj: canlı, genç, mobil-çağ estetiği; Myanmar dili öncelikli; modern ama yerel hisseden marka kimliği. Premium ve RTD formatları 2. aşamaya (kategori olgunlaştıkça) bırakılır.",
+    "price": "Değer/erişilebilirlik odaklı strateji. Sachet birim fiyatı kütle pazarın günlük cep bütçesine oturacak şekilde; rakip uluslararası markaların (Nescafé) hemen altında, yerel/düşük-kalite alternatiflerin üstünde 'erişilebilir kalite' konumu. Çok-sachet ekonomik paketle hane satın alımını teşvik. Maliyet kontrolü dikey entegrasyondan (Vietnam bileşen) geliyor; bu fiyat esnekliği sağlıyor.",
+    "place": "Geleneksel ticaret (general trade) öncelikli: bakkallar, kioskalar, tea-shop'lar, sokak satıcıları — CDSG'nin mevcut dağıtım ağı üzerinden derin penetrasyon. İkincil: büyüyen modern perakende (mini-market zincirleri) ve şehir merkezleri. Mobil/dijital sipariş ve sosyal ticaret pilotları. Soğuk zincir gerektiren RTD'den kaçınılarak raf-dayanıklı instant'a odaklanılıyor.",
+    "promotion": "Örnekleme (sampling) ağırlıklı kategori-inşa: tea-shop ve üniversite/işyeri çevresinde deneme aktivasyonları. Mobil-öncelikli dijital (Facebook, TikTok) genç kitleye erişim için ana kanal. Yerel mikro-influencer ve topluluk elçileri. Geleneksel perakende görünürlüğü (POS materyali, raf teşhiri). Çekirdek mesaj: 'Her güne uygun fiyatlı, kremamsı bir başlangıç.' Lansman kampanyası deneme→tekrar satın alma dönüşümüne odaklı."
+  },
+  "budget": {
+    "total": 1500000,
+    "currency": "USD",
+    "line_items": [
+      { "name": "Dijital pazarlama (Facebook/TikTok, içerik)", "amount": 420000, "justification": "Genç, mobil-öncelikli kitleye en maliyet-etkin erişim; deneme ve marka bilinirliğinin ana motoru." },
+      { "name": "Örnekleme & deneme aktivasyonları (sampling)", "amount": 330000, "justification": "Düşük penetrasyonlu pazarda kategori inşası için kritik; çaydan kahveye geçişte denemeyi tetikler." },
+      { "name": "Geleneksel perakende görünürlük & POS", "amount": 240000, "justification": "Baskın general-trade kanalında raf hakimiyeti ve satın alma noktası dönüşümü." },
+      { "name": "Mikro-influencer & topluluk elçileri", "amount": 180000, "justification": "Yerel güven ve sosyal kanıt; ölçeklenebilir, düşük maliyetli erişim." },
+      { "name": "Ambalaj & yaratıcı üretim", "amount": 150000, "justification": "Yerelleştirilmiş, genç marka kimliği ve çok-format ambalaj tasarımı." },
+      { "name": "Ticari promosyon & dağıtım teşviki", "amount": 120000, "justification": "CDSG ağında yeni ürünün hızlı raf yerleşimi için kanal teşvikleri." },
+      { "name": "Ölçüm, araştırma & analitik", "amount": 60000, "justification": "Marka takibi, penetrasyon ve kampanya etkinliği ölçümü; bütçe optimizasyonu." }
+    ]
+  },
+  "gantt": [
+    { "activity": "Pazar araştırması & ürün yerelleştirme testi", "start_month": 1, "end_month": 2 },
+    { "activity": "Marka kimliği & ambalaj geliştirme", "start_month": 1, "end_month": 3 },
+    { "activity": "Dağıtım kurulumu (CDSG ağı entegrasyonu)", "start_month": 2, "end_month": 4 },
+    { "activity": "Lansman kampanyası (dijital + örnekleme)", "start_month": 4, "end_month": 7 },
+    { "activity": "Geleneksel perakende görünürlük dağıtımı", "start_month": 4, "end_month": 9 },
+    { "activity": "Influencer & topluluk aktivasyonu", "start_month": 5, "end_month": 10 },
+    { "activity": "Tekrar-satın alma & sadakat kampanyası", "start_month": 8, "end_month": 12 },
+    { "activity": "Ölçüm, optimizasyon & 2. yıl planlaması", "start_month": 9, "end_month": 12 }
+  ],
+  "kpis": [
+    { "kpi": "Marka bilinirliği (yardımlı)", "method": "Çeyreklik tüketici anketi (şehirli 18-35)", "target": "12 ayda %40", "cadence": "Çeyreklik" },
+    { "kpi": "Deneme oranı (trial)", "method": "Örnekleme takibi + anket", "target": "Hedef kitlede %25", "cadence": "Aylık" },
+    { "kpi": "Tekrar satın alma oranı", "method": "Perakende paneli & satış verisi", "target": "Deneyenlerin %50'si", "cadence": "Aylık" },
+    { "kpi": "Sayısal dağıtım (numeric distribution)", "method": "Perakende denetimi (general trade)", "target": "12 ayda hedef şehirlerde %60", "cadence": "Çeyreklik" },
+    { "kpi": "Pazar payı (instant kahve, hedef şehirler)", "method": "Pazar araştırması (Nielsen benzeri)", "target": "12 ayda %8", "cadence": "Çeyreklik" },
+    { "kpi": "Dijital etkileşim & erişim", "method": "Platform analitiği (Facebook/TikTok)", "target": "Aylık 2M erişim, %4 etkileşim", "cadence": "Aylık" }
+  ]
+}

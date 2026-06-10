@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "market_recommendation.schema.json",
+  "title": "Market Recommendation",
+  "description": "MarketDebateAgent çıktısı — puanlanmış adaylar, seçilen pazar, gerekçe, riskler, giriş modu.",
+  "type": "object",
+  "required": [
+    "candidates", "recommended_market", "rationale", "success_factors",
+    "risks", "entry_mode", "entry_mode_justification", "foodempire_adaptations"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "generated_at": { "type": "string" },
+    "candidates": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["market", "bull_case", "bear_case", "cfo_score"],
+        "additionalProperties": false,
+        "properties": {
+          "market": { "type": "string" },
+          "bull_case": { "type": "string" },
+          "bear_case": { "type": "string" },
+          "cfo_score": { "type": "number", "minimum": 0, "maximum": 10 }
+        }
+      }
+    },
+    "recommended_market": { "type": "string" },
+    "rationale": { "type": "string" },
+    "success_factors": { "type": "array", "items": { "type": "string" } },
+    "risks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["risk", "mitigation"],
+        "additionalProperties": false,
+        "properties": {
+          "risk": { "type": "string" },
+          "mitigation": { "type": "string" }
+        }
+      }
+    },
+    "entry_mode": {
+      "type": "string",
+      "enum": ["export", "joint_venture", "wholly_owned", "franchise"]
+    },
+    "entry_mode_justification": { "type": "string" },
+    "foodempire_adaptations": { "type": "array", "items": { "type": "string" } }
+  }
+}
