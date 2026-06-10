@@ -27,3 +27,5 @@ yarn-error.log*
 
 # Raporlar (büyük PDF'ler — repoya koyma)
 backend/reports/*.pdf
+backend/artifacts/
+backend/.venv/

@@ -1,0 +1,8 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+langgraph>=0.2
+jsonschema>=4.22
+anthropic>=0.40
+pypdf>=4.0
+pdfplumber>=0.11
+python-dotenv>=1.0
