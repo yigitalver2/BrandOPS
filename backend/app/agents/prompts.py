@@ -111,3 +111,65 @@ SADECE şu JSON'ı döndür: {{"synthesis_narrative": "..."}}
 --- DÖNEMLER VE ANALİZLERİ ---
 {periods}
 --- SON ---"""
+
+
+# =============================== CDSG bağlamı ==============================
+# Brief'in danışmanlık kurgusu — MarketDebate ve Campaign ajanları için sabit bağlam.
+
+CDSG_CONTEXT = """CDSG (Capital Diamond Star Group), Myanmar merkezli büyük bir holding \
+şirketidir; gıda, dağıtım, FMCG ve perakendede güçlü yerel varlığa sahiptir. CDSG, halka \
+açık Singapurlu Food Empire'i model alarak bölgesel kahve işini büyütmek ve sürdürülebilir \
+kârlılığa ulaşmak istiyor. Danışmanlık sorusu: 'CDSG bölgesel kahve pazarında sürdürülebilir \
+kârlılığa ulaşmak için nasıl bir stratejik çerçeve ve eylem planı benimsemelidir?' CDSG'nin \
+en güçlü varlığı Myanmar'daki derin dağıtım ağı, regülasyon bilgisi ve tüketici erişimidir."""
+
+
+# ============================ MarketDebateAgent ============================
+# Brief Bölüm 1.C — aday pazarlar, advocate/challenger/CFO, karar.
+
+MARKET_SYSTEM = """Sen bir yatırım komitesini yöneten kıdemli bir strateji danışmanısın. \
+Food Empire'in stratejik analizinden ve CDSG'nin Myanmar tabanlı bağlamından yola çıkarak \
+CDSG'nin ilk bölgesel kahve genişlemesi için tek, savunulabilir bir pazar önerisi üreteceksin. \
+Yapılandırılmış bir iç tartışma yürüt: her aday için savunucu (bull), muhalif (bear) ve CFO \
+(finansal disiplin) bakışını dengele."""
+
+# Geçiş 1 — aday pazarlar + bull/bear + CFO skor
+MARKET_DEBATE = """Aşağıda Food Empire'in stratejik analizi ve CDSG bağlamı var. \
+CDSG'nin ilk kahve pazarı genişlemesi için 3-4 aday pazar türet (stratejik analiz + CDSG \
+Myanmar bağlamından). Her aday için yapılandırılmış tartışma yürüt:
+- market: pazar adı
+- bull_case: Savunucu — bu pazara giriş için en güçlü olumlu vaka (1 paragraf)
+- bear_case: Muhalif — riskler, engeller, başarısızlık senaryoları (1 paragraf)
+- cfo_score: CFO Filtresi — giriş maliyeti, geri ödeme süresi ve risk toleransına göre 0-10 \
+arası bir skor (10 = en cazip)
+
+SADECE şu JSON'ı döndür (başka metin yok):
+{{"candidates": [{{"market": "...", "bull_case": "...", "bear_case": "...", "cfo_score": 7.5}}]}}
+
+--- FOOD EMPIRE STRATEJİK ANALİZİ ---
+{analysis}
+
+--- CDSG BAĞLAMI ---
+{cdsg}
+--- SON ---"""
+
+# Geçiş 2 — karar
+MARKET_DECISION = """Aşağıda aday pazarların tartışması (bull/bear/CFO skor) ve CDSG bağlamı \
+var. Tek bir kazanan pazar seç ve eksiksiz bir karar üret:
+- recommended_market: kazanan pazar
+- rationale: hem Food Empire tarihine hem güncel ortama dayanan gerekçe (neden bu pazar, neden diğerleri değil)
+- success_factors: Food Empire'in kazanım ve kayıplarından türetilen kritik başarı faktörleri (liste)
+- risks: her biri {{"risk": "...", "mitigation": "..."}} olan risk + azaltma listesi
+- entry_mode: SADECE şunlardan biri: "export" | "joint_venture" | "wholly_owned" | "franchise"
+- entry_mode_justification: giriş modu gerekçesi
+- foodempire_adaptations: Food Empire playbook'unun CDSG'nin Myanmar tabanına uyarlamaları (liste)
+
+SADECE şu JSON'ı döndür (candidates'i tekrar yazma):
+{{"recommended_market": "...", "rationale": "...", "success_factors": ["..."], "risks": [{{"risk": "...", "mitigation": "..."}}], "entry_mode": "joint_venture", "entry_mode_justification": "...", "foodempire_adaptations": ["..."]}}
+
+--- ADAYLAR (TARTIŞMA) ---
+{candidates}
+
+--- CDSG BAĞLAMI ---
+{cdsg}
+--- SON ---"""
