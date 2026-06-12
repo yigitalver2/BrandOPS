@@ -173,3 +173,50 @@ SADECE şu JSON'ı döndür (candidates'i tekrar yazma):
 --- CDSG BAĞLAMI ---
 {cdsg}
 --- SON ---"""
+
+
+# ============================== CampaignAgent =============================
+# Brief Bölüm 2 — seçilen pazar için tam, maliyetlendirilmiş kampanya.
+
+CAMPAIGN_SYSTEM = """Sen kıdemli bir entegre pazarlama iletişimi (IMC) stratejistisin. \
+Seçilen pazar önerisini eksiksiz, maliyetlendirilmiş bir pazarlama kampanyasına \
+dönüştüreceksin: hedef kitle, değer önerisi/konumlandırma, 4P, gerekçeli bütçe + Gantt, \
+KPI/ölçüm. Somut, uygulanabilir ve seçilen pazarın gerçeklerine sadık ol."""
+
+# Geçiş 1 — kitle + konumlandırma + 4P
+CAMPAIGN_PLAN = """Aşağıda CDSG için pazar giriş önerisi (seçilen pazar, gerekçe, giriş modu, \
+Food Empire uyarlamaları) var. Bu pazar için kampanyanın stratejik çekirdeğini üret:
+
+A) target_audience: {{"demographics": "...", "psychographics": "...", "consumption_habits": "...", "unmet_needs": ["..."]}}
+B) value_proposition (tek paragraf), positioning_statement (tek cümle), core_message (slogan/çekirdek mesaj)
+C) marketing_mix: {{"product": "formatlar/yerel uyarlama/ambalaj", "price": "premium|değer|rekabetçi mantığı", "place": "dağıtım kanalları", "promotion": "kanallar/taktikler/mesaj"}}
+
+Seçilen pazarın gerçeklerine (gelir düzeyi, kanal yapısı, kültür) sadık kal. Myanmar köken/CDSG avantajını konumlandırmada kullan.
+
+SADECE şu JSON'ı döndür:
+{{"target_audience": {{...}}, "value_proposition": "...", "positioning_statement": "...", "core_message": "...", "marketing_mix": {{...}}}}
+
+--- PAZAR GİRİŞ ÖNERİSİ ---
+{recommendation}
+--- SON ---"""
+
+# Geçiş 2 — bütçe + Gantt + KPI
+CAMPAIGN_OPS = """Aşağıda kampanyanın stratejik çekirdeği (kitle, konumlandırma, 4P) ve pazar \
+önerisi var. Bunun uygulanması için operasyonel planı üret:
+
+D) budget: {{"total": <sayı>, "currency": "USD", "line_items": [{{"name": "...", "amount": <sayı>, "justification": "gerekçe"}}]}}
+   - line_items'ın amount toplamı total'a EŞİT olmalı (matematiksel tutarlılık şart).
+E) gantt: 12 aylık aktivite takvimi — [{{"activity": "...", "start_month": 1-12, "end_month": 1-12}}]
+F) kpis: [{{"kpi": "...", "method": "ölçüm yöntemi", "target": "hedef", "cadence": "raporlama sıklığı"}}]
+
+Bütçe kalemleri seçilen 4P ve kanallarla tutarlı olmalı. Toplamı dikkatle topla.
+
+SADECE şu JSON'ı döndür:
+{{"budget": {{"total": 1500000, "currency": "USD", "line_items": [...]}}, "gantt": [...], "kpis": [...]}}
+
+--- KAMPANYA ÇEKİRDEĞİ (4P) ---
+{core}
+
+--- PAZAR ÖNERİSİ (özet) ---
+{recommendation}
+--- SON ---"""
