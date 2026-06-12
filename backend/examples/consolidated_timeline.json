@@ -1,0 +1,337 @@
+{
+  "company": "Food Empire Holdings Ltd.",
+  "generated_at": "2026-06-12T21:07:16.481300+00:00",
+  "records": [
+    {
+      "year": 2023,
+      "data_available": true,
+      "key_events": [
+        "Rekor gelir US$425,7M (+%6,9), rekor faaliyet kârı US$70,9M (+%34,6), en yüksek EBITDA US$86,9M",
+        "Güney-Doğu Asya US$100M eşiğini aştı; üç segment artık US$100M+ seviyesinde",
+        "Hindistan freeze-dried kahve tesisi tam kapasitede çalışıyor, Güney Asya büyümesinin (+%24,1) ana itici gücü",
+        "Hong Kong'da ikincil birincil halka arz (dual primary listing) araştırılıyor",
+        "Rus Rublesi USD'ye karşı %29,8 değer kaybetti (85,4 vs 65,8 Ruble/USD)",
+        "Malezya non-dairy creamer tesisi 2024'te ticari üretime geçecek"
+      ],
+      "geographic_markets": [
+        "Rusya",
+        "Ukrayna, Kazakistan & CIS",
+        "Güney-Doğu Asya (Vietnam vurgusu)",
+        "Güney Asya (Hindistan vurgusu)",
+        "Diğer (Avrupa dahil)"
+      ],
+      "stated_strategy": "On yıllık çeşitlendirme stratejisi kapsamında çekirdek pazarlardaki (Rusya, Ukrayna/CIS, Orta Asya) liderliği korurken Güney-Doğu ve Güney Asya'nın gelir katkısını artırmak; organik büyüme önceliği (pazar geliştirme, kapasite, marka güçlendirme) ile inorganik fırsatları birlikte aramak; ve Hindistan'da freeze-dried/spray-dried kahve, Malezya'da non-dairy creamer ve atıştırmalık tesisleriyle dikey/yukarı yönlü entegrasyonu derinleştirmek.",
+      "financials": {
+        "revenue": 425.7,
+        "profit": "70.9 (faaliyet kârı); net kâr metinde verilmemiş",
+        "currency": "USD milyon",
+        "key_ratios": [
+          {
+            "name": "Gelir büyümesi YoY",
+            "value": "+%6,9"
+          },
+          {
+            "name": "Faaliyet kârı büyümesi YoY",
+            "value": "+%34,6"
+          },
+          {
+            "name": "EBITDA",
+            "value": "US$86,9M"
+          },
+          {
+            "name": "Ruble değer kaybı (USD karşısı)",
+            "value": "%29,8"
+          }
+        ]
+      },
+      "risks": [
+        "Jeopolitik çatışmalar ve Rusya/Ukrayna bölgesine yüksek bağımlılık",
+        "Rus Rublesi'nde belirgin kur oynaklığı (USD bazlı gelir baskısı)",
+        "Yükselen kahve fiyatları ve hammadde fiyat oynaklığı",
+        "Enflasyon, durgunluk riski ve tedarik zinciri kısıtları",
+        "2024 seçim yılı kaynaklı popülizm/milliyetçilik ve makro belirsizlik",
+        "Değerleme ile iş temelleri arasındaki kopukluk"
+      ],
+      "kpis": [
+        {
+          "name": "Toplam gelir",
+          "value": "US$425,7M",
+          "trend": "up"
+        },
+        {
+          "name": "Faaliyet kârı",
+          "value": "US$70,9M",
+          "trend": "up"
+        },
+        {
+          "name": "EBITDA",
+          "value": "US$86,9M",
+          "trend": "up"
+        },
+        {
+          "name": "İçecekler (kahve) geliri",
+          "value": "US$324,4M",
+          "trend": "up"
+        },
+        {
+          "name": "Bileşenler (freeze/spray-dried kahve + creamer) geliri",
+          "value": "US$71,3M (+%12,9)",
+          "trend": "up"
+        },
+        {
+          "name": "İçecek-dışı geliri",
+          "value": "US$30,1M",
+          "trend": "down"
+        },
+        {
+          "name": "Rusya geliri",
+          "value": "US$143,3M (yerel kurda +%25,2)",
+          "trend": "down"
+        },
+        {
+          "name": "Ukrayna/Kazakistan/CIS geliri",
+          "value": "US$110,7M (+%21,1)",
+          "trend": "up"
+        },
+        {
+          "name": "Güney-Doğu Asya geliri",
+          "value": "US$101,6M (+%9,6)",
+          "trend": "up"
+        },
+        {
+          "name": "Güney Asya geliri",
+          "value": "US$49,1M (+%24,1)",
+          "trend": "up"
+        },
+        {
+          "name": "Diğer bölge geliri",
+          "value": "US$21,0M (−%20,0)",
+          "trend": "down"
+        }
+      ]
+    },
+    {
+      "year": 2024,
+      "data_available": true,
+      "key_events": [
+        "Gelir +%11,9 yoy ile rekor US$476,3 milyon (4. ardışık rekor yıl); tüm segmentlerde büyüme",
+        "Normalize NPAT -%11,4 yoy US$50,0 milyon (tarihte 2. en yüksek)",
+        "Kahve çekirdeği fiyatları iklim değişikliği nedeniyle rekor seviyelere ulaştı",
+        "Güneydoğu Asya en hızlı büyüyen segment (+%27,3); Vietnam segmentin %50+'sini oluşturuyor (CaféPHỐ)",
+        "Güney Asya segmenti dikey entegrasyon ile FY2020-FY2024 CAGR %70,9; Hindistan tesisleri tam kapasiteye yakın",
+        "Capex önceliği Asya'ya kaydırıldı: Malezya atıştırmalık tesisi (2Ç2025 üretim), Kazakistan kahve-mix tesisi (2025 sonu), Vietnam Binh Dinh freeze-dried çözünebilir kahve tesisi (erken 2028)"
+      ],
+      "geographic_markets": [
+        "Rusya",
+        "Güneydoğu Asya (özellikle Vietnam)",
+        "Ukrayna, Kazakistan & BDT",
+        "Güney Asya (Hindistan)",
+        "Doğu Avrupa",
+        "Diğer"
+      ],
+      "stated_strategy": "Çok yıllı coğrafi çeşitlendirme ('Strengthening Asia') ile risk dağıtımı: hızlı büyüyen Asya pazarlarına odaklanırken geleneksel çekirdek pazarlarda (Rusya, Doğu Avrupa) liderliği koruma. Çözünebilir kahve üretiminde dikey entegrasyona yatırım (Hindistan, Vietnam, Kazakistan tesisleri), marka inşası (MacCoffee amiral marka, CaféPHỐ Vietnam'da lider), dağıtım kanalları ve ürün geliştirmeye sürekli yatırım; yeni tesis yatırımlarından tamamlanma sonrası 2-3 yıl içinde anlamlı sonuç bekleniyor.",
+      "financials": {
+        "revenue": 476.347,
+        "profit": 50.039,
+        "currency": "USD milyon ('000 olarak: 476.347 = US$476,3M gelir; 50.039 = US$50,0M normalize NPAT)",
+        "key_ratios": [
+          {
+            "name": "Gelir büyümesi yoy",
+            "value": "+%11,9"
+          },
+          {
+            "name": "Normalize NPAT",
+            "value": "US$50,0M (-%11,4 yoy)"
+          },
+          {
+            "name": "Vergi sonrası kâr (raporlanan)",
+            "value": "US$52,9M"
+          },
+          {
+            "name": "Normalize vergi öncesi kâr",
+            "value": "US$62,4M"
+          },
+          {
+            "name": "EBITDA (raporlanan)",
+            "value": "US$81,1M"
+          },
+          {
+            "name": "EBITDA (normalize)",
+            "value": "US$78,3M"
+          }
+        ]
+      },
+      "risks": [
+        "Jeopolitik gerilimler (Doğu Avrupa, Orta Doğu) → ticaret yolu kesintileri ve yüksek navlun/lojistik maliyetleri",
+        "Enflasyon ve hammadde maliyet artışı; kahve çekirdeği fiyatları iklim değişikliği nedeniyle rekor seviyelerde — marj baskısı",
+        "Yerel para birimi değer kaybı (özellikle Rus Rublesi) USD gelirini olumsuz etkiliyor (Rusya yerel parada +%7,3 ama USD'de -%1,1)",
+        "Rusya/Ukrayna-BDT pazarlarına yüksek bağımlılık (toplam gelirin ~%56'sı)",
+        "Yeni tesis yatırımlarının getiri zamanlaması riski (Vietnam tesisi erken 2028)"
+      ],
+      "kpis": [
+        {
+          "name": "Toplam gelir",
+          "value": "US$476,3M",
+          "trend": "up"
+        },
+        {
+          "name": "Normalize NPAT",
+          "value": "US$50,0M",
+          "trend": "down"
+        },
+        {
+          "name": "İçecekler (Beverages) geliri",
+          "value": "US$356,4M",
+          "trend": "up"
+        },
+        {
+          "name": "İçerikler (Ingredients) geliri",
+          "value": "US$86,5M (+%21,3)",
+          "trend": "up"
+        },
+        {
+          "name": "Güneydoğu Asya geliri",
+          "value": "US$129,4M (+%27,3)",
+          "trend": "up"
+        },
+        {
+          "name": "Güney Asya geliri",
+          "value": "US$61,4M (+%24,9)",
+          "trend": "up"
+        },
+        {
+          "name": "Rusya geliri (USD)",
+          "value": "US$141,7M (-%1,1)",
+          "trend": "down"
+        },
+        {
+          "name": "Rusya geliri (yerel para)",
+          "value": "+%7,3",
+          "trend": "up"
+        },
+        {
+          "name": "Ukrayna/Kazakistan/BDT geliri",
+          "value": "US$124,7M (+%12,6)",
+          "trend": "up"
+        },
+        {
+          "name": "Güney Asya CAGR FY2020-FY2024",
+          "value": "%70,9",
+          "trend": "up"
+        }
+      ]
+    },
+    {
+      "year": 2025,
+      "data_available": true,
+      "key_events": [
+        "Beşinci ardışık rekor yıl; gelir ilk kez yarım milyar doları aştı (US$576.9M, +%21.1)",
+        "Normalleştirilmiş NPAT rekoru US$68.6M (+%37.0); normalleştirilmiş EBITDA US$113.5M (+%45.0)",
+        "Raporlanan rakamlar US$32.6M tek seferlik (REN) etkisiyle düşük; normalleştirilmiş rakamlardan ayrışıyor",
+        "Tea House LLP (Kazakistan) tam yıl konsolidasyonu (Mayıs 2024'te bağlı ortaklık oldu)",
+        "Rusya en güçlü segment (+%34.8), kısmen Ruble'nin %10 değer kazancı kaynaklı (yerel para reel büyüme +%20.9)",
+        "Vietnam buzlu kahve segmentinde pazar lideri konumda"
+      ],
+      "geographic_markets": [
+        "Rusya",
+        "Güney-Doğu Asya (Vietnam dahil)",
+        "Orta Asya (Kazakistan dahil)",
+        "Güney Asya",
+        "Avrupa",
+        "Diğer / 60+ ülkeye dağıtım"
+      ],
+      "stated_strategy": "Dikey entegre iş modeliyle (6 ülkede 10 üretim tesisi, 23 ofis, 60+ ülkeye dağıtım) hazır kahve içeceklerinde (MacCoffee, CaféPHỐ) liderlik; çekirdek pazarlarda derinleşme, küresel üretim ağının güçlendirilmesi (capex odaklı kapasite genişlemesi) ve sürekli marka/pazarlama yatırımı yoluyla disiplinli büyüme. Coğrafi çeşitlilik büyüme bölgelerine hızlı odak kaymasını sağlarken, AI-destekli araçlarla iş gücü verimliliği hedefleniyor; 'temkinli iyimser' görünümle gelecek on yıl için konumlanma.",
+      "financials": {
+        "revenue": 576.9,
+        "profit": "Raporlanan net kâr US$36.0M; normalleştirilmiş net kâr US$68.6M (US$32.6M tek seferlik REN etkisi ayrımı)",
+        "currency": "USD milyon",
+        "key_ratios": [
+          {
+            "name": "Gelir büyümesi YoY",
+            "value": "+%21.1"
+          },
+          {
+            "name": "Normalleştirilmiş NPAT büyümesi YoY",
+            "value": "+%37.0"
+          },
+          {
+            "name": "Normalleştirilmiş EBITDA büyümesi YoY",
+            "value": "+%45.0"
+          },
+          {
+            "name": "Normalleştirilmiş EBITDA marjı",
+            "value": "~%19.7 (113.5/576.9)"
+          },
+          {
+            "name": "Beverages gelir payı",
+            "value": "~%78.5 (453.2/576.9)"
+          }
+        ]
+      },
+      "risks": [
+        "ABD gümrük tarifeleri (Trump dönemi) — doğrudan etki sınırlı (düşük ABD maruziyeti), ancak dolaylı maliyet/talep baskısı",
+        "Rusya'ya yüksek gelir konsantrasyonu (toplam gelirin ~%33'ü) ve döviz (Ruble) oynaklığına bağımlılık",
+        "Jeopolitik ve ticaret gerilimleri, döviz oynaklığı",
+        "Orta Doğu gelişmeleri — petrol fiyatları, sevkiyat rotaları ve lojistik maliyet riski (2026'ya girerken)",
+        "Raporlanan ve normalleştirilmiş kâr arasındaki US$32.6M tek seferlik (REN) sapma — kazanç kalitesi izlenmeli"
+      ],
+      "kpis": [
+        {
+          "name": "Toplam gelir",
+          "value": "US$576.9M",
+          "trend": "up"
+        },
+        {
+          "name": "Beverages (kahve dahil) gelir",
+          "value": "US$453.2M (FY24: 356.4M)",
+          "trend": "up"
+        },
+        {
+          "name": "Rusya segment geliri",
+          "value": "US$191.0M (+%34.8)",
+          "trend": "up"
+        },
+        {
+          "name": "Güney-Doğu Asya geliri",
+          "value": "US$147.8M (+%14.3)",
+          "trend": "up"
+        },
+        {
+          "name": "Orta Asya geliri",
+          "value": "US$102.0M (+%25.6)",
+          "trend": "up"
+        },
+        {
+          "name": "Güney Asya geliri",
+          "value": "US$71.0M (+%15.7)",
+          "trend": "up"
+        },
+        {
+          "name": "Avrupa geliri",
+          "value": "US$48.6M (+%7.6)",
+          "trend": "up"
+        },
+        {
+          "name": "Diğer geliri",
+          "value": "US$16.6M (-%5.3)",
+          "trend": "down"
+        },
+        {
+          "name": "Normalleştirilmiş EBITDA",
+          "value": "US$113.5M",
+          "trend": "up"
+        },
+        {
+          "name": "Normalleştirilmiş net kâr",
+          "value": "US$68.6M",
+          "trend": "up"
+        },
+        {
+          "name": "Raporlanan net kâr",
+          "value": "US$36.0M (FY24: 52.9M)",
+          "trend": "down"
+        }
+      ]
+    }
+  ]
+}

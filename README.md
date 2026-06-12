@@ -52,3 +52,27 @@ npm run dev
 
 Next.js · Tailwind · Framer Motion · SSE · FastAPI · LangGraph · Python · JSON-schema ·
 Vercel + Railway
+
+## Brief Kapsam Haritası — 13 Zorunlu Teslim
+
+| # | Brief gereksinimi | Sağlayan | Ekran |
+|---|---|---|---|
+| 1 | Yıllık raporların sıkıştırılmış kronolojik özetleri | IntelligenceAgent | `/intelligence` |
+| 2 | İsimli, geçişli stratejik dönem zaman çizelgesi | StrategyAgent G1 | `/strategy` |
+| 3 | Dönem bazlı detaylı analiz | StrategyAgent G2 | `/strategy` |
+| 4 | Sentezlenmiş, tutarlı anlatı | StrategyAgent G3 | `/strategy` |
+| 5 | Hedef pazar önerisi + gerekçe | MarketDebateAgent | `/market` |
+| 6 | Kritik başarı faktörleri | MarketDebateAgent | `/market` |
+| 7 | Risk analizi + azaltma | MarketDebateAgent | `/market` |
+| 8 | Giriş modu önerisi | MarketDebateAgent | `/market` |
+| 9 | Hedef kitle tanımı | CampaignAgent A | `/campaign` |
+| 10 | Değer önerisi ve konumlandırma | CampaignAgent B | `/campaign` |
+| 11 | Pazarlama karışımı (4P) | CampaignAgent C | `/campaign` |
+| 12 | Bütçe + Gantt grafiği | CampaignAgent D | `/campaign` |
+| 13 | KPI'lar, ölçüm planı | CampaignAgent E | `/campaign` |
+
+## Durum
+
+Tüm 4 ajan gerçek Food Empire yıllık raporları (2023-2025) üzerinde **canlı çalıştırıldı**;
+çıktılar şema-valid ve `examples/` altında demo artifact'ı olarak donduruldu (mod b). Frontend
+7 rotada bunları gösterir. Deploy adımları: [`DEPLOY.md`](./DEPLOY.md).

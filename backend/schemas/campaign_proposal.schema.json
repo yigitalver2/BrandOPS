@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "campaign_proposal.schema.json",
+  "title": "Campaign Proposal",
+  "description": "CampaignAgent çıktısı — hedef kitle, konumlandırma, 4P, bütçe, Gantt, KPI'lar.",
+  "type": "object",
+  "required": [
+    "target_audience", "value_proposition", "positioning_statement",
+    "core_message", "marketing_mix", "budget", "gantt", "kpis"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "generated_at": { "type": "string" },
+    "target_audience": {
+      "type": "object",
+      "required": ["demographics", "psychographics", "consumption_habits", "unmet_needs"],
+      "additionalProperties": false,
+      "properties": {
+        "demographics": { "type": "string" },
+        "psychographics": { "type": "string" },
+        "consumption_habits": { "type": "string" },
+        "unmet_needs": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "value_proposition": { "type": "string" },
+    "positioning_statement": { "type": "string" },
+    "core_message": { "type": "string" },
+    "marketing_mix": {
+      "type": "object",
+      "required": ["product", "price", "place", "promotion"],
+      "additionalProperties": false,
+      "properties": {
+        "product": { "type": "string" },
+        "price": { "type": "string" },
+        "place": { "type": "string" },
+        "promotion": { "type": "string" }
+      }
+    },
+    "budget": {
+      "type": "object",
+      "required": ["total", "line_items"],
+      "additionalProperties": false,
+      "properties": {
+        "total": { "type": "number", "minimum": 0 },
+        "currency": { "type": "string" },
+        "line_items": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "amount", "justification"],
+            "additionalProperties": false,
+            "properties": {
+              "name": { "type": "string" },
+              "amount": { "type": "number", "minimum": 0 },
+              "justification": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "gantt": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["activity", "start_month", "end_month"],
+        "additionalProperties": false,
+        "properties": {
+          "activity": { "type": "string" },
+          "start_month": { "type": "integer", "minimum": 1, "maximum": 12 },
+          "end_month": { "type": "integer", "minimum": 1, "maximum": 12 }
+        }
+      }
+    },
+    "kpis": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["kpi", "method", "target", "cadence"],
+        "additionalProperties": false,
+        "properties": {
+          "kpi": { "type": "string" },
+          "method": { "type": "string" },
+          "target": { "type": "string" },
+          "cadence": { "type": "string" }
+        }
+      }
+    }
+  }
+}

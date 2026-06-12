@@ -21,8 +21,14 @@ USE_MOCK_AGENTS: bool = os.getenv("USE_MOCK_AGENTS", "auto") == "true" or (
     os.getenv("USE_MOCK_AGENTS", "auto") == "auto" and not LLM_API_KEY
 )
 
-SCHEMAS_DIR = REPO_ROOT / "schemas"
-EXAMPLES_DIR = REPO_ROOT / "examples"
+def _resolve(name: str) -> Path:
+    """schemas/ ve examples/ — repo kökünde (monorepo) ya da backend-local (deploy) olabilir."""
+    root = REPO_ROOT / name
+    return root if root.exists() else BACKEND_DIR / name
+
+
+SCHEMAS_DIR = _resolve("schemas")
+EXAMPLES_DIR = _resolve("examples")
 ARTIFACTS_DIR = BACKEND_DIR / "artifacts"  # çalıştırma çıktıları buraya yazılır
 REPORTS_DIR = BACKEND_DIR / "reports"      # Food Empire yıllık rapor PDF'leri
 
