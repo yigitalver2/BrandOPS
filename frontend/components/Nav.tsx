@@ -25,7 +25,7 @@ export default function Nav() {
             Brand<span className="text-copper-light">OPS</span>
           </span>
         </Link>
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="-mx-1 flex max-w-[60%] items-center gap-1 overflow-x-auto md:max-w-none">
           {LINKS.map((l) => {
             const active = path === l.href;
             return (

@@ -5,6 +5,7 @@ import PageTransition from "@/components/PageTransition";
 import { PageHeader } from "@/components/Section";
 import { useArtifact, TrendBadge } from "@/components/useArtifact";
 import { Loading, ErrorBox } from "@/components/States";
+import ExportButton from "@/components/ExportButton";
 import { getTimeline } from "@/lib/api";
 import type { ConsolidatedTimeline } from "@/lib/types";
 
@@ -17,6 +18,7 @@ export default function IntelligencePage() {
         eyebrow="Ajan 01 · IntelligenceAgent"
         title="İstihbarat Raporu"
         description="Food Empire'in kahve işinin yıl bazlı kronolojik zaman çizelgesi — yıllık raporların hedefli çıkarım ve iteratif özetlemeyle sıkıştırılmış hâli."
+        action={<ExportButton data={data} filename="consolidated_timeline.json" />}
       />
 
       {loading && <Loading />}

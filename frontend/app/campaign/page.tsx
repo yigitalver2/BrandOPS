@@ -4,6 +4,7 @@ import PageTransition from "@/components/PageTransition";
 import { PageHeader } from "@/components/Section";
 import { useArtifact } from "@/components/useArtifact";
 import { Loading, ErrorBox } from "@/components/States";
+import ExportButton from "@/components/ExportButton";
 import BudgetChart from "@/components/BudgetChart";
 import GanttChart from "@/components/GanttChart";
 import { getCampaign } from "@/lib/api";
@@ -18,6 +19,7 @@ export default function CampaignPage() {
         eyebrow="Ajan 04 · CampaignAgent"
         title="Pazarlama Kampanyası"
         description="Seçilen pazar için eksiksiz, maliyetlendirilmiş kampanya: hedef kitle, konumlandırma, 4P, bütçe, Gantt ve KPI'lar."
+        action={<ExportButton data={data} filename="campaign_proposal.json" />}
       />
 
       {loading && <Loading />}

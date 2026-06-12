@@ -5,6 +5,7 @@ import PageTransition from "@/components/PageTransition";
 import { PageHeader } from "@/components/Section";
 import { useArtifact } from "@/components/useArtifact";
 import { Loading, ErrorBox } from "@/components/States";
+import ExportButton from "@/components/ExportButton";
 import { getMarket } from "@/lib/api";
 import type { MarketRecommendation, EntryMode } from "@/lib/types";
 
@@ -24,6 +25,7 @@ export default function MarketPage() {
         eyebrow="Ajan 03 · MarketDebateAgent"
         title="Pazar Kararı"
         description="Aday pazarların yapılandırılmış tartışması (savunucu / muhalif / CFO filtresi) ve CDSG için tek, savunulabilir pazar önerisi."
+        action={<ExportButton data={data} filename="market_recommendation.json" />}
       />
 
       {loading && <Loading />}
