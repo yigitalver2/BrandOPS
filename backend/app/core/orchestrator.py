@@ -14,8 +14,8 @@ from typing import Any, TypedDict
 from langgraph.graph import END, StateGraph
 
 from ..agents.base import BaseAgent, ValidationFailure
-from ..agents.mock import make_mock_agents
-from .config import ARTIFACTS_DIR, USE_MOCK_AGENTS
+from ..agents.registry import build_agents
+from .config import ARTIFACTS_DIR
 from .events import publish
 from .validation import validate_artifact
 
@@ -110,7 +110,7 @@ def _make_node(agent: BaseAgent):
 
 
 def build_graph(agents: dict[str, BaseAgent] | None = None):
-    agents = agents or make_real_or_mock_agents()
+    agents = agents or build_agents()
     g = StateGraph(PipelineState)
     for name in AGENT_ORDER:
         g.add_node(name, _make_node(agents[name]))
@@ -119,14 +119,6 @@ def build_graph(agents: dict[str, BaseAgent] | None = None):
         g.add_edge(a, b)
     g.add_edge(AGENT_ORDER[-1], END)
     return g.compile()
-
-
-def make_real_or_mock_agents() -> dict[str, BaseAgent]:
-    if USE_MOCK_AGENTS:
-        return make_mock_agents()
-    # Faz 3-6'da gerçek ajanlar buraya bağlanacak
-    from ..agents.mock import make_mock_agents as _mk
-    return _mk()
 
 
 def new_run() -> dict:
