@@ -5,16 +5,29 @@ import PageTransition from "@/components/PageTransition";
 import { PageHeader } from "@/components/Section";
 import { TrendBadge } from "@/components/useArtifact";
 import { Empty } from "@/components/States";
+import { fetchLatestPipelineResults } from "@/lib/api";
 import type { ConsolidatedTimeline, YearRecord } from "@/lib/types";
 
 export default function IntelligencePage() {
   const [data, setData] = useState<ConsolidatedTimeline | null>(null);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("bo_artifact_intelligence");
-      if (raw) setData(JSON.parse(raw));
-    } catch {}
+    let alive = true;
+    fetchLatestPipelineResults()
+      .then((latest) => {
+        if (!alive) return;
+        const artifact = latest.artifacts.intelligence as ConsolidatedTimeline | undefined;
+        if (artifact) setData(artifact);
+      })
+      .catch(() => {
+        try {
+          const raw = localStorage.getItem("bo_artifact_intelligence");
+          if (raw && alive) setData(JSON.parse(raw));
+        } catch {}
+      });
+    return () => {
+      alive = false;
+    };
   }, []);
 
   return (

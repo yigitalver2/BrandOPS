@@ -6,16 +6,29 @@ import { PageHeader } from "@/components/Section";
 import { Empty } from "@/components/States";
 import BudgetChart from "@/components/BudgetChart";
 import GanttChart from "@/components/GanttChart";
+import { fetchLatestPipelineResults } from "@/lib/api";
 import type { CampaignProposal } from "@/lib/types";
 
 export default function CampaignPage() {
   const [data, setData] = useState<CampaignProposal | null>(null);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("bo_artifact_campaign");
-      if (raw) setData(JSON.parse(raw));
-    } catch {}
+    let alive = true;
+    fetchLatestPipelineResults()
+      .then((latest) => {
+        if (!alive) return;
+        const artifact = latest.artifacts.campaign as CampaignProposal | undefined;
+        if (artifact) setData(artifact);
+      })
+      .catch(() => {
+        try {
+          const raw = localStorage.getItem("bo_artifact_campaign");
+          if (raw && alive) setData(JSON.parse(raw));
+        } catch {}
+      });
+    return () => {
+      alive = false;
+    };
   }, []);
 
   return (

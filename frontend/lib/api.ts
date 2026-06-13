@@ -8,6 +8,7 @@ import type {
   MarketRecommendation,
   CampaignProposal,
   RunState,
+  AgentName,
 } from "./types";
 
 export const BACKEND_URL =
@@ -31,7 +32,7 @@ export const getRunState = () => loadMock<RunState>("run_state");
 
 // --- Canlı çalıştırma (gerçek backend) ---
 export async function startRun(): Promise<{ run_id: string }> {
-  const res = await fetch(`${BACKEND_URL}/run`, { method: "POST" });
+  const res = await fetch("/api/pipeline/start", { method: "POST" });
   if (!res.ok) throw new Error("çalıştırma başlatılamadı");
   return res.json();
 }
@@ -51,6 +52,47 @@ export async function fetchArtifact(runId: string, name: string): Promise<unknow
 export async function fetchRunStatus(runId: string): Promise<RunState> {
   const res = await fetch(`${BACKEND_URL}/run/${runId}`, { cache: "no-store" });
   if (!res.ok) throw new Error("run durumu alınamadı");
+  return res.json();
+}
+
+export async function savePipelineArtifact(input: {
+  runId: string;
+  agent: AgentName;
+  name: string;
+  artifact: unknown;
+}): Promise<void> {
+  const res = await fetch("/api/pipeline/artifacts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
+  });
+  if (!res.ok) throw new Error("artifact DB'ye yazılamadı");
+}
+
+export async function finishPipelineRun(input: {
+  runId: string;
+  status: "completed" | "failed" | "needs_review";
+}): Promise<void> {
+  const res = await fetch("/api/pipeline/finish", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(input),
+  });
+  if (!res.ok) throw new Error("run durumu DB'ye yazılamadı");
+}
+
+export async function fetchLatestPipelineResults(): Promise<{
+  run: null | {
+    id: string;
+    status: string;
+    started_at: number;
+    finished_at: number | null;
+    latest_event_at: number;
+  };
+  artifacts: Partial<Record<AgentName, unknown>>;
+}> {
+  const res = await fetch("/api/pipeline/latest", { cache: "no-store" });
+  if (!res.ok) throw new Error("son pipeline sonucu alınamadı");
   return res.json();
 }
 

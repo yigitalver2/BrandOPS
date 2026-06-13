@@ -3,7 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import {
   startRun, streamUrl, getTimeline, getStrategy, getMarket, getCampaign,
-  fetchArtifact, fetchRunStatus,
+  fetchArtifact, fetchRunStatus, savePipelineArtifact, finishPipelineRun,
 } from "@/lib/api";
 import type { AgentName, StageStatus } from "@/lib/types";
 
@@ -38,6 +38,7 @@ export function usePipeline() {
   const [mode, setMode] = useState<RunMode>("idle");
   const [runId, setRunId] = useState<string | null>(null);
   const esRef = useRef<EventSource | null>(null);
+  const saveTasksRef = useRef<Promise<void>[]>([]);
 
   const patch = (agent: AgentName, p: Partial<StageView>) =>
     setStages((prev) => prev.map((s) => (s.agent === agent ? { ...s, ...p } : s)));
@@ -74,6 +75,14 @@ export function usePipeline() {
           const data = await fetchArtifact(rid, ARTIFACT_NAME[st.agent]).catch(() => null);
           if (data) {
             try { localStorage.setItem(`bo_artifact_${st.agent}`, JSON.stringify(data)); } catch {}
+            const saveTask = savePipelineArtifact({
+              runId: rid,
+              agent: st.agent,
+              name: ARTIFACT_NAME[st.agent],
+              artifact: data,
+            }).catch(() => {});
+            saveTasksRef.current.push(saveTask);
+            await saveTask;
             patch(st.agent, { status: "completed", artifact: data, tokens: st.tokens, latency_ms: st.latency_ms ?? undefined });
           }
         } else if (st.status === "running") {
@@ -83,6 +92,11 @@ export function usePipeline() {
         }
       }
       if (["completed", "failed", "needs_review"].includes(run.status)) {
+        await Promise.allSettled(saveTasksRef.current);
+        finishPipelineRun({
+          runId: rid,
+          status: run.status as "completed" | "failed" | "needs_review",
+        }).catch(() => {});
         setMode(run.status === "completed" ? "done" : "error");
         return;
       }
@@ -95,6 +109,7 @@ export function usePipeline() {
     setStages(initStages());
     setMode("live");
     try {
+      saveTasksRef.current = [];
       const { run_id } = await startRun();
       setRunId(run_id);
       const es = new EventSource(streamUrl(run_id));
@@ -111,14 +126,27 @@ export function usePipeline() {
           tokens: d.tokens, latency_ms: d.latency_ms,
         });
         try { localStorage.setItem(`bo_artifact_${d.agent}`, JSON.stringify(d.artifact)); } catch {}
+        const saveTask = savePipelineArtifact({
+          runId: run_id,
+          agent: d.agent,
+          name: ARTIFACT_NAME[d.agent as AgentName],
+          artifact: d.artifact,
+        }).catch(() => {});
+        saveTasksRef.current.push(saveTask);
       });
       es.addEventListener("stage_failed", (e) => {
         const d = JSON.parse((e as MessageEvent).data);
         patch(d.agent, { status: "needs_review", error: (d.errors || []).join("; ") });
       });
-      es.addEventListener("run_finished", () => {
+      es.addEventListener("run_finished", async (e) => {
+        const d = JSON.parse((e as MessageEvent).data) as {
+          status?: "completed" | "failed" | "needs_review";
+        };
+        const status = d.status ?? "completed";
         es.close();
-        setMode("done");
+        await Promise.allSettled(saveTasksRef.current);
+        finishPipelineRun({ runId: run_id, status }).catch(() => {});
+        setMode(status === "completed" ? "done" : "error");
       });
       es.onerror = () => {
         es.close();

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import PageTransition from "@/components/PageTransition";
 import { PageHeader } from "@/components/Section";
 import { Empty } from "@/components/States";
+import { fetchLatestPipelineResults } from "@/lib/api";
 import type { MarketRecommendation, MarketCandidate } from "@/lib/types";
 
 const ENTRY_MODE_LABELS: Record<string, string> = {
@@ -17,10 +18,22 @@ export default function MarketPage() {
   const [data, setData] = useState<MarketRecommendation | null>(null);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("bo_artifact_market");
-      if (raw) setData(JSON.parse(raw));
-    } catch {}
+    let alive = true;
+    fetchLatestPipelineResults()
+      .then((latest) => {
+        if (!alive) return;
+        const artifact = latest.artifacts.market as MarketRecommendation | undefined;
+        if (artifact) setData(artifact);
+      })
+      .catch(() => {
+        try {
+          const raw = localStorage.getItem("bo_artifact_market");
+          if (raw && alive) setData(JSON.parse(raw));
+        } catch {}
+      });
+    return () => {
+      alive = false;
+    };
   }, []);
 
   return (

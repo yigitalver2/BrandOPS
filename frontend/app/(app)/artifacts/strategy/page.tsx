@@ -4,16 +4,29 @@ import { useEffect, useState } from "react";
 import PageTransition from "@/components/PageTransition";
 import { PageHeader } from "@/components/Section";
 import { Empty } from "@/components/States";
+import { fetchLatestPipelineResults } from "@/lib/api";
 import type { StrategicAnalysis, Period } from "@/lib/types";
 
 export default function StrategyPage() {
   const [data, setData] = useState<StrategicAnalysis | null>(null);
 
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem("bo_artifact_strategy");
-      if (raw) setData(JSON.parse(raw));
-    } catch {}
+    let alive = true;
+    fetchLatestPipelineResults()
+      .then((latest) => {
+        if (!alive) return;
+        const artifact = latest.artifacts.strategy as StrategicAnalysis | undefined;
+        if (artifact) setData(artifact);
+      })
+      .catch(() => {
+        try {
+          const raw = localStorage.getItem("bo_artifact_strategy");
+          if (raw && alive) setData(JSON.parse(raw));
+        } catch {}
+      });
+    return () => {
+      alive = false;
+    };
   }, []);
 
   return (
