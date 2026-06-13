@@ -7,11 +7,11 @@ export default function Footer() {
         <p className="flex items-center gap-2.5">
           <LogoMark className="h-6 w-auto" />
           <Wordmark className="text-lg" />
-          <span className="font-display text-cream-200/60">· Ürün Gereksinimleri v1.0</span>
+          <span className="font-display text-cream-200/60">· Product Requirements v1.0</span>
         </p>
         <p>
-          CDSG × Food Empire — pazar girişi stratejisi ve kampanya tasarımı için
-          otonom bir motor. AI-Powered IMC ders projesi.
+          CDSG × Food Empire — an autonomous engine for market entry strategy and campaign design.
+          AI-Powered IMC course project.
         </p>
       </div>
     </footer>

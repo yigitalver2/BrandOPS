@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BrandOPS — Otonom Strateji Motoru",
+  title: "BrandOPS — Autonomous Strategy Engine",
   description:
-    "CDSG × Food Empire — pazar girişi stratejisi ve kampanya tasarımı için otonom çok-ajanlı pipeline.",
+    "CDSG × Food Empire — autonomous multi-agent pipeline for market entry strategy and campaign design.",
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="tr">
+    <html lang="en">
       <body className="min-h-screen">{children}</body>
     </html>
   );

@@ -26,7 +26,7 @@ export default function ExportButton({
       disabled={data == null}
       className="inline-flex items-center gap-1.5 rounded-full border border-espresso-600 px-4 py-1.5 text-sm text-cream-100 transition-colors hover:border-copper disabled:opacity-40"
     >
-      ↓ JSON indir
+      ↓ Download JSON
     </button>
   );
 }

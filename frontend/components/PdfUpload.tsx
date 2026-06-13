@@ -27,7 +27,7 @@ export default function PdfUpload() {
       setReports(data.reports);
       setLoadError(null);
     } catch {
-      setLoadError("Backend'e ulaşılamadı — backend çalışıyor mu?");
+      setLoadError("Could not reach the backend — is it running?");
     }
   }
 
@@ -136,15 +136,15 @@ export default function PdfUpload() {
           </div>
           <div>
             <p className="font-medium text-cream-100">
-              {dragging ? "Bırak" : "PDF yükle"}
+              {dragging ? "Drop here" : "Upload PDF"}
             </p>
             <p className="mt-1 text-sm text-cream-200/55">
-              Sürükle & bırak ya da tıkla · yıllık rapor PDF&apos;leri
+              Drag & drop or click · annual report PDFs
             </p>
           </div>
           {!dragging && (
             <span className="rounded-full border border-espresso-600 px-4 py-1.5 text-sm text-cream-200/70">
-              Dosya seç
+              Choose file
             </span>
           )}
         </div>
@@ -198,7 +198,7 @@ export default function PdfUpload() {
       ) : reports.length > 0 ? (
         <div className="card divide-y divide-espresso-600/60 overflow-hidden p-0">
           <p className="px-4 py-2.5 font-mono text-[11px] uppercase tracking-widest text-cream-200/50">
-            Yüklü raporlar ({reports.length})
+            Uploaded reports ({reports.length})
           </p>
           {reports.map((name) => (
             <motion.div
@@ -213,7 +213,7 @@ export default function PdfUpload() {
               <button
                 onClick={() => onDelete(name)}
                 className="shrink-0 rounded-full p-1.5 text-cream-200/40 transition-colors hover:bg-rose-50 hover:text-rose-500"
-                title="Sil"
+                title="Delete"
               >
                 <Trash />
               </button>
@@ -222,7 +222,7 @@ export default function PdfUpload() {
         </div>
       ) : (
         <p className="text-center text-sm text-cream-200/40">
-          Henüz yüklü rapor yok — pipeline mock verilerle çalışır.
+          No reports uploaded yet — pipeline runs with mock data.
         </p>
       )}
     </div>

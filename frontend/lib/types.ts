@@ -115,19 +115,19 @@ export const AGENT_META: Record<
   { index: string; title: string; subtitle: string; artifact: string; href: string }
 > = {
   intelligence: {
-    index: "01", title: "IntelligenceAgent", subtitle: "alım · sıkıştırma",
+    index: "01", title: "IntelligenceAgent", subtitle: "extraction · compression",
     artifact: "consolidated_timeline.json", href: "/intelligence",
   },
   strategy: {
-    index: "02", title: "StrategyAgent", subtitle: "dönemleştirme · sentez",
+    index: "02", title: "StrategyAgent", subtitle: "periodization · synthesis",
     artifact: "strategic_analysis.json", href: "/strategy",
   },
   market: {
-    index: "03", title: "MarketDebateAgent", subtitle: "tartışma · karar",
+    index: "03", title: "MarketDebateAgent", subtitle: "debate · decision",
     artifact: "market_recommendation.json", href: "/market",
   },
   campaign: {
-    index: "04", title: "CampaignAgent", subtitle: "planlama · maliyetlendirme",
+    index: "04", title: "CampaignAgent", subtitle: "planning · costing",
     artifact: "campaign_proposal.json", href: "/campaign",
   },
 };

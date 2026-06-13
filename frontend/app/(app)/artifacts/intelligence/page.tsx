@@ -34,27 +34,27 @@ export default function IntelligencePage() {
     <PageTransition>
       <PageHeader
         eyebrow="Artifact 01"
-        title="Piyasa İstihbaratı"
-        description="Food Empire yıllık raporlarından çıkarılan konsolide zaman çizelgesi."
+        title="Market Intelligence"
+        description="Consolidated timeline extracted from Food Empire annual reports."
         action={
           data && (
             <button onClick={() => window.print()} className="btn-primary print-hidden">
-              PDF İndir
+              Download PDF
             </button>
           )
         }
       />
 
       {!data ? (
-        <Empty msg="Henüz çalıştırılmadı — önce Pipeline'ı Çalıştır sayfasından analizi başlat." />
+        <Empty msg="Not run yet — start the analysis from the Run Pipeline page first." />
       ) : (
         <>
           <div className="mb-6 flex flex-wrap gap-4 text-xs text-cream-200/50">
-            <span>Şirket: <b className="text-cream-100">{data.company}</b></span>
+            <span>Company: <b className="text-cream-100">{data.company}</b></span>
             {data.generated_at && (
-              <span>Üretildi: <b className="text-cream-100">{new Date(data.generated_at).toLocaleString("tr-TR")}</b></span>
+              <span>Generated: <b className="text-cream-100">{new Date(data.generated_at).toLocaleString("en-US")}</b></span>
             )}
-            <span>Kayıt sayısı: <b className="text-cream-100">{data.records.length}</b></span>
+            <span>Records: <b className="text-cream-100">{data.records.length}</b></span>
           </div>
 
           <div className="space-y-6">
@@ -75,22 +75,22 @@ function YearCard({ record: r }: { record: YearRecord }) {
     <div className={`card p-5 ${unavailable ? "opacity-50" : ""}`}>
       <div className="mb-4 flex items-center justify-between">
         <span className="font-mono text-2xl font-bold text-copper-dark">{r.year}</span>
-        {unavailable && <span className="pill">veri yok</span>}
+        {unavailable && <span className="pill">no data</span>}
       </div>
 
       {unavailable ? (
-        <p className="text-sm text-cream-200/50">Bu yıl için rapor erişilemedi.</p>
+        <p className="text-sm text-cream-200/50">Report unavailable for this year.</p>
       ) : (
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {/* Finansallar */}
+          {/* Financials */}
           <div>
-            <p className="eyebrow mb-2">Finansallar</p>
+            <p className="eyebrow mb-2">Financials</p>
             <div className="space-y-1 text-sm">
               {r.financials.revenue != null && (
-                <p>Gelir: <b className="text-cream-100">{r.financials.revenue} {r.financials.currency ?? ""}</b></p>
+                <p>Revenue: <b className="text-cream-100">{r.financials.revenue} {r.financials.currency ?? ""}</b></p>
               )}
               {r.financials.profit != null && (
-                <p>Kâr: <b className="text-cream-100">{r.financials.profit} {r.financials.currency ?? ""}</b></p>
+                <p>Profit: <b className="text-cream-100">{r.financials.profit} {r.financials.currency ?? ""}</b></p>
               )}
               {r.financials.key_ratios.map((kr, i) => (
                 <p key={i} className="text-cream-200/60">{kr.name}: <b className="text-cream-100">{kr.value}</b></p>
@@ -98,9 +98,9 @@ function YearCard({ record: r }: { record: YearRecord }) {
             </div>
           </div>
 
-          {/* Strateji & Pazarlar */}
+          {/* Strategy & Markets */}
           <div>
-            <p className="eyebrow mb-2">Strateji</p>
+            <p className="eyebrow mb-2">Strategy</p>
             <p className="text-sm leading-relaxed text-cream-200/80">{r.stated_strategy}</p>
             {r.geographic_markets.length > 0 && (
               <div className="mt-2 flex flex-wrap gap-1">
@@ -111,10 +111,10 @@ function YearCard({ record: r }: { record: YearRecord }) {
             )}
           </div>
 
-          {/* KPI'lar */}
+          {/* KPIs */}
           {r.kpis.length > 0 && (
             <div>
-              <p className="eyebrow mb-2">KPI'lar</p>
+              <p className="eyebrow mb-2">KPIs</p>
               <div className="space-y-1">
                 {r.kpis.map((k, i) => (
                   <div key={i} className="flex items-center justify-between text-sm">
@@ -129,10 +129,10 @@ function YearCard({ record: r }: { record: YearRecord }) {
             </div>
           )}
 
-          {/* Önemli Olaylar */}
+          {/* Key Events */}
           {r.key_events.length > 0 && (
             <div>
-              <p className="eyebrow mb-2">Önemli Olaylar</p>
+              <p className="eyebrow mb-2">Key Events</p>
               <ul className="space-y-1 text-sm text-cream-200/70">
                 {r.key_events.map((e, i) => (
                   <li key={i} className="flex gap-2">
@@ -144,10 +144,10 @@ function YearCard({ record: r }: { record: YearRecord }) {
             </div>
           )}
 
-          {/* Riskler */}
+          {/* Risks */}
           {r.risks.length > 0 && (
             <div>
-              <p className="eyebrow mb-2">Riskler</p>
+              <p className="eyebrow mb-2">Risks</p>
               <ul className="space-y-1 text-sm text-cream-200/70">
                 {r.risks.map((risk, i) => (
                   <li key={i} className="flex gap-2">

@@ -35,40 +35,40 @@ export default function CampaignPage() {
     <PageTransition>
       <PageHeader
         eyebrow="Artifact 04"
-        title="Kampanya Planı"
-        description="CDSG'nin seçilen pazarı için hedef kitle, 4P, bütçe ve Gantt zaman çizelgesi."
+        title="Campaign Plan"
+        description="Target audience, 4Ps, budget and Gantt timeline for CDSG's selected market."
         action={
           data && (
             <button onClick={() => window.print()} className="btn-primary print-hidden">
-              PDF İndir
+              Download PDF
             </button>
           )
         }
       />
 
       {!data ? (
-        <Empty msg="Henüz çalıştırılmadı — önce Pipeline'ı Çalıştır sayfasından analizi başlat." />
+        <Empty msg="Not run yet — start the analysis from the Run Pipeline page first." />
       ) : (
         <div className="space-y-6">
           {/* Hedef kitle */}
           <div className="card p-5">
-            <p className="eyebrow mb-4">Hedef Kitle</p>
+            <p className="eyebrow mb-4">Target Audience</p>
             <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <p className="mb-1 text-xs text-cream-200/50">Demografik</p>
+                <p className="mb-1 text-xs text-cream-200/50">Demographics</p>
                 <p className="text-sm text-cream-200/80">{data.target_audience.demographics}</p>
               </div>
               <div>
-                <p className="mb-1 text-xs text-cream-200/50">Psikografik</p>
+                <p className="mb-1 text-xs text-cream-200/50">Psychographics</p>
                 <p className="text-sm text-cream-200/80">{data.target_audience.psychographics}</p>
               </div>
               <div>
-                <p className="mb-1 text-xs text-cream-200/50">Tüketim Alışkanlıkları</p>
+                <p className="mb-1 text-xs text-cream-200/50">Consumption Habits</p>
                 <p className="text-sm text-cream-200/80">{data.target_audience.consumption_habits}</p>
               </div>
               {data.target_audience.unmet_needs.length > 0 && (
                 <div>
-                  <p className="mb-1 text-xs text-cream-200/50">Karşılanmamış İhtiyaçlar</p>
+                  <p className="mb-1 text-xs text-cream-200/50">Unmet Needs</p>
                   <ul className="space-y-1">
                     {data.target_audience.unmet_needs.map((n, i) => (
                       <li key={i} className="flex gap-2 text-sm text-cream-200/70">
@@ -84,23 +84,23 @@ export default function CampaignPage() {
 
           {/* Konumlandırma */}
           <div className="card border-l-2 border-l-copper p-5">
-            <p className="eyebrow mb-3">Konumlandırma & Mesaj</p>
+            <p className="eyebrow mb-3">Positioning & Message</p>
             <p className="mb-3 leading-relaxed text-cream-100">{data.value_proposition}</p>
             <p className="mb-2 text-sm italic text-cream-200/70">"{data.positioning_statement}"</p>
             <div className="mt-3 inline-block rounded-lg bg-copper/20 px-4 py-2">
-              <p className="font-mono text-xs text-cream-200/50">Çekirdek Mesaj</p>
+              <p className="font-mono text-xs text-cream-200/50">Core Message</p>
               <p className="font-display text-lg text-copper-dark">{data.core_message}</p>
             </div>
           </div>
 
           {/* 4P */}
           <div>
-            <p className="eyebrow mb-3">Pazarlama Karması (4P)</p>
+            <p className="eyebrow mb-3">Marketing Mix (4Ps)</p>
             <div className="grid gap-4 md:grid-cols-2">
               {(["product", "price", "place", "promotion"] as const).map((p) => (
                 <div key={p} className="card p-4">
                   <p className="eyebrow mb-2">
-                    {p === "product" ? "Ürün" : p === "price" ? "Fiyat" : p === "place" ? "Dağıtım" : "Tutundurma"}
+                    {p === "product" ? "Product" : p === "price" ? "Price" : p === "place" ? "Place" : "Promotion"}
                   </p>
                   <p className="text-sm leading-relaxed text-cream-200/80">{data.marketing_mix[p]}</p>
                 </div>
@@ -136,15 +136,15 @@ export default function CampaignPage() {
           {/* KPI tablosu */}
           {data.kpis.length > 0 && (
             <div className="card p-5">
-              <p className="eyebrow mb-4">KPI & Ölçüm Planı</p>
+              <p className="eyebrow mb-4">KPI & Measurement Plan</p>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-espresso-600/40 text-left">
                       <th className="pb-2 pr-4 font-mono text-xs font-normal text-cream-200/40">KPI</th>
-                      <th className="pb-2 pr-4 font-mono text-xs font-normal text-cream-200/40">Hedef</th>
-                      <th className="pb-2 pr-4 font-mono text-xs font-normal text-cream-200/40">Ölçüm</th>
-                      <th className="pb-2 font-mono text-xs font-normal text-cream-200/40">Sıklık</th>
+                      <th className="pb-2 pr-4 font-mono text-xs font-normal text-cream-200/40">Target</th>
+                      <th className="pb-2 pr-4 font-mono text-xs font-normal text-cream-200/40">Method</th>
+                      <th className="pb-2 font-mono text-xs font-normal text-cream-200/40">Cadence</th>
                     </tr>
                   </thead>
                   <tbody>

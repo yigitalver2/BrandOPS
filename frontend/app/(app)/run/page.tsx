@@ -9,8 +9,8 @@ import PdfUpload from "@/components/PdfUpload";
 import { AGENT_META } from "@/lib/types";
 
 const STATUS_LABEL: Record<string, string> = {
-  pending: "bekliyor", running: "çalışıyor", completed: "tamamlandı",
-  needs_review: "inceleme gerekli", failed: "hata",
+  pending: "waiting", running: "running", completed: "completed",
+  needs_review: "needs review", failed: "failed",
 };
 
 export default function RunPage() {
@@ -21,9 +21,9 @@ export default function RunPage() {
   return (
     <PageTransition>
       <PageHeader
-        eyebrow="Canlı Çalıştırma"
+        eyebrow="Live Run"
         title="Pipeline"
-        description="Dört uzman ajan sırayla çalışır; her biri öncekinin doğrulanmış JSON çıktısını tek girdi olarak alır. Aşamalar tamamlandıkça çıktıları belirir."
+        description="Four specialist agents run in sequence; each takes the previous agent's validated JSON output as its sole input. Outputs appear as stages complete."
       />
 
       {/* PDF Yükleme */}
@@ -44,9 +44,9 @@ export default function RunPage() {
               </svg>
             </span>
             <div>
-              <p className="text-sm font-medium text-cream-100">Yıllık Rapor PDF&apos;leri</p>
+              <p className="text-sm font-medium text-cream-100">Annual Report PDFs</p>
               <p className="text-xs text-cream-200/50">
-                Pipeline çalışmadan önce analiz edilecek belgeleri yükle
+                Upload documents to be analyzed before the pipeline runs
               </p>
             </div>
           </div>
@@ -79,11 +79,11 @@ export default function RunPage() {
 
       <div className="mb-8 flex flex-wrap items-center gap-3">
         <button onClick={start} disabled={running} className="btn-primary disabled:opacity-50">
-          {running ? "Çalışıyor…" : mode === "done" ? "Tekrar Çalıştır" : "Pipeline'i Çalıştır →"}
+          {running ? "Running…" : mode === "done" ? "Run Again" : "Run Pipeline →"}
         </button>
         {runId && <span className="font-mono text-xs text-cream-200/50">run: {runId}</span>}
         {mode === "demo" && (
-          <span className="pill">demo akışı (donmuş, doğrulanmış artifact&apos;lar)</span>
+          <span className="pill">demo flow (frozen, validated artifacts)</span>
         )}
       </div>
 
@@ -104,9 +104,9 @@ export default function RunPage() {
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           className="mt-8 rounded-2xl border border-emerald-600/30 bg-emerald-50/30 px-5 py-4"
         >
-          <p className="text-sm font-medium text-emerald-700">Pipeline tamamlandı.</p>
+          <p className="text-sm font-medium text-emerald-700">Pipeline complete.</p>
           <p className="mt-1 text-sm text-cream-200/60">
-            Tüm artifact&apos;lar başarıyla üretildi ve doğrulandı. Sonuçlar menüsünden inceleyebilirsin.
+            All artifacts were successfully generated and validated. View them from the Results menu.
           </p>
         </motion.div>
       )}
@@ -116,10 +116,10 @@ export default function RunPage() {
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           className="mt-8 rounded-2xl border border-rose-600/30 bg-rose-50/30 px-5 py-4"
         >
-          <p className="text-sm font-medium text-rose-700">Bağlantı kesildi.</p>
+          <p className="text-sm font-medium text-rose-700">Connection lost.</p>
           <p className="mt-1 text-sm text-cream-200/60">
-            Canlı akış koptu. Tamamlanan aşamaların gerçek çıktıları kaydedildi; eksik
-            kalan olduysa pipeline&apos;ı tekrar çalıştır. (Sahte/demo veri yazılmadı.)
+            The live stream was interrupted. Real outputs from completed stages have been saved;
+            if any are missing, run the pipeline again. (No mock/demo data was written.)
           </p>
         </motion.div>
       )}
@@ -179,12 +179,12 @@ function StageCard({ stage }: { stage: StageView }) {
           >
             <div className="flex flex-wrap gap-4 text-xs text-cream-200/60">
               {stage.tokens && (
-                <span>token: <b className="text-cream-100">{stage.tokens.total.toLocaleString()}</b></span>
+                <span>tokens: <b className="text-cream-100">{stage.tokens.total.toLocaleString()}</b></span>
               )}
               {stage.latency_ms != null && (
-                <span>süre: <b className="text-cream-100">{(stage.latency_ms / 1000).toFixed(1)}s</b></span>
+                <span>duration: <b className="text-cream-100">{(stage.latency_ms / 1000).toFixed(1)}s</b></span>
               )}
-              <span className="text-emerald-400/80">✓ şema doğrulandı</span>
+              <span className="text-emerald-400/80">✓ schema validated</span>
             </div>
             <pre className="mt-3 max-h-44 overflow-auto rounded-lg bg-espresso-900/70 p-3 font-mono text-[11px] text-cream-200/70">
               {preview(stage.artifact)}

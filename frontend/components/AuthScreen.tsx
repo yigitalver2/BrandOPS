@@ -15,9 +15,9 @@ const AGENTS = [
 ];
 
 const FEATURES = [
-  "Yıllık raporlardan otonom strateji çıkarımı",
-  "Tartışarak hedef pazar seçimi",
-  "4P, bütçe ve Gantt ile tam kampanya",
+  "Autonomous strategy extraction from annual reports",
+  "Debate-driven target market selection",
+  "Full campaign with 4Ps, budget and Gantt",
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -56,13 +56,13 @@ export default function AuthScreen() {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
-        setError(data.error || "Bir şeyler ters gitti.");
+        setError(data.error || "Something went wrong.");
         return;
       }
       router.replace(next);
       router.refresh();
     } catch {
-      setError("Sunucuya ulaşılamadı.");
+      setError("Could not reach the server.");
     } finally {
       setLoading(false);
     }
@@ -105,8 +105,8 @@ export default function AuthScreen() {
             ))}
           </div>
           <h1 className="mt-8 max-w-md font-display text-4xl font-bold leading-tight text-espresso-900">
-            Otonom strateji motoruna{" "}
-            <span className="text-copper-dark">giriş</span> yap.
+            Sign in to the{" "}
+            <span className="text-copper-dark">autonomous</span> strategy engine.
           </h1>
           <ul className="mt-7 space-y-3">
             {FEATURES.map((f) => (
@@ -119,7 +119,7 @@ export default function AuthScreen() {
         </motion.div>
 
         <div className="relative rounded-xl border border-espresso-600/60 bg-espresso-800/70 px-4 py-3 font-mono text-xs text-cream-200/80 backdrop-blur-sm">
-          <span className="text-copper-dark">demo hesabı</span> · demo@brandops.ai / demo1234
+          <span className="text-copper-dark">demo account</span> · demo@brandops.ai / demo1234
         </div>
       </div>
 
@@ -133,12 +133,12 @@ export default function AuthScreen() {
           </div>
 
           <h2 className="font-display text-2xl font-semibold">
-            {mode === "login" ? "Tekrar hoş geldin" : "Hesap oluştur"}
+            {mode === "login" ? "Welcome back" : "Create an account"}
           </h2>
           <p className="mt-1 text-sm text-cream-200/60">
             {mode === "login"
-              ? "Devam etmek için giriş yap."
-              : "Birkaç saniyede başlayalım."}
+              ? "Sign in to continue."
+              : "Get started in a few seconds."}
           </p>
 
           {/* Mode sekmeleri */}
@@ -158,7 +158,7 @@ export default function AuthScreen() {
                   />
                 )}
                 <span className={`relative ${mode === m ? "text-white" : "text-cream-200/70"}`}>
-                  {m === "login" ? "Giriş" : "Kayıt"}
+                  {m === "login" ? "Sign In" : "Sign Up"}
                 </span>
               </button>
             ))}
@@ -174,12 +174,12 @@ export default function AuthScreen() {
                   transition={{ duration: 0.25, ease: EASE }}
                   className="overflow-hidden"
                 >
-                  <Field label="Ad (opsiyonel)">
+                  <Field label="Name (optional)">
                     <input
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Adın"
+                      placeholder="Your name"
                       className={inputCls}
                       autoComplete="name"
                     />
@@ -188,25 +188,25 @@ export default function AuthScreen() {
               )}
             </AnimatePresence>
 
-            <Field label="E-posta">
+            <Field label="Email">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="ornek@brandops.ai"
+                placeholder="you@brandops.ai"
                 className={inputCls}
                 autoComplete="email"
                 required
               />
             </Field>
 
-            <Field label="Şifre">
+            <Field label="Password">
               <div className="relative">
                 <input
                   type={show ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder={mode === "signup" ? "En az 8 karakter" : "••••••••"}
+                  placeholder={mode === "signup" ? "At least 8 characters" : "••••••••"}
                   className={`${inputCls} pr-11`}
                   autoComplete={mode === "signup" ? "new-password" : "current-password"}
                   required
@@ -216,7 +216,7 @@ export default function AuthScreen() {
                   type="button"
                   onClick={() => setShow((s) => !s)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-cream-200/50 transition-colors hover:text-copper-dark"
-                  aria-label={show ? "Şifreyi gizle" : "Şifreyi göster"}
+                  aria-label={show ? "Hide password" : "Show password"}
                 >
                   {show ? <EyeOff /> : <Eye />}
                 </button>
@@ -244,21 +244,21 @@ export default function AuthScreen() {
               {loading ? (
                 <Spinner />
               ) : mode === "login" ? (
-                "Giriş yap"
+                "Sign in"
               ) : (
-                "Hesap oluştur"
+                "Create account"
               )}
             </button>
           </form>
 
           <p className="mt-6 text-center text-sm text-cream-200/60">
-            {mode === "login" ? "Hesabın yok mu? " : "Zaten hesabın var mı? "}
+            {mode === "login" ? "Don't have an account? " : "Already have an account? "}
             <button
               type="button"
               onClick={() => switchMode(mode === "login" ? "signup" : "login")}
               className="font-medium text-copper-dark hover:underline"
             >
-              {mode === "login" ? "Kayıt ol" : "Giriş yap"}
+              {mode === "login" ? "Sign up" : "Sign in"}
             </button>
           </p>
         </div>

@@ -6,14 +6,14 @@ import { usePathname, useRouter } from "next/navigation";
 import { LogoMark, Wordmark } from "@/components/Logo";
 
 const LINKS = [
-  { href: "/run", label: "Pipeline'ı Çalıştır" },
+  { href: "/run", label: "Run Pipeline" },
 ];
 
 const ARTIFACT_LINKS = [
-  { href: "/artifacts/intelligence", label: "01 · İstihbarat" },
-  { href: "/artifacts/strategy",     label: "02 · Strateji" },
-  { href: "/artifacts/market",       label: "03 · Pazar" },
-  { href: "/artifacts/campaign",     label: "04 · Kampanya" },
+  { href: "/artifacts/intelligence", label: "01 · Intelligence" },
+  { href: "/artifacts/strategy",     label: "02 · Strategy" },
+  { href: "/artifacts/market",       label: "03 · Market" },
+  { href: "/artifacts/campaign",     label: "04 · Campaign" },
 ];
 
 export default function Nav() {
@@ -21,7 +21,7 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-40 border-b border-espresso-700/60 bg-espresso-900/80 backdrop-blur">
       <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
-        <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="BrandOPS — ana sayfa">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="BrandOPS — home">
           <LogoMark className="h-7 w-auto" />
           <Wordmark className="text-lg" />
         </Link>
@@ -75,7 +75,7 @@ function ResultsDropdown() {
           anyActive ? "bg-espresso-700 text-cream-50" : "text-cream-200/70 hover:text-cream-50"
         }`}
       >
-        Sonuçlar
+        Results
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
           strokeWidth="2" className={`transition-transform ${open ? "rotate-180" : ""}`}>
           <path d="M6 9l6 6 6-6" />
@@ -142,8 +142,8 @@ function UserMenu() {
         onClick={logout}
         disabled={loggingOut}
         className="rounded-full p-1.5 text-cream-200/60 transition-colors hover:bg-espresso-700 hover:text-copper-dark disabled:opacity-50"
-        title="Çıkış yap"
-        aria-label="Çıkış yap"
+        title="Sign out"
+        aria-label="Sign out"
       >
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />

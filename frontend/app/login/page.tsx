@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import AuthScreen from "@/components/AuthScreen";
 
 export const metadata: Metadata = {
-  title: "Giriş — BrandOPS",
+  title: "Sign In — BrandOPS",
 };
 
 export default function LoginPage() {

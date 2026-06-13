@@ -8,9 +8,9 @@ import { fetchLatestPipelineResults } from "@/lib/api";
 import type { MarketRecommendation, MarketCandidate } from "@/lib/types";
 
 const ENTRY_MODE_LABELS: Record<string, string> = {
-  export: "İhracat",
-  joint_venture: "Ortak Girişim",
-  wholly_owned: "Tam Sahiplik",
+  export: "Export",
+  joint_venture: "Joint Venture",
+  wholly_owned: "Wholly Owned",
   franchise: "Franchise",
 };
 
@@ -40,24 +40,24 @@ export default function MarketPage() {
     <PageTransition>
       <PageHeader
         eyebrow="Artifact 03"
-        title="Pazar Önerisi"
-        description="CDSG için yapılandırılmış tartışma (bull / bear / CFO) ve kesin pazar kararı."
+        title="Market Recommendation"
+        description="Structured debate (bull / bear / CFO) and definitive market decision for CDSG."
         action={
           data && (
             <button onClick={() => window.print()} className="btn-primary print-hidden">
-              PDF İndir
+              Download PDF
             </button>
           )
         }
       />
 
       {!data ? (
-        <Empty msg="Henüz çalıştırılmadı — önce Pipeline'ı Çalıştır sayfasından analizi başlat." />
+        <Empty msg="Not run yet — start the analysis from the Run Pipeline page first." />
       ) : (
         <>
           {/* Karar kartı */}
           <div className="card mb-8 border-l-4 border-l-copper p-6">
-            <p className="eyebrow mb-1">Önerilen Pazar</p>
+            <p className="eyebrow mb-1">Recommended Market</p>
             <h2 className="font-display text-3xl text-cream-100">{data.recommended_market}</h2>
             <span className="mt-3 inline-block rounded-full bg-copper/20 px-3 py-1 font-mono text-xs text-copper-dark">
               {ENTRY_MODE_LABELS[data.entry_mode] ?? data.entry_mode}
@@ -65,14 +65,14 @@ export default function MarketPage() {
             <p className="mt-4 leading-relaxed text-cream-200/80">{data.rationale}</p>
             {data.entry_mode_justification && (
               <p className="mt-2 text-sm text-cream-200/60">
-                <span className="text-cream-200/40">Giriş modu gerekçesi · </span>
+                <span className="text-cream-200/40">Entry mode justification · </span>
                 {data.entry_mode_justification}
               </p>
             )}
           </div>
 
           {/* Aday tartışmaları */}
-          <p className="eyebrow mb-4">Aday Pazar Tartışması</p>
+          <p className="eyebrow mb-4">Candidate Market Debate</p>
           <div className="mb-8 grid gap-4 md:grid-cols-2">
             {data.candidates.map((c, i) => (
               <CandidateCard key={i} candidate={c} isWinner={c.market === data.recommended_market} />
@@ -83,7 +83,7 @@ export default function MarketPage() {
             {/* Kritik başarı faktörleri */}
             {data.success_factors.length > 0 && (
               <div className="card p-5">
-                <p className="eyebrow mb-3">Kritik Başarı Faktörleri</p>
+                <p className="eyebrow mb-3">Critical Success Factors</p>
                 <ul className="space-y-2 text-sm text-cream-200/70">
                   {data.success_factors.map((f, i) => (
                     <li key={i} className="flex gap-2">
@@ -98,7 +98,7 @@ export default function MarketPage() {
             {/* Food Empire uyarlamaları */}
             {data.foodempire_adaptations.length > 0 && (
               <div className="card p-5">
-                <p className="eyebrow mb-3">Food Empire Playbook Uyarlamaları</p>
+                <p className="eyebrow mb-3">Food Empire Playbook Adaptations</p>
                 <ul className="space-y-2 text-sm text-cream-200/70">
                   {data.foodempire_adaptations.map((a, i) => (
                     <li key={i} className="flex gap-2">
@@ -114,7 +114,7 @@ export default function MarketPage() {
           {/* Riskler tablosu */}
           {data.risks.length > 0 && (
             <div className="card mt-6 p-5">
-              <p className="eyebrow mb-4">Riskler & Azaltma Stratejileri</p>
+              <p className="eyebrow mb-4">Risks & Mitigation Strategies</p>
               <div className="space-y-3">
                 {data.risks.map((r, i) => (
                   <div key={i} className="grid gap-2 border-b border-espresso-600/30 pb-3 last:border-0 last:pb-0 md:grid-cols-2">
@@ -143,7 +143,7 @@ function CandidateCard({ candidate: c, isWinner }: { candidate: MarketCandidate;
       <div className="mb-3 flex items-center justify-between">
         <h3 className="font-display text-lg text-cream-100">{c.market}</h3>
         <div className="flex items-center gap-2">
-          {isWinner && <span className="pill bg-copper/20 text-copper-dark">Seçildi</span>}
+          {isWinner && <span className="pill bg-copper/20 text-copper-dark">Selected</span>}
           <span className="font-mono text-sm text-copper-dark">{c.cfo_score.toFixed(1)}<span className="text-cream-200/30">/10</span></span>
         </div>
       </div>

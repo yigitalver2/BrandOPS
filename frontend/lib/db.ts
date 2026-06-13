@@ -61,7 +61,7 @@ export function ensureSchema(): Promise<void> {
           "usr_demo",
           DEMO_EMAIL,
           DEMO_HASH,
-          "Demo Kullanıcı",
+          "Demo User",
           Date.now(),
         ],
       });

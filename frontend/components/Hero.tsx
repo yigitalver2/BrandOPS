@@ -4,19 +4,19 @@ import Link from "next/link";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { Wordmark } from "@/components/Logo";
 
-// Dört ajan = pipeline. Sağ panelde tek tek "tamamlanır".
+// Four agents = pipeline. Each "completes" one by one in the right panel.
 const AGENTS = [
-  { fill: "#2A211C", text: "#F4ECDF", label: "01", name: "İstihbarat", tag: "rapor analizi" },
-  { fill: "#A9683A", text: "#F4ECDF", label: "02", name: "Strateji", tag: "GTM dönemi" },
-  { fill: "#C39A6E", text: "#F4ECDF", label: "03", name: "Karar", tag: "pazar seçimi" },
-  { fill: "#DEC9A9", text: "#6E4A2E", label: "04", name: "Kampanya", tag: "4P + bütçe" },
+  { fill: "#2A211C", text: "#F4ECDF", label: "01", name: "Intelligence", tag: "report analysis" },
+  { fill: "#A9683A", text: "#F4ECDF", label: "02", name: "Strategy", tag: "GTM periods" },
+  { fill: "#C39A6E", text: "#F4ECDF", label: "03", name: "Decision", tag: "market selection" },
+  { fill: "#DEC9A9", text: "#6E4A2E", label: "04", name: "Campaign", tag: "4P + budget" },
 ];
 
-// Başlık — aksan kelimeler parıltı alır.
+// Headline — accent words get shimmer.
 const WORDS: { t: string; accent?: boolean }[] = [
-  { t: "Pazar" }, { t: "girişi" }, { t: "stratejisi" }, { t: "ve" },
-  { t: "kampanya", accent: true }, { t: "tasarımı", accent: true },
-  { t: "için" }, { t: "otonom" }, { t: "bir" }, { t: "motor." },
+  { t: "An" }, { t: "autonomous" }, { t: "engine" }, { t: "for" },
+  { t: "market", accent: true }, { t: "entry", accent: true },
+  { t: "strategy" }, { t: "and" }, { t: "campaign" }, { t: "design." },
 ];
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -78,21 +78,21 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p variants={item} className="mt-6 max-w-xl text-lg text-cream-200/70">
-            BrandOPS, CDSG × Food Empire danışmanlık brief&apos;ini eksiksiz bir çok-ajanlı
-            pipeline&apos;a dönüştürür — yıllık raporları analiz eder, hedef pazarı tartışarak
-            seçer ve tam bir pazarlama kampanyası üretir.
+            BrandOPS converts the CDSG × Food Empire consulting brief into a complete
+            multi-agent pipeline — analyzing annual reports, debating to select the target
+            market, and generating a full marketing campaign.
           </motion.p>
 
           <motion.div variants={item} className="mt-9 flex flex-wrap gap-3">
             <Link href="/run" className="btn-primary glow-pulse group">
-              Pipeline&apos;i Çalıştır
+              Run Pipeline
               <span className="transition-transform group-hover:translate-x-1">→</span>
             </Link>
             <Link
               href="/intelligence"
               className="inline-flex items-center rounded-full border border-espresso-600 px-6 py-3 text-cream-100 transition-colors hover:border-copper hover:bg-espresso-800/50"
             >
-              Çıktıları İncele
+              View Outputs
             </Link>
           </motion.div>
         </motion.div>
@@ -130,9 +130,9 @@ function AgentConsole({ reduce }: { reduce: boolean }) {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-copper opacity-60" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-copper" />
           </span>
-          canlı · pipeline
+          live · pipeline
         </span>
-        <span className="font-mono text-[11px] text-copper-dark">4 ajan</span>
+        <span className="font-mono text-[11px] text-copper-dark">4 agents</span>
       </div>
 
       <div className="mt-5 space-y-3.5">
@@ -165,14 +165,14 @@ function AgentConsole({ reduce }: { reduce: boolean }) {
       </div>
 
       <div className="mt-5 flex items-center justify-between border-t border-espresso-700/60 pt-4 font-mono text-[11px] text-cream-200/50">
-        <span>gerçek token · latency ölçümü</span>
+        <span>real token · latency tracking</span>
         <motion.span
           className="flex items-center gap-1 text-copper-dark"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: reduce ? 0 : 2.1, duration: 0.5 }}
         >
-          pipeline hazır ✓
+          pipeline ready ✓
         </motion.span>
       </div>
     </div>

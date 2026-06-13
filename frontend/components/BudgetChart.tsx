@@ -17,9 +17,9 @@ export default function BudgetChart({ budget }: { budget: CampaignProposal["budg
   return (
     <div>
       <div className="mb-3 flex items-baseline justify-between">
-        <p className="eyebrow">Bütçe Dağılımı</p>
+        <p className="eyebrow">Budget Breakdown</p>
         <p className="font-mono text-copper-dark">
-          Toplam: {budget.total.toLocaleString("en-US")} {cur}
+          Total: {budget.total.toLocaleString("en-US")} {cur}
         </p>
       </div>
       <ResponsiveContainer width="100%" height={Math.max(260, data.length * 38)}>
@@ -39,7 +39,7 @@ export default function BudgetChart({ budget }: { budget: CampaignProposal["budg
               background: "#2A1E18", border: "1px solid #4F392D",
               borderRadius: 12, color: "#F3EADD", fontSize: 12, maxWidth: 320,
             }}
-            formatter={(v: number) => [`${v.toLocaleString("en-US")} ${cur}`, "Tutar"]}
+            formatter={(v: number) => [`${v.toLocaleString("en-US")} ${cur}`, "Amount"]}
             labelFormatter={(l) => l as string}
           />
           <Bar dataKey="amount" radius={[0, 6, 6, 0]}>
