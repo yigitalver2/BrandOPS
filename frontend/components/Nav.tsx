@@ -1,12 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { LogoMark, Wordmark } from "@/components/Logo";
 
 const LINKS = [
   { href: "/run", label: "Pipeline'ı Çalıştır" },
+];
+
+const ARTIFACT_LINKS = [
+  { href: "/artifacts/intelligence", label: "01 · İstihbarat" },
+  { href: "/artifacts/strategy",     label: "02 · Strateji" },
+  { href: "/artifacts/market",       label: "03 · Pazar" },
+  { href: "/artifacts/campaign",     label: "04 · Kampanya" },
 ];
 
 export default function Nav() {
@@ -36,10 +43,61 @@ export default function Nav() {
               </li>
             );
           })}
+          <li><ResultsDropdown /></li>
         </ul>
         <UserMenu />
       </nav>
     </header>
+  );
+}
+
+function ResultsDropdown() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLLIElement>(null);
+  const path = usePathname();
+
+  useEffect(() => {
+    function handler(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const anyActive = ARTIFACT_LINKS.some((l) => path === l.href);
+
+  return (
+    <li ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className={`flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-1.5 text-sm transition-colors ${
+          anyActive ? "bg-espresso-700 text-cream-50" : "text-cream-200/70 hover:text-cream-50"
+        }`}
+      >
+        Sonuçlar
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          strokeWidth="2" className={`transition-transform ${open ? "rotate-180" : ""}`}>
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+      {open && (
+        <div className="absolute left-0 top-full z-50 mt-1 w-44 overflow-hidden rounded-xl border border-espresso-600/60 bg-espresso-800 shadow-xl">
+          {ARTIFACT_LINKS.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className={`block px-4 py-2.5 text-sm transition-colors hover:bg-espresso-700 ${
+                path === l.href ? "text-copper-dark" : "text-cream-200/80"
+              }`}
+            >
+              {l.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </li>
   );
 }
 

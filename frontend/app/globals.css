@@ -118,3 +118,39 @@ h1, h2, h3, .font-display {
 @media (prefers-reduced-motion: reduce) {
   .blob-a, .blob-b, .text-shimmer, .glow-pulse { animation: none !important; }
 }
+
+/* ——— Yazdırma / PDF indirme ——— */
+@media print {
+  @page { margin: 18mm 16mm; }
+
+  header, footer, nav, .print-hidden { display: none !important; }
+
+  body {
+    background: #fff !important;
+    color: #1a1209 !important;
+    font-size: 11pt;
+  }
+
+  h1, h2, h3, .font-display {
+    color: #1a1209 !important;
+  }
+
+  .card {
+    border: 1px solid #d6cfc6 !important;
+    background: #fff !important;
+    backdrop-filter: none !important;
+    border-radius: 8px;
+    break-inside: avoid;
+  }
+
+  .eyebrow { color: #7c4f20 !important; }
+  .text-copper-dark, .text-copper { color: #7c4f20 !important; }
+  .text-cream-100 { color: #1a1209 !important; }
+  .text-cream-200\/70, .text-cream-200\/60, .text-cream-200\/50 { color: #4a3d30 !important; }
+  .bg-copper, .bg-espresso-700 { background: #7c4f20 !important; color: #fff !important; }
+  .text-emerald-400 { color: #15803d !important; }
+  .text-rose-400 { color: #b91c1c !important; }
+  .border-l-copper { border-left-color: #b0712f !important; }
+
+  .min-w-\[640px\] { min-width: 100% !important; }
+}

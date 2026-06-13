@@ -40,6 +40,7 @@ export function usePipeline() {
       await new Promise((r) => setTimeout(r, 1400));
       const artifact = await loaders[agent]().catch(() => undefined);
       patch(agent, { status: "completed", artifact, latency_ms: 1400 });
+      try { if (artifact) localStorage.setItem(`bo_artifact_${agent}`, JSON.stringify(artifact)); } catch {}
     }
     setMode("done");
   }, []);
@@ -63,6 +64,7 @@ export function usePipeline() {
           status: "completed", artifact: d.artifact,
           tokens: d.tokens, latency_ms: d.latency_ms,
         });
+        try { localStorage.setItem(`bo_artifact_${d.agent}`, JSON.stringify(d.artifact)); } catch {}
       });
       es.addEventListener("stage_failed", (e) => {
         const d = JSON.parse((e as MessageEvent).data);
