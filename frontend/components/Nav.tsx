@@ -43,7 +43,7 @@ export default function Nav() {
               </li>
             );
           })}
-          <li><ResultsDropdown /></li>
+          <ResultsDropdown />
         </ul>
         <UserMenu />
       </nav>
