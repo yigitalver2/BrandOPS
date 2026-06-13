@@ -3,28 +3,29 @@ from pathlib import Path
 
 
 def extract_text(path: str | Path) -> str:
-    """PDF'i düz metne çevirir. Önce pdfplumber, başarısızsa pypdf dener."""
+    """PDF'i düz metne çevirir. pypdf önce (hafif bellek), pdfplumber fallback."""
     path = Path(path)
     try:
-        import pdfplumber
+        from pypdf import PdfReader
+        reader = PdfReader(str(path))
+        text = "\n".join((page.extract_text() or "") for page in reader.pages)
+        del reader
+        if text.strip():
+            return text
+    except Exception:
+        pass
 
+    try:
+        import pdfplumber
         parts: list[str] = []
         with pdfplumber.open(path) as pdf:
             for page in pdf.pages:
                 txt = page.extract_text() or ""
                 if txt.strip():
                     parts.append(txt)
-        text = "\n".join(parts)
-        if text.strip():
-            return text
+        return "\n".join(parts)
     except Exception:
-        pass
-
-    # Fallback: pypdf
-    from pypdf import PdfReader
-
-    reader = PdfReader(str(path))
-    return "\n".join((page.extract_text() or "") for page in reader.pages)
+        return ""
 
 
 def discover_reports(reports_dir: Path) -> dict[int, Path]:
