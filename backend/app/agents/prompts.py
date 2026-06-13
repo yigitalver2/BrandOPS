@@ -20,6 +20,8 @@ istediği bölümlerden bilgi çıkar ve her başlık için maddeler halinde yan
 6. KPI'lar — yılın temel göstergeleri ve önceki yıla göre yönü (arttı/azaldı/sabit)
 
 Sadece raporda yer alan bilgileri yaz. Rakamları para birimiyle belirt.
+Çıktıyı kompakt tut: her başlık altında en fazla 4 madde, her madde tek cümle olsun.
+Uzun alıntı yapma; yalnızca karar kalitesini artıran sayısal/stratejik bilgileri koru.
 
 --- RAPOR METNİ ({year}) ---
 {report_text}

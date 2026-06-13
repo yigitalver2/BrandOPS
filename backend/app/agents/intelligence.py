@@ -10,7 +10,11 @@ import gc
 import json
 from datetime import datetime, timezone
 
-from ..core.config import REPORTS_DIR
+from ..core.config import (
+    INTEL_COMPRESS_MAX_TOKENS,
+    INTEL_EXTRACT_MAX_TOKENS,
+    REPORTS_DIR,
+)
 from ..core.pdf import discover_reports, extract_text
 from .base import BaseAgent
 from . import prompts
@@ -32,12 +36,12 @@ class IntelligenceAgent(BaseAgent):
         extracted = self._call_llm(
             prompts.INTEL_SYSTEM,
             prompts.INTEL_EXTRACT.format(year=year, report_text=text),
-            max_tokens=4096,
+            max_tokens=INTEL_EXTRACT_MAX_TOKENS,
         )
         compressed = self._call_llm(
             prompts.INTEL_SYSTEM,
             prompts.INTEL_COMPRESS.format(year=year, extracted=extracted),
-            max_tokens=4096,
+            max_tokens=INTEL_COMPRESS_MAX_TOKENS,
         )
         return self._extract_json(compressed)
 
