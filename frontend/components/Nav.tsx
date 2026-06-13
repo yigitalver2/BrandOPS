@@ -25,7 +25,7 @@ export default function Nav() {
           <LogoMark className="h-7 w-auto" />
           <Wordmark className="text-lg" />
         </Link>
-        <ul className="-mx-1 flex items-center gap-1 overflow-x-auto">
+        <ul className="-mx-1 flex items-center gap-1">
           {LINKS.map((l) => {
             const active = path === l.href;
             return (
