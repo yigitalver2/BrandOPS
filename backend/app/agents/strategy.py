@@ -9,6 +9,7 @@
 import json
 from datetime import datetime, timezone
 
+from ..core.config import LLM_MAX_TOKENS
 from .base import BaseAgent
 from . import prompts
 
@@ -24,7 +25,7 @@ class StrategyAgent(BaseAgent):
         p1 = self._call_llm(
             prompts.STRAT_SYSTEM,
             prompts.STRAT_PASS1.format(timeline=timeline_json),
-            max_tokens=8192,  # tüm dönemler dizisi; 11 yıl için geniş alan
+            max_tokens=LLM_MAX_TOKENS,
         )
         periods = self._extract_json(p1)["periods"]
 
@@ -36,7 +37,7 @@ class StrategyAgent(BaseAgent):
                     period=json.dumps(period, ensure_ascii=False),
                     timeline=timeline_json,
                 ),
-                max_tokens=4096,
+                max_tokens=LLM_MAX_TOKENS,
             )
             detail = self._extract_json(p2)
             period["financial_summary"] = detail.get("financial_summary", "")
@@ -49,7 +50,7 @@ class StrategyAgent(BaseAgent):
             prompts.STRAT_PASS3.format(
                 periods=json.dumps(periods, ensure_ascii=False)
             ),
-            max_tokens=4096,
+            max_tokens=LLM_MAX_TOKENS,
         )
         synthesis = self._extract_json(p3)["synthesis_narrative"]
 

@@ -9,6 +9,7 @@
 import json
 from datetime import datetime, timezone
 
+from ..core.config import LLM_MAX_TOKENS
 from .base import BaseAgent
 from . import prompts
 
@@ -26,7 +27,7 @@ class MarketDebateAgent(BaseAgent):
             prompts.MARKET_DEBATE.format(
                 analysis=analysis_json, cdsg=prompts.CDSG_CONTEXT
             ),
-            max_tokens=4096,
+            max_tokens=LLM_MAX_TOKENS,
         )
         candidates = self._extract_json(debate)["candidates"]
 
@@ -37,7 +38,7 @@ class MarketDebateAgent(BaseAgent):
                 candidates=json.dumps(candidates, ensure_ascii=False),
                 cdsg=prompts.CDSG_CONTEXT,
             ),
-            max_tokens=4096,
+            max_tokens=LLM_MAX_TOKENS,
         )
         decision = self._extract_json(decision_raw)
 
