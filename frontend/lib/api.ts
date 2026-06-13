@@ -39,3 +39,42 @@ export async function startRun(): Promise<{ run_id: string }> {
 export function streamUrl(runId: string): string {
   return `${BACKEND_URL}/run/${runId}/stream`;
 }
+
+// --- PDF yönetimi ---
+export async function listReports(): Promise<{ reports: string[]; count: number }> {
+  const res = await fetch(`${BACKEND_URL}/reports`);
+  if (!res.ok) throw new Error("rapor listesi alınamadı");
+  return res.json();
+}
+
+export async function uploadReport(
+  file: File,
+  onProgress?: (pct: number) => void
+): Promise<{ ok: boolean; filename: string; size: number }> {
+  return new Promise((resolve, reject) => {
+    const fd = new FormData();
+    fd.append("file", file);
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `${BACKEND_URL}/upload`);
+    xhr.upload.onprogress = (e) => {
+      if (e.lengthComputable && onProgress) onProgress((e.loaded / e.total) * 100);
+    };
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        resolve(JSON.parse(xhr.responseText));
+      } else {
+        try { reject(new Error(JSON.parse(xhr.responseText).detail || "Yükleme hatası")); }
+        catch { reject(new Error("Yükleme hatası")); }
+      }
+    };
+    xhr.onerror = () => reject(new Error("Ağ hatası"));
+    xhr.send(fd);
+  });
+}
+
+export async function deleteReport(filename: string): Promise<void> {
+  const res = await fetch(`${BACKEND_URL}/reports/${encodeURIComponent(filename)}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("silme hatası");
+}

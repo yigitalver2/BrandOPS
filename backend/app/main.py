@@ -1,13 +1,15 @@
-"""BrandOPS backend — FastAPI app: /health, /run, /run/{run_id}/stream (SSE)."""
+"""BrandOPS backend — FastAPI app: /health, /upload, /run, /run/{run_id}/stream (SSE)."""
 import asyncio
 import json
+import re
+import shutil
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 
 from .core import events
-from .core.config import ARTIFACTS_DIR, FRONTEND_URL, USE_MOCK_AGENTS
+from .core.config import ARTIFACTS_DIR, FRONTEND_URL, REPORTS_DIR, USE_MOCK_AGENTS
 from .core.orchestrator import RUNS, execute_run, new_run
 
 app = FastAPI(title="BrandOPS Engine", version="1.0")
@@ -23,6 +25,37 @@ app.add_middleware(
 @app.get("/health")
 def health():
     return {"status": "ok", "mock_agents": USE_MOCK_AGENTS}
+
+
+@app.get("/reports")
+def list_reports():
+    """Yüklü PDF dosyalarını listeler."""
+    files = sorted(REPORTS_DIR.glob("*.pdf"))
+    return {"reports": [f.name for f in files], "count": len(files)}
+
+
+@app.post("/upload")
+async def upload_report(file: UploadFile = File(...)):
+    """PDF yıllık raporunu reports/ klasörüne yükler."""
+    if not file.filename or not file.filename.lower().endswith(".pdf"):
+        raise HTTPException(400, "Yalnızca PDF dosyası kabul edilir.")
+    # Dosya adını güvenli hale getir
+    safe = re.sub(r"[^\w\-.]", "_", file.filename)
+    dest = REPORTS_DIR / safe
+    with dest.open("wb") as f:
+        shutil.copyfileobj(file.file, f)
+    return {"ok": True, "filename": safe, "size": dest.stat().st_size}
+
+
+@app.delete("/reports/{filename}")
+def delete_report(filename: str):
+    """Yüklü bir PDF'i siler."""
+    safe = re.sub(r"[^\w\-.]", "_", filename)
+    path = REPORTS_DIR / safe
+    if not path.exists():
+        raise HTTPException(404, "Dosya bulunamadı.")
+    path.unlink()
+    return {"ok": True, "deleted": safe}
 
 
 @app.post("/run")

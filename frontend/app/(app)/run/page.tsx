@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
 import { PageHeader } from "@/components/Section";
 import { usePipeline, StageView } from "@/components/usePipeline";
+import PdfUpload from "@/components/PdfUpload";
 import { AGENT_META } from "@/lib/types";
 
 const STATUS_LABEL: Record<string, string> = {
@@ -15,6 +16,7 @@ const STATUS_LABEL: Record<string, string> = {
 export default function RunPage() {
   const { stages, mode, runId, start } = usePipeline();
   const running = mode === "live" || mode === "demo";
+  const [uploadOpen, setUploadOpen] = useState(false);
 
   return (
     <PageTransition>
@@ -23,6 +25,57 @@ export default function RunPage() {
         title="Pipeline"
         description="Dört uzman ajan sırayla çalışır; her biri öncekinin doğrulanmış JSON çıktısını tek girdi olarak alır. Aşamalar tamamlandıkça çıktıları belirir."
       />
+
+      {/* PDF Yükleme */}
+      <div className="mb-6 rounded-2xl border border-espresso-600/60 bg-espresso-800/40">
+        <button
+          type="button"
+          onClick={() => setUploadOpen((o) => !o)}
+          className="flex w-full items-center justify-between px-5 py-4 text-left"
+        >
+          <div className="flex items-center gap-3">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-espresso-700 text-copper-dark">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="12" y1="18" x2="12" y2="12" />
+                <line x1="9" y1="15" x2="15" y2="15" />
+              </svg>
+            </span>
+            <div>
+              <p className="text-sm font-medium text-cream-100">Yıllık Rapor PDF&apos;leri</p>
+              <p className="text-xs text-cream-200/50">
+                Pipeline çalışmadan önce analiz edilecek belgeleri yükle
+              </p>
+            </div>
+          </div>
+          <motion.span
+            animate={{ rotate: uploadOpen ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+            className="text-cream-200/50"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
+          </motion.span>
+        </button>
+
+        <AnimatePresence initial={false}>
+          {uploadOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="overflow-hidden"
+            >
+              <div className="border-t border-espresso-600/60 px-5 pb-5 pt-4">
+                <PdfUpload />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
       <div className="mb-8 flex flex-wrap items-center gap-3">
         <button onClick={start} disabled={running} className="btn-primary disabled:opacity-50">
@@ -47,16 +100,15 @@ export default function RunPage() {
       </div>
 
       {mode === "done" && (
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-          className="mt-8 text-sm text-cream-200/60"
+          className="mt-8 rounded-2xl border border-emerald-600/30 bg-emerald-50/30 px-5 py-4"
         >
-          Pipeline tamamlandı. Her artifact&apos;ı ayrı görünümlerde inceleyebilirsiniz:{" "}
-          <Link href="/intelligence" className="text-copper-light hover:underline">İstihbarat</Link>,{" "}
-          <Link href="/strategy" className="text-copper-light hover:underline">Strateji</Link>,{" "}
-          <Link href="/market" className="text-copper-light hover:underline">Karar</Link>,{" "}
-          <Link href="/campaign" className="text-copper-light hover:underline">Kampanya</Link>.
-        </motion.p>
+          <p className="text-sm font-medium text-emerald-700">Pipeline tamamlandı.</p>
+          <p className="mt-1 text-sm text-cream-200/60">
+            Tüm artifact&apos;lar başarıyla üretildi ve doğrulandı.
+          </p>
+        </motion.div>
       )}
     </PageTransition>
   );
@@ -78,7 +130,7 @@ function StageCard({ stage }: { stage: StageView }) {
       <div className="flex items-center gap-4">
         <span
           className={`grid h-10 w-10 place-items-center rounded-lg font-mono text-sm ${
-            done ? "bg-copper text-cream-50" : "bg-espresso-700 text-copper-light"
+            done ? "bg-copper text-white" : "bg-espresso-700 text-copper-dark"
           }`}
         >
           {m.index}
@@ -138,7 +190,7 @@ function StageCard({ stage }: { stage: StageView }) {
 function StatusPill({ status }: { status: string }) {
   const cls: Record<string, string> = {
     pending: "text-cream-200/40 border-espresso-600",
-    running: "text-copper-light border-copper/50",
+    running: "text-copper-dark border-copper/50",
     completed: "text-emerald-400 border-emerald-600/40",
     needs_review: "text-rose-300 border-rose-600/40",
     failed: "text-rose-300 border-rose-600/40",

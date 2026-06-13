@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
   background-color: theme("colors.espresso.900");
   color: theme("colors.cream.100");
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; /* full-bleed hero w-screen yatay kaydırma yapmasın */
 }
 
 /* Sakin, editoryal tipografi */
@@ -32,15 +33,88 @@ h1, h2, h3, .font-display {
     @apply rounded-2xl border border-espresso-600/60 bg-espresso-800/60 backdrop-blur-sm;
   }
   .eyebrow {
-    @apply text-xs font-mono uppercase tracking-[0.2em] text-copper-light/80;
+    @apply text-xs font-mono uppercase tracking-[0.2em] text-copper-dark/80;
   }
   .btn-primary {
     @apply inline-flex items-center gap-2 rounded-full bg-copper px-6 py-3 font-medium
-           text-cream-50 transition-colors hover:bg-copper-light
-           focus:outline-none focus:ring-2 focus:ring-copper-light/50;
+           text-white transition-colors hover:bg-copper-dark
+           focus:outline-none focus:ring-2 focus:ring-copper/40;
   }
   .pill {
     @apply inline-block rounded-full border border-espresso-600 bg-espresso-700/60
            px-3 py-1 text-xs text-cream-200;
   }
+}
+
+/* ——— Giriş ekranı ambient hareketleri ——— */
+
+/* Sürüklenen bulanık ışık küreleri */
+@keyframes blob-a {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(6%, -8%) scale(1.12); }
+  66%      { transform: translate(-5%, 5%) scale(0.94); }
+}
+@keyframes blob-b {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  40%      { transform: translate(-7%, 6%) scale(1.1); }
+  75%      { transform: translate(5%, -6%) scale(0.92); }
+}
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  will-change: transform;
+  pointer-events: none;
+}
+.blob-a { animation: blob-a 18s ease-in-out infinite; }
+.blob-b { animation: blob-b 22s ease-in-out infinite; }
+
+/* Aksan metinde akan bakır parıltı */
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+.text-shimmer {
+  background: linear-gradient(
+    100deg,
+    theme("colors.copper.dark") 0%,
+    theme("colors.copper.DEFAULT") 30%,
+    theme("colors.copper.light") 50%,
+    theme("colors.copper.DEFAULT") 70%,
+    theme("colors.copper.dark") 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4.5s linear infinite;
+}
+
+/* CTA çevresinde yumuşak nabız halkası */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 theme("colors.copper.DEFAULT" / 35%); }
+  50%      { box-shadow: 0 0 0 8px theme("colors.copper.DEFAULT" / 0%); }
+}
+.glow-pulse { animation: glow-pulse 2.8s ease-out infinite; }
+
+/* İnce film grain dokusu */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* İnce noktalı ızgara */
+.dot-grid {
+  background-image: radial-gradient(theme("colors.espresso.600") 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob-a, .blob-b, .text-shimmer, .glow-pulse { animation: none !important; }
 }

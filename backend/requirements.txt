@@ -1,5 +1,6 @@
 fastapi>=0.115
 uvicorn[standard]>=0.30
+python-multipart>=0.0.9
 langgraph>=0.2
 jsonschema>=4.22
 anthropic>=0.40

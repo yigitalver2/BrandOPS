@@ -1,6 +1,10 @@
 import type { Config } from "tailwindcss";
 
-// Sıcak editoryal palet — espresso, bakır, krem (PRD Bölüm 07 Tasarım Dili)
+// Sıcak editoryal palet — açık/kağıt tema (PRD Bölüm 07 Tasarım Dili)
+// Koyu temadan açık temaya geçiş: token isimleri korundu, anlamları çevrildi.
+//   espresso = nötr kağıt yüzeyler & ayraçlar (açık)
+//   cream    = koyu mürekkep / metin (sayı arttıkça açılır)
+//   copper   = bakır aksan (açık zemine göre inceltildi)
 const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
@@ -9,23 +13,24 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Yüzeyler rol bazlı seçildi (monoton değil): 900=zemin, 800=kart, 700=çip, 600=kenarlık
         espresso: {
-          DEFAULT: "#2A1E18",
-          900: "#1C130F",
-          800: "#2A1E18",
-          700: "#3B2A21",
-          600: "#4F392D",
+          DEFAULT: "#E8E3D9",
+          900: "#F0EEE6", // sayfa zemini (verilen krem)
+          800: "#FBFAF7", // yükseltilmiş kartlar (beyaza yakın)
+          700: "#EAE5DB", // çipler / ikincil yüzey
+          600: "#D9D3C7", // kenarlık / ayraç
         },
         copper: {
-          DEFAULT: "#B5713A",
-          light: "#CE8E54",
-          dark: "#8F5526",
+          DEFAULT: "#B0712F",
+          light: "#CE8E54", // hover dolgu & odak halkası
+          dark: "#8A5523",  // açık zeminde okunur aksan metin
         },
         cream: {
-          DEFAULT: "#F3EADD",
-          50: "#FAF5EC",
-          100: "#F3EADD",
-          200: "#E7D7C2",
+          DEFAULT: "#2E2823",
+          50: "#231F1B",  // en güçlü metin / açık çip üstü
+          100: "#2E2823", // birincil gövde & başlık
+          200: "#574F46", // ikincil / sönük metin (opaklıkla)
         },
         sage: "#5E6B54",
       },

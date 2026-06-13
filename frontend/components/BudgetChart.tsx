@@ -18,7 +18,7 @@ export default function BudgetChart({ budget }: { budget: CampaignProposal["budg
     <div>
       <div className="mb-3 flex items-baseline justify-between">
         <p className="eyebrow">Bütçe Dağılımı</p>
-        <p className="font-mono text-copper-light">
+        <p className="font-mono text-copper-dark">
           Toplam: {budget.total.toLocaleString("en-US")} {cur}
         </p>
       </div>
@@ -29,7 +29,7 @@ export default function BudgetChart({ budget }: { budget: CampaignProposal["budg
             type="category"
             dataKey="name"
             width={210}
-            tick={{ fill: "#E7D7C2", fontSize: 11 }}
+            tick={{ fill: "#574F46", fontSize: 11 }}
             tickLine={false}
             axisLine={false}
           />

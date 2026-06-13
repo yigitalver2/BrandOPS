@@ -1,38 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { LogoMark, Wordmark } from "@/components/Logo";
 
 const LINKS = [
-  { href: "/run", label: "Çalıştır" },
-  { href: "/intelligence", label: "İstihbarat" },
-  { href: "/strategy", label: "Strateji" },
-  { href: "/market", label: "Karar" },
-  { href: "/campaign", label: "Kampanya" },
-  { href: "/engineering", label: "Mühendislik" },
+  { href: "/run", label: "Pipeline'ı Çalıştır" },
 ];
 
 export default function Nav() {
   const path = usePathname();
   return (
     <header className="sticky top-0 z-40 border-b border-espresso-700/60 bg-espresso-900/80 backdrop-blur">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-copper font-display text-lg font-bold text-cream-50">
-            B
-          </span>
-          <span className="font-display text-lg">
-            Brand<span className="text-copper-light">OPS</span>
-          </span>
+      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5" aria-label="BrandOPS — ana sayfa">
+          <LogoMark className="h-7 w-auto" />
+          <Wordmark className="text-lg" />
         </Link>
-        <ul className="-mx-1 flex max-w-[60%] items-center gap-1 overflow-x-auto md:max-w-none">
+        <ul className="-mx-1 flex items-center gap-1 overflow-x-auto">
           {LINKS.map((l) => {
             const active = path === l.href;
             return (
               <li key={l.href}>
                 <Link
                   href={l.href}
-                  className={`rounded-full px-3 py-1.5 text-sm transition-colors ${
+                  className={`block whitespace-nowrap rounded-full px-3 py-1.5 text-sm transition-colors ${
                     active
                       ? "bg-espresso-700 text-cream-50"
                       : "text-cream-200/70 hover:text-cream-50"
@@ -44,7 +37,62 @@ export default function Nav() {
             );
           })}
         </ul>
+        <UserMenu />
       </nav>
     </header>
+  );
+}
+
+function UserMenu() {
+  const router = useRouter();
+  const [email, setEmail] = useState<string | null>(null);
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/auth/me")
+      .then((r) => (r.ok ? r.json() : { user: null }))
+      .then((d) => active && setEmail(d.user?.email ?? null))
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  async function logout() {
+    setLoggingOut(true);
+    await fetch("/api/auth/logout", { method: "POST" }).catch(() => {});
+    router.replace("/login");
+    router.refresh();
+  }
+
+  const initial = (email?.[0] ?? "•").toUpperCase();
+
+  return (
+    <div className="flex shrink-0 items-center gap-2 border-l border-espresso-600/60 pl-3">
+      <span
+        className="grid h-7 w-7 place-items-center rounded-full bg-copper text-xs font-semibold text-white"
+        title={email ?? undefined}
+      >
+        {initial}
+      </span>
+      <span className="hidden max-w-[12rem] truncate text-sm text-cream-200/70 lg:block">
+        {email ?? "—"}
+      </span>
+      <button
+        type="button"
+        onClick={logout}
+        disabled={loggingOut}
+        className="rounded-full p-1.5 text-cream-200/60 transition-colors hover:bg-espresso-700 hover:text-copper-dark disabled:opacity-50"
+        title="Çıkış yap"
+        aria-label="Çıkış yap"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <path d="M16 17l5-5-5-5" />
+          <path d="M21 12H9" />
+        </svg>
+      </button>
+    </div>
   );
 }

@@ -1,6 +1,14 @@
-# Env
+# Gizli / dahili belgeler
+BRANDOPS_PRD_TR.md
+BrandOPS_PRD_TR.pdf
+DEPLOY.md
+PHASES.md
+*.pdf
+
+# Env / gizli anahtarlar
 .env
 .env.local
+.env*.local
 *.env
 
 # Python
@@ -18,6 +26,13 @@ out/
 .vercel/
 npm-debug.log*
 yarn-error.log*
+
+# Yerel SQLite (libSQL) — auth veritabanı
+frontend/local.db
+frontend/local.db-*
+*.db
+*.db-shm
+*.db-wal
 
 # OS / editor
 .DS_Store
