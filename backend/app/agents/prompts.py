@@ -145,6 +145,8 @@ Myanmar bağlamından). Her aday için yapılandırılmış tartışma yürüt:
 - cfo_score: CFO Filtresi — giriş maliyeti, geri ödeme süresi ve risk toleransına göre 0-10 \
 arası bir skor (10 = en cazip)
 
+Kısa yaz: bull_case ve bear_case en fazla 2 cümle olsun; 3 adaydan fazlasını üretme.
+
 SADECE şu JSON'ı döndür (başka metin yok):
 {{"candidates": [{{"market": "...", "bull_case": "...", "bear_case": "...", "cfo_score": 7.5}}]}}
 
@@ -165,6 +167,8 @@ var. Tek bir kazanan pazar seç ve eksiksiz bir karar üret:
 - entry_mode: SADECE şunlardan biri: "export" | "joint_venture" | "wholly_owned" | "franchise"
 - entry_mode_justification: giriş modu gerekçesi
 - foodempire_adaptations: Food Empire playbook'unun CDSG'nin Myanmar tabanına uyarlamaları (liste)
+
+Kısa yaz: rationale ve entry_mode_justification en fazla 3 cümle; listeler en fazla 5 öğe.
 
 SADECE şu JSON'ı döndür (candidates'i tekrar yazma):
 {{"recommended_market": "...", "rationale": "...", "success_factors": ["..."], "risks": [{{"risk": "...", "mitigation": "..."}}], "entry_mode": "joint_venture", "entry_mode_justification": "...", "foodempire_adaptations": ["..."]}}
@@ -194,6 +198,7 @@ B) value_proposition (tek paragraf), positioning_statement (tek cümle), core_me
 C) marketing_mix: {{"product": "formatlar/yerel uyarlama/ambalaj", "price": "premium|değer|rekabetçi mantığı", "place": "dağıtım kanalları", "promotion": "kanallar/taktikler/mesaj"}}
 
 Seçilen pazarın gerçeklerine (gelir düzeyi, kanal yapısı, kültür) sadık kal. Myanmar köken/CDSG avantajını konumlandırmada kullan.
+Kısa yaz: her metin alanı en fazla 2 cümle; unmet_needs en fazla 4 öğe.
 
 SADECE şu JSON'ı döndür:
 {{"target_audience": {{...}}, "value_proposition": "...", "positioning_statement": "...", "core_message": "...", "marketing_mix": {{...}}}}
@@ -212,6 +217,7 @@ E) gantt: 12 aylık aktivite takvimi — [{{"activity": "...", "start_month": 1-
 F) kpis: [{{"kpi": "...", "method": "ölçüm yöntemi", "target": "hedef", "cadence": "raporlama sıklığı"}}]
 
 Bütçe kalemleri seçilen 4P ve kanallarla tutarlı olmalı. Toplamı dikkatle topla.
+Kısa yaz: line_items en fazla 6 öğe, gantt en fazla 8 aktivite, kpis en fazla 6 öğe.
 
 SADECE şu JSON'ı döndür:
 {{"budget": {{"total": 1500000, "currency": "USD", "line_items": [...]}}, "gantt": [...], "kpis": [...]}}

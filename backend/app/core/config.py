@@ -16,6 +16,8 @@ MODEL_NAME: str = os.getenv("MODEL_NAME", "claude-opus-4-8")
 LLM_MAX_TOKENS: int = int(os.getenv("LLM_MAX_TOKENS", "8192"))
 INTEL_EXTRACT_MAX_TOKENS: int = int(os.getenv("INTEL_EXTRACT_MAX_TOKENS", str(LLM_MAX_TOKENS)))
 INTEL_COMPRESS_MAX_TOKENS: int = int(os.getenv("INTEL_COMPRESS_MAX_TOKENS", str(LLM_MAX_TOKENS)))
+LLM_MAX_ATTEMPTS: int = int(os.getenv("LLM_MAX_ATTEMPTS", "1"))
+REPORT_TEXT_MAX_CHARS: int = int(os.getenv("REPORT_TEXT_MAX_CHARS", "40000"))
 BACKEND_URL: str = os.getenv("BACKEND_URL", "http://localhost:8000")
 FRONTEND_URL: str = os.getenv("FRONTEND_URL", "http://localhost:3000")
 

@@ -8,10 +8,10 @@ import re
 import time
 from dataclasses import dataclass, field
 
-from ..core.config import LLM_API_KEY, MODEL_NAME
+from ..core.config import LLM_API_KEY, LLM_MAX_ATTEMPTS, MODEL_NAME
 from ..core.validation import validate_artifact
 
-MAX_ATTEMPTS = 2
+MAX_ATTEMPTS = max(1, LLM_MAX_ATTEMPTS)
 
 
 class ValidationFailure(Exception):

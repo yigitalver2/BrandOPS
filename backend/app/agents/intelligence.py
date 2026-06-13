@@ -13,6 +13,7 @@ from datetime import datetime, timezone
 from ..core.config import (
     INTEL_COMPRESS_MAX_TOKENS,
     INTEL_EXTRACT_MAX_TOKENS,
+    REPORT_TEXT_MAX_CHARS,
     REPORTS_DIR,
 )
 from ..core.pdf import discover_reports, extract_text
@@ -30,8 +31,8 @@ class IntelligenceAgent(BaseAgent):
     def _year_record(self, year: int, pdf_path) -> dict:
         """Tek yıl için iteratif özetleme: çıkarım -> sıkıştırma+JSON."""
         text = extract_text(pdf_path)
-        # Çok uzun raporları model bağlamına sığdır (ilk ~60k karakter yeterli kapsam)
-        text = text[:60000]
+        # Çok uzun raporları model bağlamına ve maliyet bütçesine sığdır.
+        text = text[:REPORT_TEXT_MAX_CHARS]
 
         extracted = self._call_llm(
             prompts.INTEL_SYSTEM,
