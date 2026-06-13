@@ -26,7 +26,7 @@ class MarketDebateAgent(BaseAgent):
             prompts.MARKET_DEBATE.format(
                 analysis=analysis_json, cdsg=prompts.CDSG_CONTEXT
             ),
-            max_tokens=3072,
+            max_tokens=4096,
         )
         candidates = self._extract_json(debate)["candidates"]
 
@@ -37,7 +37,7 @@ class MarketDebateAgent(BaseAgent):
                 candidates=json.dumps(candidates, ensure_ascii=False),
                 cdsg=prompts.CDSG_CONTEXT,
             ),
-            max_tokens=3072,
+            max_tokens=4096,
         )
         decision = self._extract_json(decision_raw)
 

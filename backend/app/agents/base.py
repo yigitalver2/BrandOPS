@@ -4,6 +4,7 @@ Her ajan `produce(input)` ile ham çıktı üretir (LLM ya da mock);
 `run(input)` bunu şemaya karşı doğrular, gerekirse düzeltici istemle yeniden dener.
 """
 import json
+import re
 import time
 from dataclasses import dataclass, field
 
@@ -52,6 +53,13 @@ class BaseAgent:
         self._tokens["input"] += resp.usage.input_tokens
         self._tokens["output"] += resp.usage.output_tokens
         self._tokens["total"] = self._tokens["input"] + self._tokens["output"]
+        # max_tokens'a takılan yanıt kesik JSON üretir; net hata ver (kriptik
+        # "Expecting ',' delimiter" yerine) ki sınır artırılabilsin.
+        if resp.stop_reason == "max_tokens":
+            raise ValueError(
+                f"{self.name}: LLM yanıtı max_tokens={max_tokens} sınırına takıldı, "
+                "çıktı kesildi. max_tokens değerini artırın."
+            )
         return resp.content[0].text
 
     @staticmethod
@@ -59,12 +67,22 @@ class BaseAgent:
         """Model yanıtından ilk JSON objesini ayıkla (```json bloklarına toleranslı)."""
         text = text.strip()
         if text.startswith("```"):
-            text = text.split("```")[1]
-            text = text[4:] if text.startswith("json") else text
+            parts = text.split("```")
+            if len(parts) >= 2:
+                text = parts[1]
+                if text.startswith("json"):
+                    text = text[4:]
+                text = text.strip()
         start, end = text.find("{"), text.rfind("}")
         if start == -1 or end == -1:
             raise ValueError("yanıtta JSON objesi bulunamadı")
-        return json.loads(text[start : end + 1])
+        blob = text[start : end + 1]
+        try:
+            return json.loads(blob)
+        except json.JSONDecodeError:
+            # Yaygın LLM kusuru: nesne/dizi kapanışından önceki sondaki virgül.
+            repaired = re.sub(r",(\s*[}\]])", r"\1", blob)
+            return json.loads(repaired)
 
     # --- Ana akış ----------------------------------------------------------
     def produce(self, input_data: dict, feedback: list[str] | None = None) -> dict:

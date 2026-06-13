@@ -25,7 +25,7 @@ class CampaignAgent(BaseAgent):
             self._call_llm(
                 prompts.CAMPAIGN_SYSTEM,
                 prompts.CAMPAIGN_PLAN.format(recommendation=rec_json),
-                max_tokens=3072,
+                max_tokens=4096,
             )
         )
 
@@ -37,7 +37,7 @@ class CampaignAgent(BaseAgent):
                     core=json.dumps(plan, ensure_ascii=False),
                     recommendation=rec_json,
                 ),
-                max_tokens=3072,
+                max_tokens=4096,
             )
         )
 

@@ -32,12 +32,12 @@ class IntelligenceAgent(BaseAgent):
         extracted = self._call_llm(
             prompts.INTEL_SYSTEM,
             prompts.INTEL_EXTRACT.format(year=year, report_text=text),
-            max_tokens=2048,
+            max_tokens=4096,
         )
         compressed = self._call_llm(
             prompts.INTEL_SYSTEM,
             prompts.INTEL_COMPRESS.format(year=year, extracted=extracted),
-            max_tokens=2048,
+            max_tokens=4096,
         )
         return self._extract_json(compressed)
 
