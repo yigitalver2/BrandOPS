@@ -40,6 +40,20 @@ export function streamUrl(runId: string): string {
   return `${BACKEND_URL}/run/${runId}/stream`;
 }
 
+// --- Run artifact'larını backend'den getir ---
+export async function fetchArtifact(runId: string, name: string): Promise<unknown> {
+  const res = await fetch(`${BACKEND_URL}/run/${runId}/artifact/${name}`);
+  if (!res.ok) throw new Error(`artifact alınamadı: ${name}`);
+  return res.json();
+}
+
+// Canlı run durumunu getir (SSE koptuğunda poll için).
+export async function fetchRunStatus(runId: string): Promise<RunState> {
+  const res = await fetch(`${BACKEND_URL}/run/${runId}`, { cache: "no-store" });
+  if (!res.ok) throw new Error("run durumu alınamadı");
+  return res.json();
+}
+
 // --- PDF yönetimi ---
 export async function listReports(): Promise<{ reports: string[]; count: number }> {
   const res = await fetch(`${BACKEND_URL}/reports`);

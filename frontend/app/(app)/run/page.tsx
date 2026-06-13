@@ -106,7 +106,20 @@ export default function RunPage() {
         >
           <p className="text-sm font-medium text-emerald-700">Pipeline tamamlandı.</p>
           <p className="mt-1 text-sm text-cream-200/60">
-            Tüm artifact&apos;lar başarıyla üretildi ve doğrulandı.
+            Tüm artifact&apos;lar başarıyla üretildi ve doğrulandı. Sonuçlar menüsünden inceleyebilirsin.
+          </p>
+        </motion.div>
+      )}
+
+      {mode === "error" && (
+        <motion.div
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          className="mt-8 rounded-2xl border border-rose-600/30 bg-rose-50/30 px-5 py-4"
+        >
+          <p className="text-sm font-medium text-rose-700">Bağlantı kesildi.</p>
+          <p className="mt-1 text-sm text-cream-200/60">
+            Canlı akış koptu. Tamamlanan aşamaların gerçek çıktıları kaydedildi; eksik
+            kalan olduysa pipeline&apos;ı tekrar çalıştır. (Sahte/demo veri yazılmadı.)
           </p>
         </motion.div>
       )}

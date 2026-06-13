@@ -17,7 +17,12 @@ def publish(run_id: str, event: str, data: dict) -> None:
 
 
 async def subscribe(run_id: str) -> AsyncIterator[str]:
-    """SSE formatında string'ler üretir; önce geçmişi replay eder."""
+    """SSE formatında string'ler üretir; önce geçmişi replay eder.
+
+    Uzun aşamalar (ör. IntelligenceAgent dakikalarca PDF işler) sırasında hiç
+    event akmaz; proxy boş bağlantıyı kesmesin diye her 15sn'de heartbeat
+    (SSE yorum satırı) gönderilir — EventSource bunu yok sayar ama TCP canlı kalır.
+    """
     q: asyncio.Queue = asyncio.Queue()
     _subscribers.setdefault(run_id, []).append(q)
     try:
@@ -26,7 +31,11 @@ async def subscribe(run_id: str) -> AsyncIterator[str]:
             if payload["event"] == "run_finished":
                 return
         while True:
-            payload = await q.get()
+            try:
+                payload = await asyncio.wait_for(q.get(), timeout=15)
+            except asyncio.TimeoutError:
+                yield ": ping\n\n"  # heartbeat — bağlantıyı diri tutar
+                continue
             yield _format(payload)
             if payload["event"] == "run_finished":
                 return
