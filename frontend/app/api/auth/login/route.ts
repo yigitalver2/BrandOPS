@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Geçersiz istek." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
   const email = (body.email || "").trim().toLowerCase();
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
   if (!email || !password) {
     return NextResponse.json(
-      { error: "E-posta ve şifre gerekli." },
+      { error: "Email and password are required." },
       { status: 400 }
     );
   }
@@ -23,11 +23,11 @@ export async function POST(req: Request) {
   await ensureSchema();
 
   const user = await findUserByEmail(email);
-  // Kullanıcı sayımını önlemek için aynı genel mesaj.
+  // Same generic message to prevent user enumeration.
   const ok = user ? await verifyPassword(password, user.password_hash) : false;
   if (!user || !ok) {
     return NextResponse.json(
-      { error: "E-posta veya şifre hatalı." },
+      { error: "Incorrect email or password." },
       { status: 401 }
     );
   }

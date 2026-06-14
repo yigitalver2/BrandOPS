@@ -9,7 +9,7 @@ export async function POST(req: Request) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Geçersiz istek." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
   const email = (body.email || "").trim().toLowerCase();
@@ -17,11 +17,11 @@ export async function POST(req: Request) {
   const name = (body.name || "").trim() || null;
 
   if (!EMAIL_RE.test(email)) {
-    return NextResponse.json({ error: "Geçerli bir e-posta girin." }, { status: 400 });
+    return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 });
   }
   if (password.length < 8) {
     return NextResponse.json(
-      { error: "Şifre en az 8 karakter olmalı." },
+      { error: "Password must be at least 8 characters." },
       { status: 400 }
     );
   }
@@ -31,7 +31,7 @@ export async function POST(req: Request) {
   const existing = await findUserByEmail(email);
   if (existing) {
     return NextResponse.json(
-      { error: "Bu e-posta zaten kayıtlı." },
+      { error: "This email is already registered." },
       { status: 409 }
     );
   }

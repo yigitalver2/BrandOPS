@@ -55,7 +55,7 @@ export default function MarketPage() {
         <Empty msg="Not run yet — start the analysis from the Run Pipeline page first." />
       ) : (
         <>
-          {/* Karar kartı */}
+          {/* Decision card */}
           <div className="card mb-8 border-l-4 border-l-copper p-6">
             <p className="eyebrow mb-1">Recommended Market</p>
             <h2 className="font-display text-3xl text-cream-100">{data.recommended_market}</h2>
@@ -71,7 +71,7 @@ export default function MarketPage() {
             )}
           </div>
 
-          {/* Aday tartışmaları */}
+          {/* Candidate debates */}
           <p className="eyebrow mb-4">Candidate Market Debate</p>
           <div className="mb-8 grid gap-4 md:grid-cols-2">
             {data.candidates.map((c, i) => (
@@ -80,7 +80,7 @@ export default function MarketPage() {
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
-            {/* Kritik başarı faktörleri */}
+            {/* Critical success factors */}
             {data.success_factors.length > 0 && (
               <div className="card p-5">
                 <p className="eyebrow mb-3">Critical Success Factors</p>
@@ -95,7 +95,7 @@ export default function MarketPage() {
               </div>
             )}
 
-            {/* Food Empire uyarlamaları */}
+            {/* Food Empire adaptations */}
             {data.foodempire_adaptations.length > 0 && (
               <div className="card p-5">
                 <p className="eyebrow mb-3">Food Empire Playbook Adaptations</p>
@@ -148,7 +148,7 @@ function CandidateCard({ candidate: c, isWinner }: { candidate: MarketCandidate;
         </div>
       </div>
 
-      {/* CFO skor çubuğu */}
+      {/* CFO score bar */}
       <div className="mb-4 h-1.5 w-full overflow-hidden rounded-full bg-espresso-700">
         <div
           className="h-full rounded-full bg-copper"

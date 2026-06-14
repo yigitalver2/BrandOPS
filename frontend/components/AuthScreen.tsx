@@ -123,7 +123,7 @@ export default function AuthScreen() {
         </div>
       </div>
 
-      {/* — Sağ: form — */}
+      {/* — Right: form — */}
       <div className="relative flex items-center justify-center px-5 py-12">
         <div className="w-full max-w-sm">
           {/* Mobil logo */}

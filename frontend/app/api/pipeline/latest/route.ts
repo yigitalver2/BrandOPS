@@ -9,7 +9,7 @@ import {
 export async function GET() {
   const session = await getSession();
   if (!session) {
-    return NextResponse.json({ error: "Oturum gerekli." }, { status: 401 });
+    return NextResponse.json({ error: "Session required." }, { status: 401 });
   }
 
   await ensureSchema();

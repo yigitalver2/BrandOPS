@@ -1,10 +1,10 @@
-"""CampaignAgent (Brief Bölüm 2) — seçilen pazar için tam pazarlama kampanyası.
+"""CampaignAgent (Brief Section 2) — full marketing campaign for the selected market.
 
-İki geçiş:
-  Geçiş 1: hedef kitle + değer önerisi/konumlandırma + 4P
-  Geçiş 2: gerekçeli bütçe + 12 aylık Gantt + KPI/ölçüm
-Bütçe tutarlılığı (line_items toplamı == total) sağlanır.
-Çıktı campaign_proposal.schema.json formatında birleşir.
+Two passes:
+  Pass 1: target audience + value proposition/positioning + 4Ps
+  Pass 2: justified budget + 12-month Gantt + KPI/measurement
+Budget consistency (sum of line_items == total) is enforced.
+Output merges into the campaign_proposal.schema.json format.
 """
 import json
 from datetime import datetime, timezone
@@ -18,10 +18,10 @@ class CampaignAgent(BaseAgent):
     name = "campaign"
 
     def produce(self, input_data: dict, feedback=None) -> dict:
-        # input_data = market_recommendation (MarketDebateAgent çıktısı)
+        # input_data = market_recommendation (MarketDebateAgent output)
         rec_json = json.dumps(input_data, ensure_ascii=False)
 
-        # --- Geçiş 1: kitle + konumlandırma + 4P ---
+        # --- Pass 1: audience + positioning + 4Ps ---
         plan = self._extract_json(
             self._call_llm(
                 prompts.CAMPAIGN_SYSTEM,
@@ -30,7 +30,7 @@ class CampaignAgent(BaseAgent):
             )
         )
 
-        # --- Geçiş 2: bütçe + Gantt + KPI ---
+        # --- Pass 2: budget + Gantt + KPIs ---
         ops = self._extract_json(
             self._call_llm(
                 prompts.CAMPAIGN_SYSTEM,
@@ -58,7 +58,7 @@ class CampaignAgent(BaseAgent):
 
     @staticmethod
     def _reconcile_budget(budget: dict) -> dict:
-        """line_items toplamını total ile tutarlı yap (model aritmetik hatalarına karşı koruma)."""
+        """Align line_items sum with total (guard against model arithmetic errors)."""
         items_sum = round(sum(li["amount"] for li in budget.get("line_items", [])), 2)
         budget["total"] = items_sum
         budget.setdefault("currency", "USD")

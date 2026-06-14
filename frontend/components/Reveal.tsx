@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 
-// Görünüme girince yumuşak beliriş — bir kez tetiklenir.
+// Soft fade-in when entering the viewport — fires once.
 export default function Reveal({
   children,
   className = "",

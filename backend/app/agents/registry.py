@@ -1,8 +1,8 @@
-"""Ajan registry — hangi ajanların gerçek, hangilerinin mock çalışacağını belirler.
+"""Agent registry — determines which agents run live vs. mock.
 
-Mod (b) felsefesi: gerçek ajanlar önkoşulları (LLM anahtarı + gerekli girdiler)
-karşılandığında devreye girer; aksi halde donmuş examples/ artifact'ını döndüren
-mock ajan kullanılır. Böylece demo path her zaman çalışır.
+Mode (b) philosophy: real agents activate when prerequisites are met (LLM key +
+required inputs); otherwise a mock agent that returns a frozen examples/ artifact
+is used, so the demo path always works.
 """
 from ..core.config import LLM_API_KEY, REPORTS_DIR
 from ..core.pdf import discover_reports
@@ -58,7 +58,7 @@ _BUILDERS = {
 
 
 def build_agents() -> dict[str, BaseAgent]:
-    """Her aşama için gerçek ajan (varsa) yoksa mock döndürür."""
+    """Returns the real agent for each stage when available, otherwise a mock."""
     agents: dict[str, BaseAgent] = {}
     for name in AGENT_ORDER:
         real = _BUILDERS[name]()

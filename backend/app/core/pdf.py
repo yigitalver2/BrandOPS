@@ -1,9 +1,9 @@
-"""PDF okuma yardımcısı — bir yıllık raporu metne çevirir (pdfplumber, pypdf fallback)."""
+"""PDF reading helper — converts an annual report to plain text (pdfplumber, pypdf fallback)."""
 from pathlib import Path
 
 
 def extract_text(path: str | Path) -> str:
-    """PDF'i düz metne çevirir. pypdf önce (hafif bellek), pdfplumber fallback."""
+    """Convert a PDF to plain text. Tries pypdf first (lower memory), pdfplumber as fallback."""
     path = Path(path)
     try:
         from pypdf import PdfReader
@@ -29,9 +29,9 @@ def extract_text(path: str | Path) -> str:
 
 
 def discover_reports(reports_dir: Path) -> dict[int, Path]:
-    """reports/ içindeki PDF'leri yıla göre eşler. Dosya adında 4 haneli yıl arar.
+    """Maps PDFs in reports/ by year. Looks for a 4-digit year in the filename.
 
-    Örn: FY2022.pdf, food_empire_2022_annual.pdf -> {2022: path}
+    E.g.: FY2022.pdf, food_empire_2022_annual.pdf -> {2022: path}
     """
     import re
 

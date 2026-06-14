@@ -5,14 +5,14 @@ import { ensureSchema, finishPipelineRun } from "@/lib/db";
 export async function POST(req: Request) {
   const session = await getSession();
   if (!session) {
-    return NextResponse.json({ error: "Oturum gerekli." }, { status: 401 });
+    return NextResponse.json({ error: "Session required." }, { status: 401 });
   }
 
   let body: { runId?: string; status?: string };
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Geçersiz istek." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
   if (
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     !["completed", "failed", "needs_review"].includes(body.status ?? "")
   ) {
     return NextResponse.json(
-      { error: "runId ve geçerli status gerekli." },
+      { error: "runId and a valid status are required." },
       { status: 400 }
     );
   }

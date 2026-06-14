@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-// Dört numaralı kare = dört ajanlı pipeline (01 İstihbarat → 04 Kampanya).
-// Espresso → bakır → tan → açık tan geçişi, bakır bağlantı çizgisiyle.
+// Four numbered squares = four-agent pipeline (01 Intelligence → 04 Campaign).
+// Espresso → copper → tan → light tan gradient, copper connector line.
 const SQUARES = [
   { fill: "#2A211C", text: "#F4ECDF", label: "01" },
   { fill: "#A9683A", text: "#F4ECDF", label: "02" },
@@ -9,7 +9,7 @@ const SQUARES = [
   { fill: "#DEC9A9", text: "#6E4A2E", label: "04" },
 ];
 
-/** Yalnızca dört kareli işaret (mark). Yükseklik `className` ile ayarlanır. */
+/** Four-square mark only. Height controlled via `className`. */
 export function LogoMark({ className = "" }: { className?: string }) {
   return (
     <svg
@@ -19,7 +19,7 @@ export function LogoMark({ className = "" }: { className?: string }) {
       aria-label="BrandOPS"
       fill="none"
     >
-      {/* Kareleri bağlayan bakır hat (karelerin altında kalır, yalnız boşluklarda görünür) */}
+      {/* Copper connector line behind squares (visible only in gaps) */}
       <line x1="8" y1="22" x2="200" y2="22" stroke="#B0712F" strokeWidth="2" />
       {SQUARES.map((s, i) => {
         const x = i * 52;
@@ -45,7 +45,7 @@ export function LogoMark({ className = "" }: { className?: string }) {
   );
 }
 
-/** Bakır vurgulu serif wordmark. */
+/** Serif wordmark with copper accent. */
 export function Wordmark({ className = "" }: { className?: string }) {
   return (
     <span className={`font-display font-bold tracking-tight ${className}`}>
@@ -54,7 +54,7 @@ export function Wordmark({ className = "" }: { className?: string }) {
   );
 }
 
-/** Tam logo: işaret + wordmark (+ opsiyonel alt başlık), dikey yığın. */
+/** Full logo: mark + wordmark (+ optional tagline), vertical stack. */
 export default function Logo({
   showTagline = false,
   href = "/",
@@ -78,7 +78,7 @@ export default function Logo({
 
   if (href === null) return content;
   return (
-    <Link href={href} aria-label="BrandOPS — ana sayfa">
+    <Link href={href} aria-label="BrandOPS — home">
       {content}
     </Link>
   );

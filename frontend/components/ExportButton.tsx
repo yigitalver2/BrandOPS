@@ -1,6 +1,6 @@
 "use client";
 
-// Artifact'ı indirilebilir yapar (JSON). PRD: "Teslim için dışarı aktarılabilir artifact'lar".
+// Makes an artifact downloadable as JSON. PRD: "Exportable artifacts for delivery".
 export default function ExportButton({
   data,
   filename,

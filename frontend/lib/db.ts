@@ -1,20 +1,20 @@
 import "server-only";
 import { createClient, type Client } from "@libsql/client";
 
-// Lokalde: DATABASE_URL ayarlı değilse yerel SQLite dosyası (file:local.db).
-// Prod (Vercel): DATABASE_URL=libsql://... + DATABASE_AUTH_TOKEN (Turso) ayarla.
+// Local: falls back to a local SQLite file (file:local.db) if DATABASE_URL is not set.
+// Prod (Railway/Vercel): set DATABASE_URL=libsql://... + DATABASE_AUTH_TOKEN (Turso).
 const url = process.env.DATABASE_URL || "file:local.db";
 const authToken = process.env.DATABASE_AUTH_TOKEN;
 
 export const db: Client = createClient({ url, authToken });
 
-// Demo hesabı: demo@brandops.ai / demo1234 (bcrypt, cost 10)
+// Demo account: demo@brandops.ai / demo1234 (bcrypt, cost 10)
 const DEMO_EMAIL = "demo@brandops.ai";
 const DEMO_HASH = "$2b$10$yXoaMQYiU8TuW4hLb7FEv.AsYwXgZMSfmWFN5NIKkDLrp6sjPljyu";
 
 let ready: Promise<void> | null = null;
 
-/** Şemayı (tek seferlik) hazırlar ve demo hesabını ekler. Her route bunu await eder. */
+/** Initialises the schema (once) and inserts the demo account. Every route awaits this. */
 export function ensureSchema(): Promise<void> {
   if (!ready) {
     ready = (async () => {
@@ -66,7 +66,7 @@ export function ensureSchema(): Promise<void> {
         ],
       });
     })().catch((e) => {
-      ready = null; // başarısızsa tekrar denensin
+      ready = null; // allow retry on failure
       throw e;
     });
   }

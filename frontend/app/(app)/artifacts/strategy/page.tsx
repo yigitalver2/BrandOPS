@@ -48,19 +48,19 @@ export default function StrategyPage() {
         <Empty msg="Not run yet — start the analysis from the Run Pipeline page first." />
       ) : (
         <>
-          {/* Sentez anlatısı */}
+          {/* Synthesis narrative */}
           <div className="card mb-8 border-l-2 border-l-copper p-6">
             <p className="eyebrow mb-3">Through-Line · Synthesis</p>
             <p className="text-lg leading-relaxed text-cream-100">{data.synthesis_narrative}</p>
           </div>
 
-          {/* Dönem sayacı */}
+          {/* Period counter */}
           <div className="mb-4 flex items-baseline gap-2">
             <p className="eyebrow">Strategic Periods</p>
             <span className="font-mono text-xs text-cream-200/40">({data.periods.length} periods)</span>
           </div>
 
-          {/* Dönemler — dikey zaman çizelgesi */}
+          {/* Periods — vertical timeline */}
           <div className="relative space-y-6 pl-6">
             <div className="absolute left-2 top-0 h-full w-px bg-espresso-600" aria-hidden />
             {data.periods.map((p, i) => (
@@ -76,7 +76,7 @@ export default function StrategyPage() {
 function PeriodCard({ period: p, index: i }: { period: Period; index: number }) {
   return (
     <div className="card relative p-5">
-      {/* Zaman çizelgesi noktası */}
+      {/* Timeline dot */}
       <div className="absolute -left-[22px] top-6 h-3 w-3 rounded-full border-2 border-copper bg-espresso-900" aria-hidden />
 
       <div className="mb-4 flex flex-wrap items-start justify-between gap-2">
@@ -88,7 +88,7 @@ function PeriodCard({ period: p, index: i }: { period: Period; index: number }) 
       </div>
 
       <div className="grid gap-5 md:grid-cols-2">
-        {/* Strateji + coğrafya */}
+        {/* Strategy + geography */}
         <div>
           <p className="eyebrow mb-1.5">Strategy</p>
           <p className="text-sm leading-relaxed text-cream-200/80">{p.strategy}</p>
@@ -101,7 +101,7 @@ function PeriodCard({ period: p, index: i }: { period: Period; index: number }) 
           )}
         </div>
 
-        {/* Girişimler */}
+        {/* Initiatives */}
         {p.initiatives.length > 0 && (
           <div>
             <p className="eyebrow mb-1.5">Initiatives</p>
@@ -116,7 +116,7 @@ function PeriodCard({ period: p, index: i }: { period: Period; index: number }) 
           </div>
         )}
 
-        {/* Finansal özet */}
+        {/* Financial summary */}
         {p.financial_summary && (
           <div>
             <p className="eyebrow mb-1.5">Financial Performance</p>
@@ -124,7 +124,7 @@ function PeriodCard({ period: p, index: i }: { period: Period; index: number }) 
           </div>
         )}
 
-        {/* Marka & ürün evrimi */}
+        {/* Brand & product evolution */}
         {p.brand_product_evolution && (
           <div>
             <p className="eyebrow mb-1.5">Brand & Product Evolution</p>
@@ -132,7 +132,7 @@ function PeriodCard({ period: p, index: i }: { period: Period; index: number }) 
           </div>
         )}
 
-        {/* KPI hareketi */}
+        {/* KPI movement */}
         {p.kpi_movement && (
           <div className="md:col-span-2">
             <p className="eyebrow mb-1.5">KPI Movement</p>
@@ -141,7 +141,7 @@ function PeriodCard({ period: p, index: i }: { period: Period; index: number }) 
         )}
       </div>
 
-      {/* Geçiş */}
+      {/* Transition */}
       <div className="mt-4 grid gap-2 border-t border-espresso-600/40 pt-4 text-xs text-cream-200/50 md:grid-cols-2">
         {p.transition_in && <p><span className="text-emerald-400/70">→ Entry:</span> {p.transition_in}</p>}
         {p.transition_out && <p><span className="text-rose-400/70">← Exit:</span> {p.transition_out}</p>}

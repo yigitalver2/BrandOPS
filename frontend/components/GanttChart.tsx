@@ -4,14 +4,14 @@ import type { CampaignProposal } from "@/lib/types";
 
 const MONTHS = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
 
-// 12 aylık Gantt — JSON gantt verisinden beslenir (hardcode yok).
+// 12-month Gantt — driven by JSON gantt data (no hardcoding).
 export default function GanttChart({ gantt }: { gantt: CampaignProposal["gantt"] }) {
   return (
     <div>
       <p className="eyebrow mb-3">Timeline · 12-Month Gantt</p>
       <div className="overflow-x-auto">
         <div className="min-w-[640px]">
-          {/* Ay başlıkları */}
+          {/* Month headers */}
           <div className="mb-2 grid grid-cols-[200px_repeat(12,1fr)] gap-1">
             <div />
             {MONTHS.map((m, i) => (
@@ -20,7 +20,7 @@ export default function GanttChart({ gantt }: { gantt: CampaignProposal["gantt"]
               </div>
             ))}
           </div>
-          {/* Satırlar */}
+          {/* Rows */}
           <div className="space-y-1.5">
             {gantt.map((g, i) => (
               <div key={i} className="grid grid-cols-[200px_repeat(12,1fr)] items-center gap-1">

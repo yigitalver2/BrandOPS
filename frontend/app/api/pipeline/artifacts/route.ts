@@ -12,7 +12,7 @@ const ARTIFACT_NAMES: Record<string, string> = {
 export async function POST(req: Request) {
   const session = await getSession();
   if (!session) {
-    return NextResponse.json({ error: "Oturum gerekli." }, { status: 401 });
+    return NextResponse.json({ error: "Session required." }, { status: 401 });
   }
 
   let body: {
@@ -24,19 +24,19 @@ export async function POST(req: Request) {
   try {
     body = await req.json();
   } catch {
-    return NextResponse.json({ error: "Geçersiz istek." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
   if (!body.runId || !body.agent || body.artifact == null) {
     return NextResponse.json(
-      { error: "runId, agent ve artifact gerekli." },
+      { error: "runId, agent and artifact are required." },
       { status: 400 }
     );
   }
 
   const name = body.name || ARTIFACT_NAMES[body.agent];
   if (!name) {
-    return NextResponse.json({ error: "Bilinmeyen ajan." }, { status: 400 });
+    return NextResponse.json({ error: "Unknown agent." }, { status: 400 });
   }
 
   await ensureSchema();

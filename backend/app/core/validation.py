@@ -1,4 +1,4 @@
-"""Validation katmanı — her ajan çıktısı ilgili JSON şemasına karşı kontrol edilir."""
+"""Validation layer — each agent output is checked against its JSON schema."""
 import json
 from functools import lru_cache
 
@@ -6,7 +6,7 @@ from jsonschema import Draft7Validator
 
 from .config import SCHEMAS_DIR
 
-# agent adı -> şema dosyası
+# agent name -> schema file
 AGENT_SCHEMAS = {
     "intelligence": "consolidated_timeline.schema.json",
     "strategy": "strategic_analysis.schema.json",
@@ -23,7 +23,7 @@ def _validator(schema_file: str) -> Draft7Validator:
 
 
 def validate_artifact(agent: str, data: dict) -> list[str]:
-    """Şema hatalarının listesini döndürür; boş liste = valid."""
+    """Returns a list of schema errors; empty list means valid."""
     v = _validator(AGENT_SCHEMAS[agent])
     return [
         f"{'/'.join(map(str, e.path)) or '<root>'}: {e.message}"

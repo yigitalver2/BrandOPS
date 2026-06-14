@@ -1,7 +1,7 @@
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
-// Korunan uygulama kabuğu: Nav + içerik + Footer. (Giriş sayfası bunu kullanmaz.)
+// Protected app shell: Nav + content + Footer. (Login page does not use this layout.)
 export default function AppLayout({
   children,
 }: {

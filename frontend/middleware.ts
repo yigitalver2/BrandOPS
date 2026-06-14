@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { SESSION_COOKIE, verifySession } from "@/lib/session";
 
-// /login dışındaki tüm uygulamayı korur. Edge runtime'da çalışır (jose).
+// Guards all routes except /login. Runs in the Edge runtime (jose).
 export async function middleware(req: NextRequest) {
   const token = req.cookies.get(SESSION_COOKIE)?.value;
   const session = token ? await verifySession(token) : null;
@@ -9,14 +9,14 @@ export async function middleware(req: NextRequest) {
   const isAuthPage = pathname === "/login";
 
   if (session) {
-    // Giriş yapmış kullanıcıyı login sayfasından uzaklaştır.
+    // Redirect authenticated users away from the login page.
     if (isAuthPage) {
       return NextResponse.redirect(new URL("/", req.url));
     }
     return NextResponse.next();
   }
 
-  // Oturum yok.
+  // No session.
   if (isAuthPage) return NextResponse.next();
 
   const url = new URL("/login", req.url);
@@ -25,6 +25,6 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  // api/auth, Next statikleri, icon ve nokta içeren statik dosyalar (mock JSON dahil) hariç.
+  // Exclude api/auth, Next statics, icons, and dot-extension static files (mock JSON included).
   matcher: ["/((?!api/auth|_next/static|_next/image|icon.svg|.*\\..*).*)"],
 };

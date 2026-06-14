@@ -1,13 +1,13 @@
 import { SignJWT, jwtVerify, type JWTPayload } from "jose";
 
-// jose tabanlı oturum token'ı — Edge runtime'da (middleware) de çalışır.
-// Üretimde AUTH_SECRET mutlaka ayarlanmalı; lokal için güvenli olmayan varsayılan.
+// jose-based session token — also works in the Edge runtime (middleware).
+// AUTH_SECRET must be set in production; insecure default is for local dev only.
 const SECRET = new TextEncoder().encode(
   process.env.AUTH_SECRET || "dev-only-insecure-secret-change-me-in-prod"
 );
 
 export const SESSION_COOKIE = "bo_session";
-const MAX_AGE_S = 60 * 60 * 24 * 7; // 7 gün
+const MAX_AGE_S = 60 * 60 * 24 * 7; // 7 days
 
 export type SessionData = { sub: string; email: string; name?: string | null };
 

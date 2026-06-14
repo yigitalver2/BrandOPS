@@ -1,10 +1,10 @@
 """Orchestrator — LangGraph state machine: intelligence → strategy → market → campaign.
 
-Her node:
-  1. stage_started event'i basar
-  2. ajanı çalıştırır (BaseAgent.run: LLM/mock + validation + retry)
-  3. artifact'ı state'e ve diske yazar, stage_completed basar
-  4. ValidationFailure'da run "needs_review" durumuna geçer ve pipeline durur
+Each node:
+  1. Publishes a stage_started event
+  2. Runs the agent (BaseAgent.run: LLM/mock + validation + retry)
+  3. Writes the artifact to state and disk, publishes stage_completed
+  4. On ValidationFailure, sets run to "needs_review" and halts the pipeline
 """
 import json
 import uuid
@@ -28,13 +28,13 @@ _ARTIFACT_NAMES = {
     "campaign": "campaign_proposal",
 }
 
-# run_id -> run_state dict (in-memory depo; ayrıca diske yazılır)
+# run_id -> run_state dict (in-memory store; also persisted to disk)
 RUNS: dict[str, dict] = {}
 
 
 class PipelineState(TypedDict, total=False):
     run_id: str
-    artifacts: dict[str, Any]  # agent adı -> doğrulanmış çıktı
+    artifacts: dict[str, Any]  # agent name -> validated output
     halted: bool
 
 
@@ -63,7 +63,7 @@ def _make_node(agent: BaseAgent):
         stage["started_at"] = _now()
         publish(state["run_id"], "stage_started", {"agent": agent.name})
         try:
-            # önceki ajanın doğrulanmış çıktısı tek input
+            # previous agent's validated output is the sole input
             idx = AGENT_ORDER.index(agent.name)
             input_data = (
                 state["artifacts"].get(AGENT_ORDER[idx - 1], {}) if idx > 0 else {}
@@ -80,7 +80,7 @@ def _make_node(agent: BaseAgent):
                     {"agent": agent.name, "errors": exc.errors[:5]})
             state["halted"] = True
             return state
-        except Exception as exc:  # LLM/IO hatası
+        except Exception as exc:  # LLM/IO error
             stage.update(status="failed", finished_at=_now(),
                          validation_passed=False, error=str(exc))
             run_state["status"] = "failed"
@@ -140,7 +140,7 @@ def new_run() -> dict:
 
 
 def execute_run(run_id: str) -> None:
-    """Senkron pipeline yürütme (thread executor'da çağrılır)."""
+    """Synchronous pipeline execution (called from a thread executor)."""
     run_state = RUNS[run_id]
     run_state["status"] = "running"
     run_state["started_at"] = _now()
@@ -150,11 +150,11 @@ def execute_run(run_id: str) -> None:
     graph = build_graph()
     final = graph.invoke({"run_id": run_id, "artifacts": {}, "halted": False})
 
-    if run_state["status"] == "running":  # hiçbir aşama durdurmadıysa
+    if run_state["status"] == "running":  # no stage halted the pipeline
         run_state["status"] = "completed"
     run_state["finished_at"] = _now()
 
-    # run_state kendisi de şemaya karşı doğrulanır (kendi yemeğini yemek)
+    # run_state itself is validated against the schema (eating our own cooking)
     errors = validate_artifact("run_state", run_state)
     if errors:
         publish(run_id, "warning", {"run_state_schema_errors": errors[:5]})

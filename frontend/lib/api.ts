@@ -1,6 +1,5 @@
-// Veri katmanı — önce mock (public/mock/*.json), sonra gerçek API.
-// Mod (b): donmuş, doğrulanmış artifact'lar mock olarak servis edilir; canlı çalıştırma
-// backend SSE'ye bağlanır.
+// Data layer — mock first (public/mock/*.json), then real API.
+// Demo mode: frozen, validated artifacts are served as mock; live run connects to backend SSE.
 
 import type {
   ConsolidatedTimeline,
@@ -16,7 +15,7 @@ export const BACKEND_URL =
 
 async function loadMock<T>(name: string): Promise<T> {
   const res = await fetch(`/mock/${name}.json`, { cache: "no-store" });
-  if (!res.ok) throw new Error(`mock yüklenemedi: ${name}`);
+  if (!res.ok) throw new Error(`failed to load mock: ${name}`);
   return res.json();
 }
 
@@ -30,10 +29,10 @@ export const getCampaign = () =>
   loadMock<CampaignProposal>("campaign_proposal");
 export const getRunState = () => loadMock<RunState>("run_state");
 
-// --- Canlı çalıştırma (gerçek backend) ---
+// --- Live run (real backend) ---
 export async function startRun(): Promise<{ run_id: string }> {
   const res = await fetch("/api/pipeline/start", { method: "POST" });
-  if (!res.ok) throw new Error("çalıştırma başlatılamadı");
+  if (!res.ok) throw new Error("failed to start run");
   return res.json();
 }
 
@@ -41,17 +40,17 @@ export function streamUrl(runId: string): string {
   return `${BACKEND_URL}/run/${runId}/stream`;
 }
 
-// --- Run artifact'larını backend'den getir ---
+// --- Fetch run artifacts from backend ---
 export async function fetchArtifact(runId: string, name: string): Promise<unknown> {
   const res = await fetch(`${BACKEND_URL}/run/${runId}/artifact/${name}`);
-  if (!res.ok) throw new Error(`artifact alınamadı: ${name}`);
+  if (!res.ok) throw new Error(`could not fetch artifact: ${name}`);
   return res.json();
 }
 
-// Canlı run durumunu getir (SSE koptuğunda poll için).
+// Fetch live run status (used for polling when SSE drops).
 export async function fetchRunStatus(runId: string): Promise<RunState> {
   const res = await fetch(`${BACKEND_URL}/run/${runId}`, { cache: "no-store" });
-  if (!res.ok) throw new Error("run durumu alınamadı");
+  if (!res.ok) throw new Error("could not fetch run status");
   return res.json();
 }
 
@@ -66,7 +65,7 @@ export async function savePipelineArtifact(input: {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(input),
   });
-  if (!res.ok) throw new Error("artifact DB'ye yazılamadı");
+  if (!res.ok) throw new Error("failed to write artifact to DB");
 }
 
 export async function finishPipelineRun(input: {
@@ -78,7 +77,7 @@ export async function finishPipelineRun(input: {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(input),
   });
-  if (!res.ok) throw new Error("run durumu DB'ye yazılamadı");
+  if (!res.ok) throw new Error("failed to write run status to DB");
 }
 
 export async function fetchLatestPipelineResults(): Promise<{
@@ -92,14 +91,14 @@ export async function fetchLatestPipelineResults(): Promise<{
   artifacts: Partial<Record<AgentName, unknown>>;
 }> {
   const res = await fetch("/api/pipeline/latest", { cache: "no-store" });
-  if (!res.ok) throw new Error("son pipeline sonucu alınamadı");
+  if (!res.ok) throw new Error("could not fetch latest pipeline results");
   return res.json();
 }
 
-// --- PDF yönetimi ---
+// --- PDF management ---
 export async function listReports(): Promise<{ reports: string[]; count: number }> {
   const res = await fetch(`${BACKEND_URL}/reports`);
-  if (!res.ok) throw new Error("rapor listesi alınamadı");
+  if (!res.ok) throw new Error("could not fetch report list");
   return res.json();
 }
 
@@ -119,11 +118,11 @@ export async function uploadReport(
       if (xhr.status >= 200 && xhr.status < 300) {
         resolve(JSON.parse(xhr.responseText));
       } else {
-        try { reject(new Error(JSON.parse(xhr.responseText).detail || "Yükleme hatası")); }
-        catch { reject(new Error("Yükleme hatası")); }
+        try { reject(new Error(JSON.parse(xhr.responseText).detail || "Upload failed")); }
+        catch { reject(new Error("Upload failed")); }
       }
     };
-    xhr.onerror = () => reject(new Error("Ağ hatası"));
+    xhr.onerror = () => reject(new Error("Network error"));
     xhr.send(fd);
   });
 }
@@ -132,5 +131,5 @@ export async function deleteReport(filename: string): Promise<void> {
   const res = await fetch(`${BACKEND_URL}/reports/${encodeURIComponent(filename)}`, {
     method: "DELETE",
   });
-  if (!res.ok) throw new Error("silme hatası");
+  if (!res.ok) throw new Error("delete failed");
 }

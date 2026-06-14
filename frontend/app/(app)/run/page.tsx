@@ -26,7 +26,7 @@ export default function RunPage() {
         description="Four specialist agents run in sequence; each takes the previous agent's validated JSON output as its sole input. Outputs appear as stages complete."
       />
 
-      {/* PDF Yükleme */}
+      {/* PDF Upload */}
       <div className="mb-6 rounded-2xl border border-espresso-600/60 bg-espresso-800/40">
         <button
           type="button"
@@ -87,7 +87,7 @@ export default function RunPage() {
         )}
       </div>
 
-      {/* Dikey pipeline */}
+      {/* Vertical pipeline */}
       <div className="space-y-4">
         {stages.map((s, i) => (
           <div key={s.agent}>
@@ -155,7 +155,7 @@ function StageCard({ stage }: { stage: StageView }) {
         <StatusPill status={stage.status} />
       </div>
 
-      {/* Çalışırken ince ilerleme çizgisi */}
+      {/* Thin progress bar while running */}
       {running && (
         <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-espresso-700">
           <motion.div
@@ -168,7 +168,7 @@ function StageCard({ stage }: { stage: StageView }) {
         </div>
       )}
 
-      {/* Stage reveal — sakin geçiş */}
+      {/* Stage reveal — smooth transition */}
       <AnimatePresence>
         {done && stage.artifact != null && (
           <motion.div

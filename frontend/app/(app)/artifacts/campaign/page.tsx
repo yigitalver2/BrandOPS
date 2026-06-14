@@ -82,7 +82,7 @@ export default function CampaignPage() {
             </div>
           </div>
 
-          {/* Konumlandırma */}
+          {/* Positioning */}
           <div className="card border-l-2 border-l-copper p-5">
             <p className="eyebrow mb-3">Positioning & Message</p>
             <p className="mb-3 leading-relaxed text-cream-100">{data.value_proposition}</p>
@@ -108,7 +108,7 @@ export default function CampaignPage() {
             </div>
           </div>
 
-          {/* Bütçe */}
+          {/* Budget */}
           <div className="card p-5">
             <BudgetChart budget={data.budget} />
             <div className="mt-4 space-y-2 border-t border-espresso-600/40 pt-4">
@@ -133,7 +133,7 @@ export default function CampaignPage() {
             <GanttChart gantt={data.gantt} />
           </div>
 
-          {/* KPI tablosu */}
+          {/* KPI table */}
           {data.kpis.length > 0 && (
             <div className="card p-5">
               <p className="eyebrow mb-4">KPI & Measurement Plan</p>

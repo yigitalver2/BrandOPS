@@ -10,7 +10,7 @@ const BACKEND_URL =
 export async function POST() {
   const session = await getSession();
   if (!session) {
-    return NextResponse.json({ error: "Oturum gerekli." }, { status: 401 });
+    return NextResponse.json({ error: "Session required." }, { status: 401 });
   }
 
   await ensureSchema();
@@ -18,7 +18,7 @@ export async function POST() {
   const res = await fetch(`${BACKEND_URL}/run`, { method: "POST" });
   if (!res.ok) {
     return NextResponse.json(
-      { error: "Pipeline başlatılamadı." },
+      { error: "Failed to start pipeline." },
       { status: 502 }
     );
   }
@@ -26,7 +26,7 @@ export async function POST() {
   const data = (await res.json()) as { run_id?: string; status?: string };
   if (!data.run_id) {
     return NextResponse.json(
-      { error: "Backend run_id döndürmedi." },
+      { error: "Backend did not return a run_id." },
       { status: 502 }
     );
   }

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-// Basit artifact yükleyici — yükleniyor / hata / boş durumlarını yönetir.
+// Simple artifact loader — manages loading / error / empty states.
 export function useArtifact<T>(loader: () => Promise<T>) {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);

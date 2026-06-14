@@ -72,7 +72,7 @@ export default function PdfUpload() {
       })
     );
 
-    // 3s sonra tamamlanan/hatalı öğeleri temizle
+    // Clear completed/errored items after 3s
     setTimeout(() => {
       setUploading((prev) => prev.filter((u) => u.status === "uploading"));
     }, 3000);
@@ -100,13 +100,13 @@ export default function PdfUpload() {
       await deleteReport(name);
       await refresh();
     } catch {
-      // sessizce geç
+      // silently ignore
     }
   }
 
   return (
     <div className="space-y-4">
-      {/* Drag & drop alanı */}
+      {/* Drag & drop zone */}
       <div
         onDragEnter={onDragEnter}
         onDragOver={(e) => e.preventDefault()}
@@ -150,7 +150,7 @@ export default function PdfUpload() {
         </div>
       </div>
 
-      {/* Aktif yükleme öğeleri */}
+      {/* Active upload items */}
       <AnimatePresence>
         {uploading.map((item) => (
           <motion.div
@@ -190,7 +190,7 @@ export default function PdfUpload() {
         ))}
       </AnimatePresence>
 
-      {/* Yüklü dosyalar */}
+      {/* Uploaded files */}
       {loadError ? (
         <p className="rounded-xl border border-rose-400/30 bg-rose-50/40 px-4 py-3 text-sm text-rose-600">
           {loadError}

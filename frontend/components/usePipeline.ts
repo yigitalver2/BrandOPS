@@ -31,8 +31,8 @@ function initStages(): StageView[] {
   return ORDER.map((agent) => ({ agent, status: "pending" }));
 }
 
-// Canlı çalıştırma: backend SSE'ye bağlanır. Backend yoksa "demo" moduna düşer:
-// donmuş artifact'ları sırayla, sakin gecikmeyle açar (mod b akış efekti).
+// Live run: connects to backend SSE. Falls back to "demo" mode if backend is unreachable:
+// replays frozen artifacts sequentially with a short delay (simulated stream effect).
 export function usePipeline() {
   const [stages, setStages] = useState<StageView[]>(initStages);
   const [mode, setMode] = useState<RunMode>("idle");
@@ -43,8 +43,8 @@ export function usePipeline() {
   const patch = (agent: AgentName, p: Partial<StageView>) =>
     setStages((prev) => prev.map((s) => (s.agent === agent ? { ...s, ...p } : s)));
 
-  // Demo akışı: SADECE backend hiç erişilemediğinde, run sayfasında "demo" etiketiyle
-  // gösterilir. localStorage'a YAZMAZ — artifact sayfalarına sahte veri sızmaz.
+  // Demo flow: only used when backend is completely unreachable; shown with a "demo" label
+  // on the run page. Does NOT write to localStorage — prevents fake data leaking to artifact pages.
   const runDemo = useCallback(async () => {
     setMode("demo");
     const loaders = { intelligence: getTimeline, strategy: getStrategy, market: getMarket, campaign: getCampaign };
@@ -57,10 +57,10 @@ export function usePipeline() {
     setMode("done");
   }, []);
 
-  // SSE koptuğunda: backend'i poll'le, pipeline bitene kadar bekle, GERÇEK
-  // artifact'ları çek. Demo'ya düşmez — uzun çalışmalarda tek güvenilir yol bu.
+  // When SSE drops: poll the backend until the pipeline finishes, then fetch real artifacts.
+  // Never falls back to demo — polling is the only reliable path for long-running stages.
   const recoverFromBackend = useCallback(async (rid: string) => {
-    const DEADLINE = Date.now() + 30 * 60_000; // en fazla 30 dk bekle
+    const DEADLINE = Date.now() + 30 * 60_000; // wait at most 30 min
     while (Date.now() < DEADLINE) {
       let run;
       try {
@@ -69,7 +69,7 @@ export function usePipeline() {
         await new Promise((r) => setTimeout(r, 5000));
         continue;
       }
-      // Tamamlanan aşamaların artifact'larını çek + kaydet
+      // Fetch + save artifacts for completed stages
       for (const st of run.stages) {
         if (st.status === "completed") {
           const data = await fetchArtifact(rid, ARTIFACT_NAME[st.agent]).catch(() => null);
@@ -100,7 +100,7 @@ export function usePipeline() {
         setMode(run.status === "completed" ? "done" : "error");
         return;
       }
-      await new Promise((r) => setTimeout(r, 5000)); // 5sn'de bir yokla
+      await new Promise((r) => setTimeout(r, 5000)); // poll every 5s
     }
     setMode("error");
   }, []);
@@ -150,9 +150,9 @@ export function usePipeline() {
       });
       es.onerror = () => {
         es.close();
-        // SSE koptu (uzun aşamada proxy timeout olabilir). Backend'den GERÇEK
-        // artifact'ları çekmeyi dene. Demo verisine ASLA düşme — pipeline
-        // backend'de hâlâ çalışıyor olabilir, sahte veri yazmak yanıltıcı olur.
+        // SSE dropped (likely a proxy timeout on a long stage). Try to fetch real
+        // artifacts from the backend. Never fall back to demo — the pipeline may still
+        // be running on the backend and writing fake data would be misleading.
         recoverFromBackend(run_id);
       };
     } catch {

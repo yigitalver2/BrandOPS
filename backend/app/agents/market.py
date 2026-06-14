@@ -1,10 +1,10 @@
-"""MarketDebateAgent (Brief Bölüm 1.C) — aday pazarları tartış, birini seç.
+"""MarketDebateAgent (Brief Section 1.C) — debate candidate markets, select one.
 
-İç roller yapılandırılmış tartışmayla uygulanır:
-  Geçiş 1: aday pazarlar + Savunucu (bull) + Muhalif (bear) + CFO skoru
-  Geçiş 2: karar — kazanan pazar, gerekçe, başarı faktörleri, risk/azaltma,
-           giriş modu, Food Empire uyarlamaları
-Çıktı market_recommendation.schema.json formatında birleşir.
+Internal roles implemented via structured debate:
+  Pass 1: candidate markets + Advocate (bull) + Skeptic (bear) + CFO score
+  Pass 2: decision — winning market, rationale, success factors, risks/mitigations,
+           entry mode, Food Empire adaptations
+Output merges into the market_recommendation.schema.json format.
 """
 import json
 from datetime import datetime, timezone
@@ -18,10 +18,10 @@ class MarketDebateAgent(BaseAgent):
     name = "market"
 
     def produce(self, input_data: dict, feedback=None) -> dict:
-        # input_data = strategic_analysis (StrategyAgent çıktısı)
+        # input_data = strategic_analysis (StrategyAgent output)
         analysis_json = json.dumps(input_data, ensure_ascii=False)
 
-        # --- Geçiş 1: aday pazarlar + bull/bear + CFO skor ---
+        # --- Pass 1: candidate markets + bull/bear + CFO score ---
         debate = self._call_llm(
             prompts.MARKET_SYSTEM,
             prompts.MARKET_DEBATE.format(
@@ -31,7 +31,7 @@ class MarketDebateAgent(BaseAgent):
         )
         candidates = self._extract_json(debate)["candidates"]
 
-        # --- Geçiş 2: karar ---
+        # --- Pass 2: decision ---
         decision_raw = self._call_llm(
             prompts.MARKET_SYSTEM,
             prompts.MARKET_DECISION.format(

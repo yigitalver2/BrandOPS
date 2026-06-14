@@ -9,7 +9,7 @@ export default function Landing() {
     <>
       <Hero />
 
-      {/* Pipeline özeti — bilgi kartları, link yok */}
+      {/* Pipeline summary — info cards, no links */}
       <Reveal className="py-10">
         <p className="eyebrow">Pipeline</p>
         <h2 className="mt-2 text-2xl font-semibold">Four specialist agents, verified chain</h2>

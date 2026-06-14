@@ -1,11 +1,11 @@
-"""SSE publisher — her run için bir asyncio kuyruğu; orchestrator event basar, stream endpoint okur."""
+"""SSE publisher — one asyncio queue per run; orchestrator publishes events, stream endpoint reads."""
 import asyncio
 import json
 from typing import AsyncIterator
 
-# run_id -> abone kuyrukları
+# run_id -> subscriber queues
 _subscribers: dict[str, list[asyncio.Queue]] = {}
-# run_id -> geçmiş event'ler (geç bağlanan client'lar için replay)
+# run_id -> event history (for replaying to late-connecting clients)
 _history: dict[str, list[dict]] = {}
 
 
@@ -17,11 +17,11 @@ def publish(run_id: str, event: str, data: dict) -> None:
 
 
 async def subscribe(run_id: str) -> AsyncIterator[str]:
-    """SSE formatında string'ler üretir; önce geçmişi replay eder.
+    """Yields SSE-formatted strings; replays history first.
 
-    Uzun aşamalar (ör. IntelligenceAgent dakikalarca PDF işler) sırasında hiç
-    event akmaz; proxy boş bağlantıyı kesmesin diye her 15sn'de heartbeat
-    (SSE yorum satırı) gönderilir — EventSource bunu yok sayar ama TCP canlı kalır.
+    During long stages (e.g. IntelligenceAgent processing PDFs for minutes) no events
+    flow; a heartbeat (SSE comment line) is sent every 15s so proxies don't close the
+    idle connection — EventSource ignores it but TCP stays alive.
     """
     q: asyncio.Queue = asyncio.Queue()
     _subscribers.setdefault(run_id, []).append(q)
@@ -34,7 +34,7 @@ async def subscribe(run_id: str) -> AsyncIterator[str]:
             try:
                 payload = await asyncio.wait_for(q.get(), timeout=15)
             except asyncio.TimeoutError:
-                yield ": ping\n\n"  # heartbeat — bağlantıyı diri tutar
+                yield ": ping\n\n"  # heartbeat — keeps the connection alive
                 continue
             yield _format(payload)
             if payload["event"] == "run_finished":

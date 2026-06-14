@@ -34,9 +34,9 @@ export default function Hero() {
   };
 
   return (
-    // Full-bleed: arka plan tüm genişliği kaplar, ortadaki "kutu" görüntüsü kalkar.
+    // Full-bleed: background spans the full viewport width, no boxed appearance.
     <section className="relative left-1/2 -mt-10 w-screen -translate-x-1/2 overflow-hidden border-b border-espresso-700/50">
-      {/* — Ambient arka plan (tam genişlik) — */}
+      {/* — Ambient background (full width) — */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="blob blob-a left-[-6%] top-[-12%] h-[38rem] w-[38rem] bg-copper/20" />
         <div className="blob blob-b right-[-4%] top-[2%] h-[34rem] w-[34rem] bg-sage/15" />
@@ -45,9 +45,9 @@ export default function Hero() {
       </div>
       <div className="grain absolute inset-0 -z-10" aria-hidden />
 
-      {/* — İçerik (sayfa ızgarasıyla hizalı) — */}
+      {/* — Content (aligned to page grid) — */}
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-16 md:py-24 lg:min-h-[84vh] lg:grid-cols-12 lg:gap-8">
-        {/* Sol: metin */}
+        {/* Left: text */}
         <motion.div
           initial="hidden"
           animate="show"
@@ -97,7 +97,7 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        {/* Sağ: canlı ajan konsolu */}
+        {/* Right: live agent console */}
         <motion.div
           initial={{ opacity: 0, y: reduce ? 0 : 28, scale: reduce ? 1 : 0.97 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -114,7 +114,7 @@ export default function Hero() {
 function AgentConsole({ reduce }: { reduce: boolean }) {
   return (
     <div className="card relative overflow-hidden p-5 shadow-xl shadow-espresso/5 md:p-6">
-      {/* tarayıcı parıltısı */}
+      {/* browser shimmer */}
       {!reduce && (
         <motion.div
           aria-hidden

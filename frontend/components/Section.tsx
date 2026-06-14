@@ -1,4 +1,4 @@
-// Sayfa başlığı bloğu — eyebrow + serif başlık + açıklama + opsiyonel aksiyon (export vb.).
+// Page header block — eyebrow + serif title + description + optional action (export, etc.).
 export function PageHeader({
   eyebrow, title, description, action,
 }: {

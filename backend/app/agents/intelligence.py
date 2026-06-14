@@ -1,10 +1,10 @@
-"""IntelligenceAgent (Brief Bölüm 1.A) — Food Empire yıllık raporlarını özetle, sıkıştır, birleştir.
+"""IntelligenceAgent (Brief Section 1.A) — summarise, compress, and consolidate Food Empire annual reports.
 
-Akış (her yıl için, izole context):
-  PDF -> metin -> hedefli çıkarım (INTEL_EXTRACT) -> sıkıştırma+JSON (INTEL_COMPRESS)
-Sonra tüm yıl kayıtları kronolojik sıralanıp consolidated_timeline formatında birleşir.
+Flow (per year, isolated context):
+  PDF -> text -> targeted extraction (INTEL_EXTRACT) -> compression+JSON (INTEL_COMPRESS)
+All year records are then sorted chronologically and merged into the consolidated_timeline format.
 
-Erişilemeyen yıllar için fallback: data_available=false işaretli minimal kayıt.
+Fallback for inaccessible years: a minimal record marked data_available=false.
 """
 import gc
 import json
@@ -29,9 +29,9 @@ class IntelligenceAgent(BaseAgent):
         self.reports_dir = reports_dir
 
     def _year_record(self, year: int, pdf_path) -> dict:
-        """Tek yıl için iteratif özetleme: çıkarım -> sıkıştırma+JSON."""
+        """Iterative summarisation for a single year: extraction -> compression+JSON."""
         text = extract_text(pdf_path)
-        # Çok uzun raporları model bağlamına ve maliyet bütçesine sığdır.
+        # Truncate very long reports to fit model context and cost budget.
         text = text[:REPORT_TEXT_MAX_CHARS]
 
         extracted = self._call_llm(
@@ -48,11 +48,11 @@ class IntelligenceAgent(BaseAgent):
 
     @staticmethod
     def _fallback_record(year: int) -> dict:
-        """Erişilemeyen yıl için 'veri yok' işaretli minimal kayıt."""
+        """Minimal 'no data' record for an inaccessible year."""
         return {
             "year": year, "data_available": False,
-            "key_events": ["Bu yıl için rapor erişilemedi"],
-            "geographic_markets": [], "stated_strategy": "Veri yok",
+            "key_events": ["Report not accessible for this year"],
+            "geographic_markets": [], "stated_strategy": "No data",
             "financials": {"revenue": None, "profit": None, "key_ratios": []},
             "risks": [], "kpis": [],
         }
@@ -61,25 +61,25 @@ class IntelligenceAgent(BaseAgent):
         reports = discover_reports(self.reports_dir)
         if not reports:
             raise FileNotFoundError(
-                f"{self.reports_dir} içinde PDF yok — IntelligenceAgent için "
-                "Food Empire yıllık raporları gerekli (ya da mock mod kullanın)."
+                f"No PDFs found in {self.reports_dir} — IntelligenceAgent requires "
+                "Food Empire annual reports (or use mock mode)."
             )
 
-        print(f"[IntelligenceAgent] {len(reports)} PDF bulundu: {sorted(reports.keys())}", flush=True)
+        print(f"[IntelligenceAgent] {len(reports)} PDF(s) found: {sorted(reports.keys())}", flush=True)
 
         records: list[dict] = []
         for year in sorted(reports):
             pdf_path = reports[year]
-            print(f"[IntelligenceAgent] işleniyor → {year} ({pdf_path.name})", flush=True)
+            print(f"[IntelligenceAgent] processing → {year} ({pdf_path.name})", flush=True)
             try:
                 rec = self._year_record(year, pdf_path)
-                rec["year"] = year  # garantiye al
+                rec["year"] = year  # ensure year is set
                 records.append(rec)
-                print(f"[IntelligenceAgent] tamamlandı ✓ {year}", flush=True)
+                print(f"[IntelligenceAgent] done ✓ {year}", flush=True)
             except Exception as e:
-                print(f"[IntelligenceAgent] hata ✗ {year}: {e}", flush=True)
+                print(f"[IntelligenceAgent] error ✗ {year}: {e}", flush=True)
                 records.append(self._fallback_record(year))
-            gc.collect()  # her PDF sonrası belleği temizle
+            gc.collect()  # free memory after each PDF
 
         return {
             "company": "Food Empire Holdings Ltd.",

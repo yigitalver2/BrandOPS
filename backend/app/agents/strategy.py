@@ -1,10 +1,10 @@
-"""StrategyAgent (Brief Bölüm 1.B) — dönem tespiti + dönem analizi + sentez.
+"""StrategyAgent (Brief Section 1.B) — period detection + period analysis + synthesis.
 
-Üç iç geçiş (her biri ayrı LLM çağrısı, izole context):
-  Geçiş 1: konsolide zaman çizelgesinden stratejik dönemleri çıkar
-  Geçiş 2: her dönem için ayrı, derin analiz (izole bağlam)
-  Geçiş 3: dönem analizlerini tek bir through-line anlatıya dok
-Çıktı strategic_analysis.schema.json formatında birleşir.
+Three internal passes (each a separate LLM call with isolated context):
+  Pass 1: extract strategic periods from the consolidated timeline
+  Pass 2: deep isolated analysis for each period
+  Pass 3: weave period analyses into a single through-line narrative
+Output merges into the strategic_analysis.schema.json format.
 """
 import json
 from datetime import datetime, timezone
@@ -18,10 +18,10 @@ class StrategyAgent(BaseAgent):
     name = "strategy"
 
     def produce(self, input_data: dict, feedback=None) -> dict:
-        # input_data = consolidated_timeline (IntelligenceAgent çıktısı)
+        # input_data = consolidated_timeline (IntelligenceAgent output)
         timeline_json = json.dumps(input_data, ensure_ascii=False)
 
-        # --- Geçiş 1: dönem tespiti ---
+        # --- Pass 1: period detection ---
         p1 = self._call_llm(
             prompts.STRAT_SYSTEM,
             prompts.STRAT_PASS1.format(timeline=timeline_json),
@@ -29,7 +29,7 @@ class StrategyAgent(BaseAgent):
         )
         periods = self._extract_json(p1)["periods"]
 
-        # --- Geçiş 2: her dönem için izole derin analiz ---
+        # --- Pass 2: isolated deep analysis per period ---
         for period in periods:
             p2 = self._call_llm(
                 prompts.STRAT_SYSTEM,
@@ -44,7 +44,7 @@ class StrategyAgent(BaseAgent):
             period["brand_product_evolution"] = detail.get("brand_product_evolution", "")
             period["kpi_movement"] = detail.get("kpi_movement", "")
 
-        # --- Geçiş 3: sentez ---
+        # --- Pass 3: synthesis ---
         p3 = self._call_llm(
             prompts.STRAT_SYSTEM,
             prompts.STRAT_PASS3.format(

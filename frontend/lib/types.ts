@@ -1,4 +1,4 @@
-// Aşamalar arası veri sözleşmeleri — schemas/*.schema.json ile birebir.
+// Inter-stage data contracts — mirror schemas/*.schema.json exactly.
 
 export type Trend = "up" | "down" | "flat" | "n/a";
 

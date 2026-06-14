@@ -1,7 +1,7 @@
-"""Mock ajanlar — mod (b): examples/ altındaki donmuş, doğrulanmış artifact'ları döndürür.
+"""Mock agents — mode (b): returns frozen, validated artifacts from examples/.
 
-Pipeline'ı LLM anahtarı olmadan uçtan uca çalıştırır; canlı akış efekti için
-küçük bir gecikme simüle eder.
+Lets the pipeline run end-to-end without an LLM key; simulates a small delay
+for a realistic live-stream effect.
 """
 import json
 import time
@@ -16,7 +16,7 @@ _ARTIFACT_FILES = {
     "campaign": "campaign_proposal.json",
 }
 
-# Demo akışının gerçekçi hissetmesi için aşama başına saniye
+# Seconds per stage to make the demo feel realistic
 _SIMULATED_DELAY_S = 1.5
 
 
