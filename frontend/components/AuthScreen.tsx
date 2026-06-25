@@ -117,10 +117,6 @@ export default function AuthScreen() {
             ))}
           </ul>
         </motion.div>
-
-        <div className="relative rounded-xl border border-espresso-600/60 bg-espresso-800/70 px-4 py-3 font-mono text-xs text-cream-200/80 backdrop-blur-sm">
-          <span className="text-copper-dark">demo account</span> · demo@brandops.ai / demo1234
-        </div>
       </div>
 
       {/* — Right: form — */}
